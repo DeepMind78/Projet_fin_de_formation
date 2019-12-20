@@ -9,7 +9,7 @@ RECUPERATION :
 
 3 - git checkout -b dev
 
-4 - composer installer
+4 - composer install
 
 5 - php bin/console doctrine:database:create
 
