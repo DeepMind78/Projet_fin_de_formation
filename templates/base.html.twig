@@ -8,19 +8,22 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="">FINDACOACH</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <a class="navbar-brand" href="{{path('home')}}">FINDACOACH</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           
             <div class="collapse navbar-collapse" id="navbarColor03">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
+              <ul class="navbar-nav ml-auto ">
+                <li class="nav-item  ">
                   <a class="nav-link" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{path('inscriptionClient')}}">Inscription Client </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{path('login')}}">Login </a>
                 </li>
               </ul>
              

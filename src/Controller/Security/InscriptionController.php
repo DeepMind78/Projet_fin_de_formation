@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class InscriptionController extends AbstractController
@@ -54,6 +55,19 @@ class InscriptionController extends AbstractController
 
         return $this->render('inscription/client.html.twig', [
             'formInscription' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authentificationUtils)
+    {
+        $error = $authentificationUtils->getLastAuthenticationError();
+        $lastUsername = $authentificationUtils->getLastUsername();
+        return $this->render('inscription/login.html.twig', [
+            'last_username' => $lastUsername, 
+            'error' => $error
         ]);
     }
 }
