@@ -40,6 +40,11 @@ class User implements UserInterface
      */
     public $confirm_password;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Coach", mappedBy="User", cascade={"persist", "remove"})
+     */
+    private $coach;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -118,5 +123,23 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->coach;
+    }
+
+    public function setCoach(?Coach $coach): self
+    {
+        $this->coach = $coach;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $coach ? null : $this;
+        if ($coach->getUser() !== $newUser) {
+            $coach->setUser($newUser);
+        }
+
+        return $this;
     }
 }
