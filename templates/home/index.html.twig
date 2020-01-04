@@ -2,4 +2,7 @@
 
 {% block body %}
 <h1>Bienvenue sur FINDACOACH</h1>
+{% if is_granted("ROLE_COACH") %}
+    Hi {{ app.user.id }}
+{% endif %}
 {% endblock %}

@@ -72,9 +72,9 @@ class Coach
     private $prix;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="coach", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      */
-    private $User;
+    private $user;
 
     public function getId(): ?int
     {
@@ -216,12 +216,12 @@ class Coach
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function setUser(?User $User): self
     {
-        $this->User = $User;
+        $this->user = $User;
 
         return $this;
     }

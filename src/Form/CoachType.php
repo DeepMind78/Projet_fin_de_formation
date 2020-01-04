@@ -23,7 +23,7 @@ class CoachType extends AbstractType
             ->add('diplome')
             ->add('domaine')
             ->add('prix')
-            ->add('user')
+            // ->add('user')
         ;
     }
 

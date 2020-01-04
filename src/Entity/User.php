@@ -40,11 +40,9 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Coach", mappedBy="User", cascade={"persist", "remove"})
-     */
-    private $coach;
+    
 
+    
     public function getId(): ?int
     {
         return $this->id;
