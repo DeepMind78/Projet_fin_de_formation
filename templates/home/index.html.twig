@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="jumbotron">
+    <div class="container">
+        {{form_start(form)}}
+
+            <div class="form-row d-flex justify-content-center">
+                <div class="col-3">
+                    {{form_row(form.sport)}}
+                    
+                </div>
+                <div class="col-3">
+                    {{form_row(form.ville)}}
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        {{form_end(form)}}
+    </div>
+</div>
 <h1>Bienvenue sur FINDACOACH</h1>
+{% for coach in coachs %}
+    {{coach.nom}}
+{% endfor %}
+<div class="navigation d-flex justify-content-center">
+    {{ knp_pagination_render(coachs) }}
+</div>
 {% if is_granted("ROLE_COACH") %}
     Hi {{ app.user.id }}
 {% endif %}

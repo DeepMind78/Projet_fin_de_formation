@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Coach;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\CoachSearch;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Coach|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,25 @@ class CoachRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Coach::class);
     }
+
+    public function findGoodCoach(CoachSearch $search){
+
+        $query = $this->createQueryBuilder('c');
+        
+        if($search->getVille()){
+            $query = $query->andWhere('c.ville = :ville');
+            $query ->setParameter('ville',$search->getVille());
+        }
+
+        if ($search->getSport()){
+            $query = $query->andWhere('c.domaine = :sport');
+            $query ->setParameter('sport',$search->getSport()); 
+        }
+
+        return $query->getQuery();
+    }
+
+
 
     // /**
     //  * @return Coach[] Returns an array of Coach objects
