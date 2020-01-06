@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fais ta fiche gentil roi client{% endblock %}
+
+{% block body %}
+    {% if is_granted("ROLE_CLIENT") %}
+        <div class="container">
+            {{ form_start(ficheClient) }}
+            {{form_rest(ficheClient)}}
+            <button class='btn btn-primary' type="submit">Envoyer</button>
+            {{ form_end(ficheClient) }}
+        </div>
+    {% else %}
+        <h2>Nous ne reconnaissons pas votre personne, veuillez vous identifier !!</h2>
+        <a href="{{path('login')}}">Se connecter</a>
+    {% endif %}
+
+{% endblock %}

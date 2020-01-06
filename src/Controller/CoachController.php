@@ -39,6 +39,7 @@ class CoachController extends AbstractController
             $coach->setUser($user);
             $manager->persist($coach);
             $manager->flush();
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('coach/index.html.twig', [

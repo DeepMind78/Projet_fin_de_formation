@@ -28,6 +28,7 @@ class InscriptionController extends AbstractController
             $user->setRoles(['ROLE_COACH']);
             $manager->persist($user);
             $manager->flush();
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('inscription/coach.html.twig', [
@@ -46,11 +47,12 @@ class InscriptionController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $hash= $encoder->encodePassword($user, $user->getPassword()); // Il saura faire le lien car nous avons déclaré quel algorithme utiliser pour cette classe $user dans les configurations. 
+            $hash= $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setRoles(['ROLE_CLIENT']);
             $manager->persist($user);
             $manager->flush();
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('inscription/client.html.twig', [

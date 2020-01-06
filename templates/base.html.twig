@@ -16,7 +16,11 @@
           
             <div class="collapse navbar-collapse" id="navbarColor03">
               <ul class="navbar-nav ml-auto ">
-                
+                  {% if is_granted("ROLE_CLIENT") %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                      </li>
+                  {% endif %}
                 {% if is_granted("ROLE_COACH") %}
                 <li class="nav-item">
                   <a class="nav-link" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
