@@ -19,7 +19,17 @@ class ClientType extends AbstractType
             ->add('codePostal')
             ->add('telephone')
             ->add('age')
-            ->add('poids')
+            ->add('poids', null,[
+                'attr'=>[
+                    'placeholder'=>'Poids en kg'
+                ]
+            ])
+
+            ->add('taille', null,[
+                'attr'=>[
+                    'placeholder'=>'Taille en cm'
+                ]
+            ])
           //  ->add('user')
         ;
     }

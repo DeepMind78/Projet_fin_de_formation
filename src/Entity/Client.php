@@ -62,6 +62,11 @@ class Client
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $taille;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class Client
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTaille(): ?string
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(string $taille): self
+    {
+        $this->taille = $taille;
 
         return $this;
     }
