@@ -3,6 +3,11 @@
 {% block body %}
 
     <div class="container">
-       {{ fichefull.prenom }}
+       {{ fichefull.nom }}
+    </div>
+
+    <div>
+        {{ form_start(formRdv) }}
+        {{ form_end(formRdv) }}
     </div>
 {% endblock %}

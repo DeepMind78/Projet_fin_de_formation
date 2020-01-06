@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Coach.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CoachType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CoachType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +201,8 @@
       <updated>1578302382202</updated>
       <workItem from="1578302385709" duration="13386000" />
       <workItem from="1578320048728" duration="45000" />
-      <workItem from="1578320269657" duration="4516000" />
+      <workItem from="1578320269657" duration="8000000" />
+      <workItem from="1578328627183" duration="139000" />
     </task>
     <servers />
   </component>
@@ -220,9 +218,9 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578308208092" />
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578320279616">
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578328631099">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578320279616" />
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578328631099" />
   </component>
 </project>

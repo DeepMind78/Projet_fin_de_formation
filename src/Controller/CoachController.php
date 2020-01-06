@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Rdv;
 use App\Entity\User;
 use App\Entity\Coach;
 use App\Form\CoachType;
+use App\Form\RdvType;
 use App\Repository\CoachRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,10 +53,16 @@ class CoachController extends AbstractController
      * @Route("/coach/fichecomplet/{id}", name="fichefullcoach")
      */
 
-    public function afficherFiche (CoachRepository $repo, $id) {
-    $coach = $repo->find($id);
+    public function afficherFiche (CoachRepository $repo, $id, Request $request){
+        $coach = $repo->find($id);
+        $rdv = new Rdv();
+        $form = $this->createForm(RdvType::class,$rdv);
+        $form->handleRequest($request);
+
+
     return $this->render('coach/fichefullcoach.html.twig', [
-        'fichefull' => $coach
+        'fichefull' => $coach,
+        'formRdv' => $form->createView()
     ]);
     }
 }
