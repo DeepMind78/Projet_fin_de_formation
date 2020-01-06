@@ -26,9 +26,12 @@ class CoachType extends AbstractType
             ->add('telephone')
             ->add('diplome')
             ->add('domaine')
-            ->add('prix')
+            ->add('prix', null, ['attr'=>[
+        'placeholder'=>"Prix à l'heure"
+                ]
+            ]);
             // ->add('user')
-        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

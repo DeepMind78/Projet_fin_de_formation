@@ -46,4 +46,15 @@ class CoachController extends AbstractController
             'ficheCoach' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/coach/fichecomplet/{id}", name="fichefullcoach")
+     */
+
+    public function afficherFiche (CoachRepository $repo, $id) {
+    $coach = $repo->find($id);
+    return $this->render('coach/fichefullcoach.html.twig', [
+        'fichefull' => $coach
+    ]);
+    }
 }

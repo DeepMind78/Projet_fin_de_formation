@@ -23,6 +23,7 @@
 <h1>Bienvenue sur FINDACOACH</h1>
 {% for coach in coachs %}
     {{coach.nom}}
+    <a href="{{ path('fichefullcoach', {id: coach.user.id}) }}">Fiche complète du coach</a>
 {% endfor %}
 <div class="navigation d-flex justify-content-center">
     {{ knp_pagination_render(coachs) }}
