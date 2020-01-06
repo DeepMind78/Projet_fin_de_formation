@@ -11,7 +11,7 @@ RECUPERATION :
 
 4 - composer install
 
-composer require symfony/swiftmailer-bundle
+4bis - composer require symfony/swiftmailer-bundle
 
 5 - php bin/console doctrine:database:create
 
