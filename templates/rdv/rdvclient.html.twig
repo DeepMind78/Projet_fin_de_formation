@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes rendez-vous{% endblock %}
+
+{% block body %}
+    {% for rdv in rdvclients %}
+{{ rdv.lieu}}
+
+    {% endfor %}
+{% endblock %}
