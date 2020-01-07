@@ -4,8 +4,8 @@
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RdvType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RdvType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +202,10 @@
       <workItem from="1578302385709" duration="13386000" />
       <workItem from="1578320048728" duration="45000" />
       <workItem from="1578320269657" duration="8000000" />
-      <workItem from="1578328627183" duration="139000" />
+      <workItem from="1578328627183" duration="2284000" />
+      <workItem from="1578348343585" duration="818000" />
+      <workItem from="1578385832462" duration="3145000" />
+      <workItem from="1578388988435" duration="4672000" />
     </task>
     <servers />
   </component>
@@ -214,13 +217,17 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2471" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578306421769" />
+    <state x="2559" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1578388971953">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2559" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578388971953" />
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578308208092">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578308208092" />
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578328631099">
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578388989464">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578328631099" />
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578388989464" />
   </component>
 </project>

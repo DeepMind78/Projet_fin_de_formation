@@ -17,7 +17,11 @@ class RdvType extends AbstractType
         $builder
             ->add('jour', DateType::class)
             ->add('heure', TimeType::class)
-            ->add('duree', DateIntervalType::class)
+            ->add('duree', null, [
+                'attr' => [
+                    "placeholder" => "Nombre d'heure"
+                ]
+            ])
             ->add('lieu')
           //  ->add('total')
           //  ->add('coach')
