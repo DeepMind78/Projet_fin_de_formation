@@ -3,7 +3,14 @@
 {% block body %}
 
     <div class="container">
-       {{ fichefull.nom }}
+        <div class="jumbotron">
+       Bienvenue sur la fiche de <h2>{{ fichefull.nom }}</h2>
+        {{ fichefull.prenom }}
+        {{ fichefull.photo }}
+        {{ fichefull.age }}
+        {{ fichefull.domaine }}
+        {{ fichefull.prix }}
+        </div>
     </div>
 
     <div>
