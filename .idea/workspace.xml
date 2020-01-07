@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Benj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/findacoach.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/findacoach.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RdvType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RdvType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Coach.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/CoachType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CoachType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200106132745.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200106145924.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -164,6 +173,10 @@
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/behat/transliterator" />
+      <path value="$PROJECT_DIR$/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/templating" />
     </include_path>
   </component>
   <component name="ProjectId" id="1W11eOu1qVWE02yuhbwxEurTVEN" />
@@ -173,8 +186,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="ServiceViewManager">
@@ -206,6 +221,8 @@
       <workItem from="1578348343585" duration="818000" />
       <workItem from="1578385832462" duration="3145000" />
       <workItem from="1578388988435" duration="4672000" />
+      <workItem from="1578398957730" duration="244000" />
+      <workItem from="1578423088791" duration="1827000" />
     </task>
     <servers />
   </component>
@@ -225,9 +242,14 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578308208092" />
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578388989464">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="655" y="377" key="com.intellij.ide.util.TipDialog" timestamp="1578423098897">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578388989464" />
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578398959863" />
+    <state x="655" y="377" key="com.intellij.ide.util.TipDialog/0.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1578423098897" />
+    <state x="479" y="342" width="672" height="678" key="search.everywhere.popup" timestamp="1578423341826">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="479" y="342" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1578423341826" />
   </component>
 </project>

@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Builder\Property;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CoachRepository")
+ * @Vich\Uploadable
  */
 class Coach
 {
@@ -17,6 +22,18 @@ class Coach
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var  File|null
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -82,6 +99,11 @@ class Coach
      * @ORM\OneToMany(targetEntity="App\Entity\Rdv", mappedBy="coach")
      */
     private $rdvs;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function __construct()
     {
@@ -268,4 +290,55 @@ class Coach
 
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Coach
+     * @throws \Exception
+     */
+    public function setFilename(?string $filename): Coach
+    {
+        $this->filename = $filename;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+            return $this;
+    }
+    /**
+     * @return null|File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+    /**
+     * @param File|null $imageFile
+     * @return Coach
+     */
+    public function setImageFile(?File $imageFile): Coach
+    {
+        $this->imageFile = $imageFile;
+            return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
 }

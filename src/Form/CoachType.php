@@ -19,6 +19,9 @@ class CoachType extends AbstractType
             // [ 'required'=>false 
             // ])
             ->add('photo')
+             ->add('imageFile', FileType::class,
+             [ 'required'=>false
+             ])
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
