@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/email/welcomeClient.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/email/welcomeCoach.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/UserChecker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/SecurityAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/SecurityAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/MailerService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MailerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inscription/client.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inscription/client.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inscription/confirmation.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inscription/confirmation.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +213,7 @@
       <workItem from="1578398957730" duration="378000" />
       <workItem from="1578400462470" duration="9672000" />
       <workItem from="1578471584430" duration="19797000" />
-      <workItem from="1578496004003" duration="6109000" />
+      <workItem from="1578496004003" duration="11443000" />
     </task>
     <servers />
   </component>
@@ -237,6 +241,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578496010329" />
+    <state x="2536" y="240" key="run.anything.popup" timestamp="1578503453487">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578503453487" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1578498591143">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

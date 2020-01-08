@@ -36,4 +36,21 @@ class MailerService extends AbstractController
             );
         $this->mailer->send($message);
     }
+
+    public function sendWelcome($to, $pseudo, $template)
+    {
+        $message = (new \Swift_Message('Bienvenue'))
+            ->setFrom('cullellsullivan78@gmail.com')
+            ->setTo($to)
+            ->setBody(
+                $this->renderView(
+                    'email/' . $template,
+                    [
+                        'pseudo' => $pseudo
+                    ]
+                ),
+                'text/html'
+            );
+        $this->mailer->send($message);
+    }
 }

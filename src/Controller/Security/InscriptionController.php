@@ -39,7 +39,7 @@ class InscriptionController extends AbstractController
             $pseudo = $user->getPseudo();
             $mailerService->sendToken($token, $email, $pseudo, 'emailconfirm.html.twig');
             $this->addFlash('user-error', 'Votre inscription a été validée, vous allez recevoir un email de confirmation pour activer votre compte et pouvoir vous connectez');
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('confirmationpage');
         }
 
         return $this->render('inscription/coach.html.twig', [
@@ -48,47 +48,74 @@ class InscriptionController extends AbstractController
     }
 
     /**
+     * @Route("/confirmationpage", name="confirmationpage")
+     */
+    public function confirmationpage(){
+        return $this->render('inscription/confirmation.html.twig');
+    }
+
+    /**
      * @Route("/compte/confirmation/{token}/{pseudo}", name="confirme_compte")
      * @param $token
      * @param $pseudo
      */
-    public function confirmAccount($token, $pseudo, EntityManagerInterface $manager)
+    public function confirmAccount($token, $pseudo, EntityManagerInterface $manager, MailerService $mailerService)
     {
         $user = $manager->getRepository(User::class)->findOneBy(['pseudo' => $pseudo]);
         $tokenExist = $user->getConfirmationToken();
+        $email = $user->getEmail();
+        $pseudo = $user->getPseudo();
+
+        if($user->getRoles()[0] === "ROLE_CLIENT"){
+            $mailerService->sendWelcome($email, $pseudo, 'welcomeClient.html.twig');
+        } elseif ($user->getRoles()[0] === "ROLE_COACH"){
+            $mailerService->sendWelcome($email, $pseudo, 'welcomeCoach.html.twig');
+        }
+
         if($token === $tokenExist) {
             $user->setConfirmationToken(null);
             $user->setEnabled(true);
             $manager->persist($user);
             $manager->flush();
+
             return $this->redirectToRoute('app_login');
         } else {
-            return $this->render('inscription/login.html.twig');
+            return $this->render('security/login.html.twig');
         }
     }
 
 
     /**
      * @Route("/inscription/client", name="inscriptionClient")
+     * @throws \Exception
      */
-    public function clientInscription(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    public function clientInscription(AuthenticationUtils $authenticationUtils, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailerService $mailerService)
     {
 
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User;
         $form = $this->createForm(InscriptionType::class,$user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $hash= $encoder->encodePassword($user, $user->getPassword());
+            $user->setConfirmationToken(rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '='));
+            $hash= $encoder->encodePassword($user, $user->getPassword()); // Il saura faire le lien car nous avons déclaré quel algorithme utiliser pour cette classe $user dans les configurations.
             $user->setPassword($hash);
             $user->setRoles(['ROLE_CLIENT']);
+            $user->setEnabled(false);
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('login');
+            $token = $user->getConfirmationToken();
+            $email = $user->getEmail();
+            $pseudo = $user->getPseudo();
+            $mailerService->sendToken($token, $email, $pseudo, 'emailconfirm.html.twig');
+            $this->addFlash('user-error', 'Votre inscription a été validée, vous allez recevoir un email de confirmation pour activer votre compte et pouvoir vous connectez');
+            return $this->redirectToRoute('confirmationpage');
         }
 
         return $this->render('inscription/client.html.twig', [
-            'formInscription' => $form->createView(),
+            'formInscription' => $form->createView(), 'last_username' => $lastUsername, 'error' => $error,
         ]);
     }
 

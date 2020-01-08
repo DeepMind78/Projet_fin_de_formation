@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation email{% endblock %}
+
+{% block body %}
+   Nous vous avons envoyé un email de confirmation pour nous rejoindre dans cette grande aventure.
+
+    <a href="{{ path('app_login')}}">Se connecter</a>
+
+{% endblock %}
