@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use PhpParser\Builder\Property;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -24,28 +23,6 @@ class Coach
     private $id;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255)
-     */
-    private $filename;
-    /**
-     * @var  File|null
-     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
-     */
-    private $imageFile;
-
-    /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255)
-     */
-    private $diplomename;
-    /**
-     * @var  File|null
-     * @Vich\UploadableField(mapping="property_diplome", fileNameProperty="diplomename")
-     */
-    private $diplomeFile;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
@@ -55,10 +32,17 @@ class Coach
      */
     private $prenom;
 
+//   ** PHOTO **
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    private $photo;
+    private $filename;
+    /**
+     * @var  File|null
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -85,10 +69,17 @@ class Coach
      */
     private $telephone;
 
+//    ** DIPLOME **
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    private $diplome;
+    private $diplomename;
+    /**
+     * @var  File|null
+     * @Vich\UploadableField(mapping="property_diplome", fileNameProperty="diplomename")
+     */
+    private $diplomeFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -149,18 +140,6 @@ class Coach
         return $this;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -217,19 +196,6 @@ class Coach
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-
-    public function getDiplome(): ?string
-    {
-        return $this->diplome;
-    }
-
-    public function setDiplome(string $diplome): self
-    {
-        $this->diplome = $diplome;
 
         return $this;
     }
@@ -297,10 +263,10 @@ class Coach
                 $rdv->setCoach(null);
             }
         }
-
         return $this;
     }
 
+    //   ** PHOTO **
     /**
      * @return null|string
      */
@@ -325,7 +291,6 @@ class Coach
     {
         return $this->imageFile;
     }
-
     /**
      * @param File|null $imageFile
      * @return Coach
@@ -350,12 +315,7 @@ class Coach
         return $this;
     }
 
-
-
-
-
-
-
+//   ** DIPLOME **
     /**
      * @return null|string
      */
@@ -380,7 +340,6 @@ class Coach
     {
         return $this->diplomeFile;
     }
-
     /**
      * @param File|null $diplomeFile
      * @return Coach

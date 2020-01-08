@@ -11,6 +11,7 @@ use App\Repository\ClientRepository;
 use App\Repository\CoachRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Security;
@@ -20,11 +21,17 @@ class CoachController extends AbstractController
 {
     /**
      * @Route("/coach/fiche/{user}", name="fiche.coach")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param Security $security
+     * @param CoachRepository $repo
+     * @param Coach|null $coach
+     * @return Response
      */
     public function index(Request $request, EntityManagerInterface $manager, Security $security, CoachRepository $repo, Coach $coach=null)
-    {   
+    {
         // if ($repo->findBy(['user'=>$id])){
-        //     $coach = $repo->findBy(['user'=>$id]);   
+        //     $coach = $repo->findBy(['user'=>$id]);
         // } else {
         //     $coach = new Coach;
         // }
@@ -42,7 +49,7 @@ class CoachController extends AbstractController
             $coach->setUser($user);
             $manager->persist($coach);
             $manager->flush();
-//            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('coach/index.html.twig', [
@@ -52,6 +59,12 @@ class CoachController extends AbstractController
 
     /**
      * @Route("/coach/fichecomplet/{id}", name="fichefullcoach")
+     * @param CoachRepository $repoCoach
+     * @param $id
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param ClientRepository $repoClient
+     * @return Response
      */
 
     public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient){

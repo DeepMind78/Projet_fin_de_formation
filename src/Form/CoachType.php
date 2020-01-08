@@ -15,28 +15,24 @@ class CoachType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            // ->add('photo', FileType::class,
-            // [ 'required'=>false 
-            // ])
-            ->add('photo')
-             ->add('imageFile', FileType::class, [
-                 'required'=>false
-             ])
+            ->add('imageFile', FileType::class, [
+                'required'=> false,
+                'label' => 'Photo'
+                ])
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
             ->add('age')
             ->add('telephone')
-            ->add('diplome')
             ->add('diplomeFile', FileType::class, [
-                'required'=>false
+                'required'=>false,
+                'label' => 'Diplôme'
                 ])
             ->add('domaine')
             ->add('prix', null, ['attr'=>[
         'placeholder'=>"Prix à l'heure"
                 ]
             ]);
-            // ->add('user')
 
     }
 
