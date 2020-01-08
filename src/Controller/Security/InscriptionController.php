@@ -16,8 +16,9 @@ class InscriptionController extends AbstractController
     /**
      * @Route("/inscription/coach", name="inscriptionCoach")
      */
-    public function coachInscription(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    public function coachInscription(AuthenticationUtils $authenticationUtils, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
+        //$error = $authenticationUtils->getLastAuthenticationError();
         $user = new User;
         $form = $this->createForm(InscriptionType::class,$user);
         $form->handleRequest($request);
@@ -28,6 +29,16 @@ class InscriptionController extends AbstractController
             $user->setRoles(['ROLE_COACH']);
             $manager->persist($user);
             $manager->flush();
+            //$token = $user->getConfirmationToken();
+            $email = $user->getEmail();
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('cullellsullivan78@gmail.com')
+                ->setTo($email)
+                ->setBody('Test Mailer!')
+            ;
+
+            $mailer->send($message);
+            //$mailerservice
             return $this->redirectToRoute('login');
         }
 

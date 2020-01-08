@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Service/MailerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/coach/fichefullcoach.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +207,8 @@
       <workItem from="1578385832462" duration="3145000" />
       <workItem from="1578388988435" duration="4672000" />
       <workItem from="1578398957730" duration="378000" />
-      <workItem from="1578400462470" duration="8938000" />
+      <workItem from="1578400462470" duration="9672000" />
+      <workItem from="1578471584430" duration="4497000" />
     </task>
     <servers />
   </component>
@@ -225,9 +228,9 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578406995478" />
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578400481095">
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578471585982">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578400481095" />
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578471585982" />
   </component>
 </project>
