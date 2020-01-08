@@ -20,11 +20,17 @@
                       <li class="nav-item">
                           <a class="nav-link" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
                       </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                      </li>
                   {% endif %}
                 {% if is_granted("ROLE_COACH") %}
                 <li class="nav-item">
                   <a class="nav-link" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
                 </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                    </li>
                 {% endif %}
                 {% if app.user %}
                 <li class="nav-item">

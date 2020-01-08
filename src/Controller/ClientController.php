@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientType;
+use App\Repository\ClientRepository;
+use App\Repository\CoachRepository;
+use App\Repository\RdvRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,4 +45,27 @@ class ClientController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route ("/rdvClient", name="client.rdv")
+     */
+
+    public function rdvclient(ClientRepository $repoClient, RdvRepository $repoRdv, CoachRepository $repoCoach) {
+        $user = $this->getUser()->getId();
+        $resultat = $repoClient->findBy(['user'=>$user]);
+        $idclient = $resultat[0]->getId();
+        $rdv = $repoRdv->findBy(['client'=> $idclient]);
+        //dump($idclient);
+        //dump($rdv);
+
+        //$coach = $repoRdv->findBy('coach_id')
+        //$resultat1 = $repoCoach->findBy(['user'=>$user]);
+        //$nomcoach = $resultat1[0]->getId();
+        //dump($nomcoach);
+
+        return $this->render('/rdv/rdvclient.html.twig', [
+            'rdvclients' => $rdv
+        ]);
+    }
+
 }

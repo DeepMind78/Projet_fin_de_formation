@@ -9,6 +9,7 @@ use App\Form\CoachType;
 use App\Form\RdvType;
 use App\Repository\ClientRepository;
 use App\Repository\CoachRepository;
+use App\Repository\RdvRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,5 +99,24 @@ class CoachController extends AbstractController
         'fichefull' => $coach,
         'formRdv' => $form->createView()
     ]);
+    }
+
+
+    /**
+     * @Route ("/rdvCoach", name="coach.rdv")
+     */
+
+    public function rdvcoach(CoachRepository $repoCoach, RdvRepository $repoRdv)
+    {
+        $user = $this->getUser()->getId();
+        $resultat = $repoCoach->findBy(['user' => $user]);
+        $idcoach = $resultat[0]->getId();
+        $rdv = $repoRdv->findBy(['coach' => $idcoach]);
+        //dump($idcoach);
+        dump($rdv);
+
+        return $this->render('/rdv/rdvcoach.html.twig', [
+            'rdvcoachs' => $rdv
+        ]);
     }
 }

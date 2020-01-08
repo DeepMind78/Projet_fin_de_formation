@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381dd9d4-7cba-423d-994a-ee712fca029f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/email/welcomeClient.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/email/welcomeCoach.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/public/images/diplome/Lettre_motivation.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/properties/737179.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CoachController.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Security/InscriptionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/SecurityAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/SecurityAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/MailerService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MailerService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inscription/client.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inscription/client.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inscription/confirmation.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inscription/confirmation.html.twig" afterDir="false" />
+>>>>>>> registermailer
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,9 +222,16 @@
       <workItem from="1578348343585" duration="818000" />
       <workItem from="1578385832462" duration="3145000" />
       <workItem from="1578388988435" duration="4672000" />
+<<<<<<< HEAD
       <workItem from="1578398957730" duration="244000" />
       <workItem from="1578423088791" duration="1827000" />
       <workItem from="1578472383566" duration="11248000" />
+=======
+      <workItem from="1578398957730" duration="378000" />
+      <workItem from="1578400462470" duration="9672000" />
+      <workItem from="1578471584430" duration="19797000" />
+      <workItem from="1578496004003" duration="11443000" />
+>>>>>>> registermailer
     </task>
     <servers />
   </component>
@@ -230,9 +247,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2559" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578388971953" />
-    <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578308208092">
+    <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578406995478">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
+<<<<<<< HEAD
     <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578308208092" />
     <state x="2478" y="445" key="NewPhpClassDialog" timestamp="1578499315323">
       <screen x="1920" y="30" width="1920" height="1050" />
@@ -249,5 +267,24 @@
     </state>
     <state x="2399" y="342" width="672" height="678" key="search.everywhere.popup/0.30.1536.834/1920.30.1920.1050@1920.30.1920.1050" timestamp="1578501245877" />
     <state x="479" y="342" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1578423341826" />
+=======
+    <state x="2609" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578406995478" />
+    <state x="2631" y="334" key="NewPhpClassDialog" timestamp="1578492257823">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2631" y="334" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578492257823" />
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1578496010329">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2575" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578496010329" />
+    <state x="2536" y="240" key="run.anything.popup" timestamp="1578503453487">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578503453487" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1578498591143">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1578498591143" />
+>>>>>>> registermailer
   </component>
 </project>

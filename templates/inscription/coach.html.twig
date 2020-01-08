@@ -5,7 +5,7 @@
     <h2>Inscription coach</h2>
     
     {{ form_start(formInscription) }}
-    
+    {{ form_row(formInscription.pseudo) }}
     {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
     
     {{form_row(formInscription.password, {attr : { 'placeholder': 'mot de passe'}})}}

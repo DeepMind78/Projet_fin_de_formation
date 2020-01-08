@@ -45,7 +45,34 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $pseudo;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $tokenPassword;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdTokenPasswordAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+
+    private $enabled;
+
+
+
 
     
     public function getId(): ?int
@@ -144,5 +171,88 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param mixed $pseudo
+     */
+    public function setPseudo($pseudo): void
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param mixed $ConfirmationToken
+     */
+    public function setConfirmationToken($ConfirmationToken): void
+    {
+        $this->confirmationToken = $ConfirmationToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTokenPassword()
+    {
+        return $this->tokenPassword;
+    }
+
+    /**
+     * @param mixed $tokenPassword
+     */
+    public function setTokenPassword($tokenPassword): void
+    {
+        $this->tokenPassword = $tokenPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedTokenPasswordAt()
+    {
+        return $this->createdTokenPasswordAt;
+    }
+
+    /**
+     * @param mixed $createdTokenPasswordAt
+     */
+    public function setCreatedTokenPasswordAt($createdTokenPasswordAt): void
+    {
+        $this->createdTokenPasswordAt = $createdTokenPasswordAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+    public function isEnabled() {
+        return $this->getEnabled();
     }
 }

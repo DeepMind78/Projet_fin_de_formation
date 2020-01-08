@@ -6,7 +6,7 @@
     <h2>Inscription client</h2>
     
     {{ form_start(formInscription) }}
-    
+    {{ form_row(formInscription.pseudo) }}
     {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
     {{form_row(formInscription.password, {attr : { 'placeholder': 'mot de passe'}})}}
     {{form_row(formInscription.confirm_password, {attr : { 'placeholder': 'confirmer mot de passe'}})}}

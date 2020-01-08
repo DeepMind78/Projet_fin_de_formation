@@ -3,12 +3,25 @@
 {% block body %}
 
     <div class="container">
+
+        <div class="jumbotron">
        {{ fichefull.nom }}
-        <img src="{{ vich_uploader_asset(fichefull, 'imageFile') }}" alt="" style="width:200px;height:180px">
-        <a href="{{ vich_uploader_asset(fichefull, 'diplomeFile') }}" alt="">PDF</a>
+
+       Bienvenue sur la fiche de <h2>{{ fichefull.nom }}</h2>
+            
+        {{ fichefull.prenom }}
+
+            <img src="{{ vich_uploader_asset(fichefull, 'imageFile') }}" alt="" style="width:200px;height:180px">
+            <a href="{{ vich_uploader_asset(fichefull, 'diplomeFile') }}" alt="">PDF</a>
+
+        {{ fichefull.age }}
+        {{ fichefull.domaine }}
+        {{ fichefull.prix }}
+
+
     </div>
 
-    <div>
+
         {% if is_granted("ROLE_CLIENT") %}
             {{ form_start(formRdv) }}
             {{ form_rest(formRdv) }}
@@ -19,5 +32,5 @@
             <a class="nav-link" href="{{path('login')}}">Connection | Inscription </a>
         {% endif %}
 
-    </div>
+
 {% endblock %}
