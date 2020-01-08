@@ -7,11 +7,21 @@
 
             <div class="form-row d-flex justify-content-center">
                 <div class="col-3">
+
                     {{form_row(form.sport)}}
-                    
+
+                    <select name="" id="">
+                        {% for coach in coachs %}
+                            <option value="">{{coach.domaine}}</option>
+                        {% endfor %}
+                    </select>
+
                 </div>
                 <div class="col-3">
-                    {{form_row(form.ville)}}
+{#                    {% for forms in form %}#}
+{#                        {{form_row(form.ville)}}#}
+{#                    {% endfor %}#}
+                        {{form_row(form.ville)}}
                 </div>
                 <div class="col-2">
                     <button class="btn btn-primary">Rechercher</button>
@@ -23,6 +33,7 @@
 <h1>Bienvenue sur FINDACOACH</h1>
 {% for coach in coachs %}
     {{coach.nom}}
+    {{coach.domaine}}
     <a href="{{ path('fichefullcoach', {id: coach.id}) }}">Fiche complète du coach</a>
 {% endfor %}
 <div class="navigation d-flex justify-content-center">

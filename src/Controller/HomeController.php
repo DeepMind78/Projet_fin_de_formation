@@ -30,8 +30,16 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'form'=>$form->createView(),
-            'coachs'=>$coachlist
+            'form' => $form->createView(),
+            'coachs' => $coachlist
         ]);
     }
+
+
+//    public function recupDomaines(Request $request)
+//    {
+//        $searchDomaine = new DomaineSearch;
+//        $select = $this->creatSelected(DomaineSearchType::class, $searchDomaine);
+//        $select->handleRequest($request);
+//    }
 }
