@@ -15,19 +15,21 @@ class MailerService extends AbstractController
 
     /**
      * @param $token
+     * @param $pseudo
      * @param $template
      * @param $to
      */
-    public function sendToken($token, $to, $template)
+    public function sendToken($token, $to, $pseudo, $template)
     {
         $message = (new \Swift_Message('Mail de confirmation'))
-            ->setFrom('registration@al-houria.com')
+            ->setFrom('cullellsullivan78@gmail.com')
             ->setTo($to)
             ->setBody(
                 $this->renderView(
-                    'emails/' . $template,
+                    'email/' . $template,
                     [
-                        'token' => $token
+                        'token' => $token,
+                        'pseudo' => $pseudo
                     ]
                 ),
                 'text/html'
