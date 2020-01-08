@@ -49,7 +49,7 @@ class CoachController extends AbstractController
             $coach->setUser($user);
             $manager->persist($coach);
             $manager->flush();
-            $id = $user->getId();
+            $id = $coach->getId();
             return $this->redirectToRoute('fichefullcoach',[
                 'id' => $id
             ] );
