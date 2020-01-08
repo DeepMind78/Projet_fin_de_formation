@@ -61,7 +61,7 @@ class InscriptionController extends AbstractController
             $user->setEnabled(true);
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_login');
         } else {
             return $this->render('inscription/login.html.twig');
         }
