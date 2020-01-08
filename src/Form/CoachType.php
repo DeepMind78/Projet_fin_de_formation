@@ -19,8 +19,8 @@ class CoachType extends AbstractType
             // [ 'required'=>false 
             // ])
             ->add('photo')
-             ->add('imageFile', FileType::class,
-             [ 'required'=>false
+             ->add('imageFile', FileType::class, [
+                 'required'=>false
              ])
             ->add('adresse')
             ->add('codePostal')
@@ -28,6 +28,9 @@ class CoachType extends AbstractType
             ->add('age')
             ->add('telephone')
             ->add('diplome')
+            ->add('diplomeFile', FileType::class, [
+                'required'=>false
+                ])
             ->add('domaine')
             ->add('prix', null, ['attr'=>[
         'placeholder'=>"Prix à l'heure"

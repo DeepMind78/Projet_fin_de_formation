@@ -28,12 +28,22 @@ class Coach
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
-
     /**
      * @var  File|null
      * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
      */
     private $imageFile;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $diplomename;
+    /**
+     * @var  File|null
+     * @Vich\UploadableField(mapping="property_diplome", fileNameProperty="diplomename")
+     */
+    private $diplomeFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -298,7 +308,6 @@ class Coach
     {
         return $this->filename;
     }
-
     /**
      * @param null|string $filename
      * @return Coach
@@ -307,10 +316,7 @@ class Coach
     public function setFilename(?string $filename): Coach
     {
         $this->filename = $filename;
-        if ($this->imageFile instanceof UploadedFile) {
-            $this->updated_at = new \DateTime('now');
-        }
-            return $this;
+        return $this;
     }
     /**
      * @return null|File
@@ -319,26 +325,75 @@ class Coach
     {
         return $this->imageFile;
     }
+
     /**
      * @param File|null $imageFile
      * @return Coach
+     * @throws \Exception
      */
     public function setImageFile(?File $imageFile): Coach
     {
         $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
             return $this;
     }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
-
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
     }
+
+
+
+
+
+
+
+    /**
+     * @return null|string
+     */
+    public function getDiplomename(): ?string
+    {
+        return $this->diplomename;
+    }
+    /**
+     * @param null|string $diplomename
+     * @return Coach
+     * @throws \Exception
+     */
+    public function setDiplomename(?string $diplomename): Coach
+    {
+        $this->diplomename = $diplomename;
+        return $this;
+    }
+    /**
+     * @return null|File
+     */
+    public function getDiplomeFile(): ?File
+    {
+        return $this->diplomeFile;
+    }
+
+    /**
+     * @param File|null $diplomeFile
+     * @return Coach
+     * @throws \Exception
+     */
+    public function setDiplomeFile(?File $diplomeFile): Coach
+    {
+        $this->diplomeFile = $diplomeFile;
+        if ($this->diplomeFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
 
 }
