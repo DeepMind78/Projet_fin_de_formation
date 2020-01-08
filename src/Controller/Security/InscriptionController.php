@@ -21,6 +21,7 @@ class InscriptionController extends AbstractController
     public function coachInscription(AuthenticationUtils $authenticationUtils, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailerService $mailerService)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User;
         $form = $this->createForm(InscriptionType::class,$user);
         $form->handleRequest($request);
@@ -30,19 +31,42 @@ class InscriptionController extends AbstractController
             $hash= $encoder->encodePassword($user, $user->getPassword()); // Il saura faire le lien car nous avons déclaré quel algorithme utiliser pour cette classe $user dans les configurations. 
             $user->setPassword($hash);
             $user->setRoles(['ROLE_COACH']);
+            $user->setEnabled(false);
             $manager->persist($user);
             $manager->flush();
             $token = $user->getConfirmationToken();
             $email = $user->getEmail();
             $pseudo = $user->getPseudo();
             $mailerService->sendToken($token, $email, $pseudo, 'emailconfirm.html.twig');
+            $this->addFlash('user-error', 'Votre inscription a été validée, vous allez recevoir un email de confirmation pour activer votre compte et pouvoir vous connectez');
             return $this->redirectToRoute('login');
         }
 
         return $this->render('inscription/coach.html.twig', [
-            'formInscription' => $form->createView()
-        ]);
+            'formInscription' => $form->createView(), 'last_username' => $lastUsername, 'error' => $error,
+            ]);
     }
+
+    /**
+     * @Route("/compte/confirmation/{token}/{pseudo}", name="confirme_compte")
+     * @param $token
+     * @param $pseudo
+     */
+    public function confirmAccount($token, $pseudo, EntityManagerInterface $manager)
+    {
+        $user = $manager->getRepository(User::class)->findOneBy(['pseudo' => $pseudo]);
+        $tokenExist = $user->getConfirmationToken();
+        if($token === $tokenExist) {
+            $user->setConfirmationToken(null);
+            $user->setEnabled(true);
+            $manager->persist($user);
+            $manager->flush();
+            return $this->redirectToRoute('login');
+        } else {
+            return $this->render('inscription/login.html.twig');
+        }
+    }
+
 
     /**
      * @Route("/inscription/client", name="inscriptionClient")
@@ -75,8 +99,9 @@ class InscriptionController extends AbstractController
     {
         $error = $authentificationUtils->getLastAuthenticationError();
         $lastUsername = $authentificationUtils->getLastUsername();
+        dump($lastUsername);
         return $this->render('inscription/login.html.twig', [
-            'last_username' => $lastUsername, 
+            'last_username' => $lastUsername,
             'error' => $error
         ]);
     }

@@ -1,0 +1,144 @@
+[33mcommit a9630476252fa8eebfdf8d8f9ce46a5d97d338ba[m[33m ([m[1;36mHEAD -> [m[1;32mregistermailer[m[33m)[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Wed Jan 8 12:56:25 2020 +0100
+
+    étape 2 token dans le mail de confirmation
+
+[33mcommit 0d7c08f110f4b27401769b0756a697fe527c5f8a[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Wed Jan 8 10:54:10 2020 +0100
+
+    test mail envoi ok
+
+[33mcommit 94f43e9905a143cf6cb96a42a47d0582ae02dd9b[m[33m ([m[1;31morigin/rdv[m[33m, [m[1;32mrdv[m[33m)[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Tue Jan 7 16:45:40 2020 +0100
+
+    finalisation de la fiche complet du coach
+
+[33mcommit f73e4df49a72701ecbea0f95c7a8c923a72f3ae6[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Tue Jan 7 16:14:51 2020 +0100
+
+    finition des pages de rdv infos full
+
+[33mcommit 6414f7f6e2c3b7bc270153a4b0e80e1e3d9bb333[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Tue Jan 7 15:21:40 2020 +0100
+
+    Page mes rdvs client
+
+[33mcommit a23cb03563b3cce89eaf0ce1b0a6d6d6e70004d4[m[33m ([m[1;32mdev[m[33m)[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Tue Jan 7 13:10:32 2020 +0100
+
+    Partie basique Rdv J2
+
+[33mcommit bb063aa02e0d117a35ee3332fd8764aedf6a46de[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Mon Jan 6 17:41:37 2020 +0100
+
+    Debut partie RDV J1
+
+[33mcommit 051d1b53867edd4fd99d92175674aa977fb398d1[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Mon Jan 6 16:43:15 2020 +0100
+
+    création BDD RDV et liaison fiche coach complète
+
+[33mcommit f73f160f68e5760ed3c1b3a122120365fa9ff7a1[m
+Merge: ae100eb 2a4d53c
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Mon Jan 6 14:30:15 2020 +0100
+
+    Merge branch 'dev' of https://github.com/Benji-devw/findacoach into dev
+
+[33mcommit ae100eb9be5154e208bf0d086d9eab15f45df785[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Mon Jan 6 14:29:01 2020 +0100
+
+    db ok
+
+[33mcommit 63e3a59c89e6a90337d3442fd97678d502dc3c22[m
+Author: Sullivan78 <cullellsullivan@gmail.com>
+Date:   Mon Jan 6 12:44:00 2020 +0100
+
+    création entity client full
+
+[33mcommit 2a4d53c863ae6881675083b237ee384164457293[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Mon Jan 6 10:39:28 2020 +0100
+
+    Update README.md
+
+[33mcommit 457365ad278164ae36ab049ebd24ab21ef790fec[m[33m ([m[1;31morigin/entityCoach[m[33m)[m
+Author: Damien <damien.barotte78@gmail.com>
+Date:   Sun Jan 5 22:33:55 2020 +0100
+
+    controle fiche coach accès
+
+[33mcommit d355c6f4f16460412a6dba9672d2d701abc5e8c3[m
+Author: Damien <damien.barotte78@gmail.com>
+Date:   Sun Jan 5 10:44:35 2020 +0100
+
+    ajout barre recherche coach home + fonctionnalités
+
+[33mcommit f41702f066dafe7496b2ded9cfd76e00ca574ae1[m
+Author: Damien <damien.barotte78@gmail.com>
+Date:   Sat Jan 4 14:00:47 2020 +0100
+
+    ajout possibilité modification fiche coach + logout si connecté
+
+[33mcommit cd8a8015e663c79e3c48bbd8804741f3f15436f7[m
+Author: Damien <damien.barotte@gmail.com>
+Date:   Fri Jan 3 17:23:14 2020 +0100
+
+    add entityCoach
+
+[33mcommit 058b2ac0981d66612392ccec873afcec67eef2e9[m[33m ([m[1;31morigin/damien[m[33m)[m
+Author: Damien <damien.barotte78@gmail.com>
+Date:   Wed Jan 1 14:29:02 2020 +0100
+
+    ajout home et login
+
+[33mcommit 1037fe76dc7eeba61e592040a9aa8972b9b82e41[m
+Author: Damien <damien.barotte78@gmail.com>
+Date:   Tue Dec 31 16:40:58 2019 +0100
+
+    add navbar et simple inscription client et coach
+
+[33mcommit 3c5dde3fe34cbc9d57e0b180179412b8b0284d26[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Fri Dec 20 16:56:09 2019 +0100
+
+    Update README.md
+
+[33mcommit 3895d8a3902c85f6b60e9b471f8b1ca34af16ce6[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Fri Dec 20 16:50:08 2019 +0100
+
+    Update README.md
+
+[33mcommit d318f901979b84aca4d800e148d6a3d18b51c149[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Fri Dec 20 16:49:44 2019 +0100
+
+    Update README.md
+
+[33mcommit 4f990e9842958b81cf490542f921ee6fd6580622[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Fri Dec 20 16:49:11 2019 +0100
+
+    Update README.md
+
+[33mcommit bc7c34fd9096a036f7af0bda40d544019fc45515[m
+Author: Benji <55087919+Benji-devw@users.noreply.github.com>
+Date:   Fri Dec 20 16:37:42 2019 +0100
+
+    Create README.md
+
+[33mcommit c7a0e0d54288751207bfdc444ef1f2d157b3ee5e[m
+Author: Benji-devw <ben.nav@pm.me>
+Date:   Fri Dec 20 16:35:01 2019 +0100
+
+    init

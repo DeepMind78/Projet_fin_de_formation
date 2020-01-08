@@ -60,6 +60,13 @@ class User implements UserInterface
      */
     private $createdTokenPasswordAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+
+    private $enabled;
+
+
 
 
     
@@ -223,5 +230,24 @@ class User implements UserInterface
     public function setCreatedTokenPasswordAt($createdTokenPasswordAt): void
     {
         $this->createdTokenPasswordAt = $createdTokenPasswordAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+    public function isEnabled() {
+        return $this->getEnabled();
     }
 }
