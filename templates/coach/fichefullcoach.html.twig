@@ -16,9 +16,7 @@
         {{ form_end(formRdv) }}
         {% else %}
             <p>Vous devez être connecté/inscrit pour réserver ! </p>
-            <a class="nav-link" href="{{path('inscriptionClient')}}">M'inscrire</a>
-            |
-            <a class="nav-link" href="{{path('login')}}">Me connecter </a>
+            <a class="nav-link" href="{{path('login')}}">Connection | Inscription </a>
         {% endif %}
 
     </div>
