@@ -9,9 +9,17 @@
     </div>
 
     <div>
-        {{ form_start(formRdv) }}
-        {{ form_rest(formRdv) }}
-        <button>Réserver</button>
+        {% if is_granted("ROLE_CLIENT") %}
+            {{ form_start(formRdv) }}
+            {{ form_rest(formRdv) }}
+            <button>Réserver</button>
         {{ form_end(formRdv) }}
+        {% else %}
+            <p>Vous devez être connecté/inscrit pour réserver ! </p>
+            <a class="nav-link" href="{{path('inscriptionClient')}}">M'inscrire</a>
+            |
+            <a class="nav-link" href="{{path('login')}}">Me connecter </a>
+        {% endif %}
+
     </div>
 {% endblock %}
