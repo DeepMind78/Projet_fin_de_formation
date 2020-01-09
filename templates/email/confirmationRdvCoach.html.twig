@@ -1,0 +1,12 @@
+{# templates/emails/registration.html.twig #}
+<h3>Confirmation de rendez-vous</h3>
+
+Vous avez un nouveau rendez-vous avec le client {{ infoClient }} le {{ jour }} à {{ heure }}.
+Ce rendez-vous aura lieu à {{ lieu }} pour une durée de {{ duree }}h.
+
+Vous serez crédité d'un montant total de {{ total }}€ ultérieurement.
+
+Cordialement.
+
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('images/logo.png')) }}" alt="">

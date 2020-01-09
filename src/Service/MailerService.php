@@ -71,4 +71,49 @@ class MailerService extends AbstractController
             );
         $this->mailer->send($message);
     }
+
+    public function sendRdvCoach($to, $infoClient, $duree, $heure, $jour,  $lieu, $total, $template)
+    {
+        $message = (new \Swift_Message('Nouveau rendez-vous'))
+            ->setFrom('cullellsullivan78@gmail.com')
+            ->setTo($to)
+            ->setBody(
+                $this->renderView(
+                    'email/' . $template,
+                    [
+                        'infoClient' => $infoClient,
+                        'duree' => $duree,
+                        'lieu' => $lieu,
+                        'total' => $total,
+                        'heure'=>$heure,
+                        'jour'=>$jour
+
+                    ]
+                ),
+                'text/html'
+            );
+        $this->mailer->send($message);
+    }
+
+    public function sendRdvClient($to, $infoCoach, $duree, $heure, $jour, $lieu, $total, $template)
+    {
+        $message = (new \Swift_Message('Nouveau rendez-vous'))
+            ->setFrom('cullellsullivan78@gmail.com')
+            ->setTo($to)
+            ->setBody(
+                $this->renderView(
+                    'email/' . $template,
+                    [
+                        'infoCoach' => $infoCoach,
+                        'duree' => $duree,
+                        'lieu' => $lieu,
+                        'total' => $total,
+                        'heure'=>$heure,
+                        'jour'=>$jour
+                    ]
+                ),
+                'text/html'
+            );
+        $this->mailer->send($message);
+    }
 }

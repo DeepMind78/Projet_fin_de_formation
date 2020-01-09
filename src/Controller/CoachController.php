@@ -10,6 +10,8 @@ use App\Form\RdvType;
 use App\Repository\ClientRepository;
 use App\Repository\CoachRepository;
 use App\Repository\RdvRepository;
+use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,7 +73,7 @@ class CoachController extends AbstractController
      * @return Response
      */
 
-    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient){
+    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient, UserRepository $repoUser, MailerService $mailer){
         $coach = $repoCoach->find($id);
         $prix = $coach->getPrix();
         $rdv = new Rdv();
@@ -86,8 +88,29 @@ class CoachController extends AbstractController
             $rdv->setCoach($coach);
             $test = ($request->request->get('rdv'));
             $rdv->setTotal($prix * $test['duree']);
-
+            $clientemail = $this->getUser()->getEmail();
+            $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
+            $coachEmail = $coachRequette[0]->getEmail();
            // dump($test['duree']);
+
+                $jourTab = $test['jour'];
+                $jourRdv = $jourTab['day'] .'/'. $jourTab['month'] . '/'. $jourTab['year'];
+
+                $heureTab = $test['heure'];
+                $heure = $heureTab['hour'] .'h'. $heureTab['minute'];
+
+                $lieu = $test['lieu'];
+
+                $total = $prix * $test['duree'];
+
+                $duree = $test['duree'];
+                $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
+                $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
+
+                $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
+                $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
+
+
 
             $manager->persist($rdv);
             $manager->flush();
