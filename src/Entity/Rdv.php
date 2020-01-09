@@ -37,7 +37,7 @@ class Rdv
     private $lieu;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $total;
 

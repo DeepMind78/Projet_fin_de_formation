@@ -120,7 +120,9 @@ class CoachController extends AbstractController
                     $rdvPlage->setJour($jourUtilisateur);
                     $rdvPlage->setHeure(date_modify($heureUtilisateur, "+1 hours"));
                     $rdvPlage->setLieu($lieuUtilisateur);
-                    $rdvPlage->setTotal($prix * $test['duree']);
+                    if($i==0){
+                        $rdvPlage->setTotal($prix * $test['duree']);
+                    }
                     $manager->persist($rdvPlage);
                     $manager->flush();
                 }

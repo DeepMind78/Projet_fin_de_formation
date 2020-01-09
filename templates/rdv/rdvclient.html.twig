@@ -5,15 +5,16 @@
 {% block body %}
 <div class="container">
     {% for rdv in rdvclients %}
-    <div>
-        Vous avez rendez-vous avec {{ rdv.coach.nom }},
-        Le {{ rdv.jour | date("d/m/Y") }}
-        à {{ rdv.heure | date("H:i") }}
-        pour une durée de  {{ rdv.duree }} heure(s)
-        à {{ rdv.lieu}}
-        pour un montant de {{ rdv.total }} €.
-    </div>
-
+        {% if rdv.total %}
+            <div>
+                Vous avez rendez-vous avec {{ rdv.coach.nom }},
+                Le {{ rdv.jour | date("d/m/Y") }}
+                à {{ rdv.heure | date("H:i") }}
+                pour une durée de  {{ rdv.duree }} heure(s)
+                à {{ rdv.lieu}}
+                pour un montant de {{ rdv.total }} €.
+            </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
