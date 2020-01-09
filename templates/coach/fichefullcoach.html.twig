@@ -5,7 +5,6 @@
     <div class="container">
 
         <div class="jumbotron">
-       {{ fichefull.nom }}
 
        Bienvenue sur la fiche de <h2>{{ fichefull.nom }}</h2>
             
@@ -29,7 +28,7 @@
         {{ form_end(formRdv) }}
         {% else %}
             <p>Vous devez être connecté/inscrit pour réserver ! </p>
-            <a class="nav-link" href="{{path('login')}}">Connection | Inscription </a>
+            <a class="nav-link" href="{{path('app_login')}}">Connection | Inscription </a>
         {% endif %}
 
 

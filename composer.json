@@ -30,7 +30,8 @@
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
         "symfony/yaml": "5.0.*",
-        "vich/uploader-bundle": "^1.12"
+        "vich/uploader-bundle": "^1.12",
+      "ext-http": "*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

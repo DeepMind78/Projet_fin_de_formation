@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\InscriptionType;
 use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Env\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -118,19 +119,65 @@ class InscriptionController extends AbstractController
             'formInscription' => $form->createView(), 'last_username' => $lastUsername, 'error' => $error,
         ]);
     }
+    /**
+     * @Route("/mot-de-passe-oublie", name="forgottenPassword")
+     * @param Request $request
+     * @param MailerService $mailerService
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function forgottenPassword(Request $request, MailerService $mailerService, \Swift_Mailer $mailer): \Symfony\Component\HttpFoundation\Response
+    {
+        if($request->isMethod('POST')) {
+            $email = $request->get('email');
+            $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
+            if($user === null) {
+                $this->addFlash('user-error', 'Utilisateur non identifié ');
+                return $this->redirectToRoute('app_login');
+            }
+            $user->setTokenPassword(rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '='));
+            $user->setCreatedTokenPasswordAt(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            $token = $user->getTokenPassword();
+            $email = $user->getEmail();
+            $pseudo = $user->getUsername();
+            $mailerService->sendTokenPassword($token, $email, $pseudo, 'forgottenPassword.html.twig');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('/security/forgottenPassword.html.twig');
+    }
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/reset-password/{token}", name="resetPassword")
+     * @param Request $request
+     * @param $token
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function login(AuthenticationUtils $authentificationUtils)
+    public function resetPassword(Request $request, $token, UserPasswordEncoderInterface $passwordEncoder): \Symfony\Component\HttpFoundation\Response
     {
-        $error = $authentificationUtils->getLastAuthenticationError();
-        $lastUsername = $authentificationUtils->getLastUsername();
-        dump($lastUsername);
-        return $this->render('inscription/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error
-        ]);
+        $em = $this->getDoctrine()->getManager();
+        if ($request->isMethod('POST')) {
+            $user = $em->getRepository(User::class)->findOneBy(['tokenPassword' => $token]);
+            if($user === null) {
+                $this->addFlash('not-user-exist', 'Utilisateur non identifié');
+                return $this->redirectToRoute('app_login');
+            }
+            $user->setTokenPassword(null);
+            $user->setCreatedTokenPasswordAt(null);
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $request->get('password')
+                )
+            );
+            $em->flush();
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->render('security/newPassword.html.twig');
     }
 
 }

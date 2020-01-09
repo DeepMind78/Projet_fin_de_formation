@@ -101,22 +101,4 @@ class CoachController extends AbstractController
     ]);
     }
 
-
-    /**
-     * @Route ("/rdvCoach", name="coach.rdv")
-     */
-
-    public function rdvcoach(CoachRepository $repoCoach, RdvRepository $repoRdv)
-    {
-        $user = $this->getUser()->getId();
-        $resultat = $repoCoach->findBy(['user' => $user]);
-        $idcoach = $resultat[0]->getId();
-        $rdv = $repoRdv->findBy(['coach' => $idcoach]);
-        //dump($idcoach);
-        dump($rdv);
-
-        return $this->render('/rdv/rdvcoach.html.twig', [
-            'rdvcoachs' => $rdv
-        ]);
-    }
 }

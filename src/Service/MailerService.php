@@ -37,6 +37,24 @@ class MailerService extends AbstractController
         $this->mailer->send($message);
     }
 
+    public function sendTokenPassword($token, $to, $pseudo, $template)
+    {
+        $message = (new \Swift_Message('Réinitialisation de mot de passe'))
+            ->setFrom('cullellsullivan78@gmail.com')
+            ->setTo($to)
+            ->setBody(
+                $this->renderView(
+                    'email/' . $template,
+                    [
+                        'token' => $token,
+                        'pseudo' => $pseudo
+                    ]
+                ),
+                'text/html'
+            );
+        $this->mailer->send($message);
+    }
+
     public function sendWelcome($to, $pseudo, $template)
     {
         $message = (new \Swift_Message('Bienvenue'))
