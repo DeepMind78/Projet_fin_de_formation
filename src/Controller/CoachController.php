@@ -79,6 +79,8 @@ class CoachController extends AbstractController
         $rdv = new Rdv();
         $form = $this->createForm(RdvType::class,$rdv);
         $form->handleRequest($request);
+        $error= false;
+
 
         if($form->isSubmitted() && $form->isValid()){
 
@@ -104,12 +106,27 @@ class CoachController extends AbstractController
             $dureeUtilisateur = $rdv->getDuree();
             $lieuUtilisateur = $rdv->getLieu();
             // FIN VARIABLES DONNEES RDV 
+
+            // GESTION PARTIE VARIABLES EMAIL LORS DE L'INSCRIPTION
+            $clientemail = $this->getUser()->getEmail();
+            $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
+            $coachEmail = $coachRequette[0]->getEmail();
+            $jourTab = $test['jour'];
+            $jourRdv = $jourTab['day'] .'/'. $jourTab['month'] . '/'. $jourTab['year'];
+            $heureTab = $test['heure'];
+            $heure = $heureTab['hour'] .'h'. $heureTab['minute'];
+            $lieu = $test['lieu'];
+            $total = $prix * $test['duree'];
+            $duree = $test['duree'];
+            $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
+            $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
+            // FIN PARTIE GESTION VARIABLES EMAIL
            
             
             // CONTROLE SI RDV EXISTE DEJA DANS BDD OU NON, REMPLISSAGE DES PLAGES HORRAIRES
             $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur, 'heure'=>$heureUtilisateur]));
             if(!empty($jourBdd)){
-                dump('Rdv déjà pris');
+                $error = true;
             } else {
                 date_modify($heureUtilisateur,"-1 hours");
                 for($i=0; $i<$dureeUtilisateur;$i++){
@@ -126,39 +143,19 @@ class CoachController extends AbstractController
                     $manager->persist($rdvPlage);
                     $manager->flush();
                 }
+                $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
+                $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
+                
             }
            
-
-            // GESTION PARTIE EMAIL LORS DE L'INSCRIPTION
-            $clientemail = $this->getUser()->getEmail();
-            $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
-            $coachEmail = $coachRequette[0]->getEmail();
-          
-
-            $jourTab = $test['jour'];
-            $jourRdv = $jourTab['day'] .'/'. $jourTab['month'] . '/'. $jourTab['year'];
-
-            $heureTab = $test['heure'];
-            $heure = $heureTab['hour'] .'h'. $heureTab['minute'];
-
-            $lieu = $test['lieu'];
-
-            $total = $prix * $test['duree'];
-
-            $duree = $test['duree'];
-            $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
-            $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
-
-            $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
-            $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
-      
         }
 
 
 
     return $this->render('coach/fichefullcoach.html.twig', [
         'fichefull' => $coach,
-        'formRdv' => $form->createView()
+        'formRdv' => $form->createView(),
+        'error' => $error
     ]);
     }
 

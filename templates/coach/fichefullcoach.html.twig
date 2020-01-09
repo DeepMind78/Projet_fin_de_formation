@@ -20,8 +20,12 @@
 
     </div>
 
-
+        {% if error %}
+            <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+        {% endif %}
+        
         {% if is_granted("ROLE_CLIENT") %}
+        
             {{ form_start(formRdv) }}
             {{ form_rest(formRdv) }}
             <button>Réserver</button>
@@ -30,6 +34,7 @@
             <p>Vous devez être connecté/inscrit pour réserver ! </p>
             <a class="nav-link" href="{{path('app_login')}}">Connection | Inscription </a>
         {% endif %}
+
 
 
 {% endblock %}
