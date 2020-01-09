@@ -82,64 +82,74 @@ class CoachController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
+            // GESTION RENDEZ-VOUS DE L'UTILISATEUR FORMULAIRE
             $user = $this->getUser()->getId();
             $resultat = $repoClient->findBy(['user'=>$user]);
             $idclient = $resultat[0]->getId();
             $rdv->setClient($resultat[0]);
             $rdv->setCoach($coach);
-
-
+            $rdv->setHeure($rdv->getHeure());
+        
             $test = ($request->request->get('rdv'));
+            $rdv->setTotal($prix * $test['duree']);
+            
+            // FIN GESTION RENDEZ-VOUS UTILISATEUR FORMULAIRE
+            
 
-            // Données envoyées par l'utilisateur pour le souhait de rdv. 
+            // VARIABLES DONNEES RDV 
             $jourUtilisateur = $rdv->getJour();
             dump($jourUtilisateur);
             $heureUtilisateur = $rdv->getHeure();
-            dump($heureUtilisateur);
-
-            // pour trouver si jour existe dans bdd
-            $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur]));
             
+            $dureeUtilisateur = $rdv->getDuree();
+            $lieuUtilisateur = $rdv->getLieu();
+            // FIN VARIABLES DONNEES RDV 
+           
+            
+            // CONTROLE SI RDV EXISTE DEJA DANS BDD OU NON, REMPLISSAGE DES PLAGES HORRAIRES
+            $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur, 'heure'=>$heureUtilisateur]));
             if(!empty($jourBdd)){
-                foreach($jourBdd as $jour){
-                    if( $jour->getHeure() == $heureUtilisateur ){
-                        dump('Rdv déjà pris');
-                    } else {
-                        dump('Rdv libre');
-                    }
-                }
+                dump('Rdv déjà pris');
             } else {
-                dump('rdv libre');
+                date_modify($heureUtilisateur,"-1 hours");
+                for($i=0; $i<$dureeUtilisateur;$i++){
+                    $rdvPlage = new Rdv();
+                    $rdvPlage->setClient($resultat[0]);
+                    $rdvPlage->setCoach($coach);
+                    $rdvPlage->setDuree($dureeUtilisateur);
+                    $rdvPlage->setJour($jourUtilisateur);
+                    $rdvPlage->setHeure(date_modify($heureUtilisateur, "+1 hours"));
+                    $rdvPlage->setLieu($lieuUtilisateur);
+                    $rdvPlage->setTotal($prix * $test['duree']);
+                    $manager->persist($rdvPlage);
+                    $manager->flush();
+                }
             }
+           
 
-            
-            $rdv->setTotal($prix * $test['duree']);
+            // GESTION PARTIE EMAIL LORS DE L'INSCRIPTION
             $clientemail = $this->getUser()->getEmail();
             $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
             $coachEmail = $coachRequette[0]->getEmail();
-           // dump($test['duree']);
+          
 
-                $jourTab = $test['jour'];
-                $jourRdv = $jourTab['day'] .'/'. $jourTab['month'] . '/'. $jourTab['year'];
+            $jourTab = $test['jour'];
+            $jourRdv = $jourTab['day'] .'/'. $jourTab['month'] . '/'. $jourTab['year'];
 
-                $heureTab = $test['heure'];
-                $heure = $heureTab['hour'] .'h'. $heureTab['minute'];
+            $heureTab = $test['heure'];
+            $heure = $heureTab['hour'] .'h'. $heureTab['minute'];
 
-                $lieu = $test['lieu'];
+            $lieu = $test['lieu'];
 
-                $total = $prix * $test['duree'];
+            $total = $prix * $test['duree'];
 
-                $duree = $test['duree'];
-                $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
-                $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
+            $duree = $test['duree'];
+            $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
+            $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
 
-                $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
-                $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
-
-
-
-            $manager->persist($rdv);
-            $manager->flush();
+            $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
+            $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
+      
         }
 
 
