@@ -72,9 +72,9 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
-        if($user->getEnabled() == false ){
-            throw new CustomUserMessageAuthenticationException('Veuillez confirmer votre adresse email');
-        }
+        // if($user->getEnabled() == false ){
+        //     throw new CustomUserMessageAuthenticationException('Veuillez confirmer votre adresse email');
+        // }
 
         return $user;
     }

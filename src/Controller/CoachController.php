@@ -73,7 +73,7 @@ class CoachController extends AbstractController
      * @return Response
      */
 
-    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient, UserRepository $repoUser, MailerService $mailer){
+    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient, UserRepository $repoUser, MailerService $mailer, RdvRepository $repoRdv){
         $coach = $repoCoach->find($id);
         $prix = $coach->getPrix();
         $rdv = new Rdv();
@@ -81,12 +81,38 @@ class CoachController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
             $user = $this->getUser()->getId();
             $resultat = $repoClient->findBy(['user'=>$user]);
             $idclient = $resultat[0]->getId();
             $rdv->setClient($resultat[0]);
             $rdv->setCoach($coach);
+
+
             $test = ($request->request->get('rdv'));
+
+            // Données envoyées par l'utilisateur pour le souhait de rdv. 
+            $jourUtilisateur = $rdv->getJour();
+            dump($jourUtilisateur);
+            $heureUtilisateur = $rdv->getHeure();
+            dump($heureUtilisateur);
+
+            // pour trouver si jour existe dans bdd
+            $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur]));
+            
+            if(!empty($jourBdd)){
+                foreach($jourBdd as $jour){
+                    if( $jour->getHeure() == $heureUtilisateur ){
+                        dump('Rdv déjà pris');
+                    } else {
+                        dump('Rdv libre');
+                    }
+                }
+            } else {
+                dump('rdv libre');
+            }
+
+            
             $rdv->setTotal($prix * $test['duree']);
             $clientemail = $this->getUser()->getEmail();
             $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
