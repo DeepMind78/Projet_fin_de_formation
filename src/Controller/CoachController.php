@@ -100,7 +100,7 @@ class CoachController extends AbstractController
 
             // VARIABLES DONNEES RDV 
             $jourUtilisateur = $rdv->getJour();
-            dump($jourUtilisateur);
+            // dump($jourUtilisateur);
             $heureUtilisateur = $rdv->getHeure();
             
             $dureeUtilisateur = $rdv->getDuree();
@@ -121,14 +121,19 @@ class CoachController extends AbstractController
             $infoClient = $resultat[0]->getNom() . ' '. $resultat[0]->getPrenom();
             $infoCoach = $coach->getPrenom() . ' ' . $coach->getNom();
             // FIN PARTIE GESTION VARIABLES EMAIL
+
+            $heureTest = $heureUtilisateur;
+            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur);
+            // dump($variable);
+
            
             
             // CONTROLE SI RDV EXISTE DEJA DANS BDD OU NON, REMPLISSAGE DES PLAGES HORRAIRES
-            $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur, 'heure'=>$heureUtilisateur]));
-            if(!empty($jourBdd)){
+            // $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur, 'heure'=>$heureUtilisateur]));
+            if($variable==true){
                 $error = true;
             } else {
-                date_modify($heureUtilisateur,"-1 hours");
+                date_modify($heureUtilisateur,'-'.($dureeUtilisateur).' hours');
                 for($i=0; $i<$dureeUtilisateur;$i++){
                     $rdvPlage = new Rdv();
                     $rdvPlage->setClient($resultat[0]);
@@ -150,13 +155,32 @@ class CoachController extends AbstractController
            
         }
 
-
-
     return $this->render('coach/fichefullcoach.html.twig', [
         'fichefull' => $coach,
         'formRdv' => $form->createView(),
         'error' => $error
     ]);
+    }
+
+    public function rdvExist($heure, $duree, $repo, $jour){
+            $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure]));
+            if(!empty($jourUnBdd)){
+                return true;
+            }
+            for($i=1;$i<$duree;$i++){
+                $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
+                print_r('test');
+                if(!empty($jourBdd)){
+                    dump($heure);
+                    return true;
+                    break;
+                } else {
+                    
+                    // return false;
+                    dump($heure);
+                
+                }
+            }
     }
 
 }
