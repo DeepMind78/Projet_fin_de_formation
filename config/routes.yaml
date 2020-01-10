@@ -4,3 +4,6 @@
 
 logout:
   path: /logout
+
+calendar:
+    resource: "@CalendarBundle/Resources/config/routing.yaml"

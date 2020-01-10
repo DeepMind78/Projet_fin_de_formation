@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Rdv;
 use App\Entity\User;
 use App\Entity\Coach;
+use App\EventSubscriber\CalendarSubscriber;
 use App\Form\CoachType;
 use App\Form\RdvType;
 use App\Repository\ClientRepository;
@@ -12,16 +13,19 @@ use App\Repository\CoachRepository;
 use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
+use CalendarBundle\Event\CalendarEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class CoachController extends AbstractController
 {
+
     /**
      * @Route("/coach/fiche/{user}", name="fiche.coach")
      * @param Request $request
@@ -80,6 +84,15 @@ class CoachController extends AbstractController
         $form = $this->createForm(RdvType::class,$rdv);
         $form->handleRequest($request);
         $error= false;
+
+
+        
+        // $rdvs = $repoRdv->findBy(['coach'=>$id]);
+        // dump($rdvs);
+        // $temp = new CalendarSubscriber($manager, $repoRdv);
+        // $temp->setId($id);
+        // $temp->onCalendarSetData($calendar);
+        // $calandarTest->onCalendarSetData($repoRdv,$id);
 
 
         if($form->isSubmitted() && $form->isValid()){
@@ -163,24 +176,29 @@ class CoachController extends AbstractController
     }
 
     public function rdvExist($heure, $duree, $repo, $jour){
+            
             $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure]));
             if(!empty($jourUnBdd)){
                 return true;
             }
             for($i=1;$i<$duree;$i++){
                 $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
-                print_r('test');
+                // print_r('test');
                 if(!empty($jourBdd)){
-                    dump($heure);
+                    // dump($heure);
                     return true;
                     break;
                 } else {
                     
                     // return false;
-                    dump($heure);
+                    // dump($heure);
                 
                 }
             }
+    }
+
+    public function showIdCoach(){
+
     }
 
 }
