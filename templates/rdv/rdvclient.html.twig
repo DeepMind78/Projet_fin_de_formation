@@ -3,6 +3,14 @@
 {% block title %}Mes rendez-vous{% endblock %}
 
 {% block body %}
+
+    <div class="row text-center">
+        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
+            <h1 class="display-4 mt-5">Mes rendez-vous</h1>
+        </div>
+    </div>
+
+
 <div class="container">
     {% for rdv in rdvclients %}
         {% if rdv.total %}

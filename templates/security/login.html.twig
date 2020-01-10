@@ -4,6 +4,13 @@
 
 {% block body %}
 <form method="post">
+
+    <div class="row text-center">
+        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
+            <h1 class="display-4 mt-5">Please sign in</h1>
+        </div>
+    </div>
+
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}

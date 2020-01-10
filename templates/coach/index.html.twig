@@ -3,6 +3,13 @@
 {% block title %}Fais ta fiche PD de Coach{% endblock %}
 
 {% block body %}
+
+    <div class="row text-center mb-5">
+        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
+            <h1 class="display-4 mt-5">Compte Coach</h1>
+        </div>
+    </div>
+
 {% if is_granted("ROLE_COACH") %}
 <div class="container">
  {{ form_start(ficheCoach) }}
@@ -16,3 +23,4 @@
 {% endif %}
 
 {% endblock %}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim iusto laborum modi, nesciunt nostrum porro quas quisquam sunt tenetur. Consequatur cumque, enim et iusto laudantium officia quaerat ratione rerum suscipit.

@@ -2,9 +2,14 @@
 
 {% block body %}
 
+    <div class="row text-center">
+        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
+            <h1 class="display-4 mt-5">Inscription client</h1>
+        </div>
+    </div>
+
 <div class="container">
-    <h2>Inscription client</h2>
-    
+
     {{ form_start(formInscription) }}
     {{ form_row(formInscription.pseudo) }}
     {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
