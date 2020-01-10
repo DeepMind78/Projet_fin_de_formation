@@ -61,36 +61,37 @@
             </div>
 
             <div class="row">
-                <div class="col-6 mx-auto">
+                <div class="col-6">
                     {{ form_row(ficheCoach.telephone) }}
-                </div>
-                <div class="col-2">
-                    {{ form_row(ficheCoach.age) }}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-6 mx-auto">
+                <div class="col-md-2">
+                    {{ form_row(ficheCoach.age) }}
+                </div>
+                <div class="col-md-3">
                     {{ form_row(ficheCoach.imageFile) }}
                 </div>
-                <div class="col-2">
+                <div class="col-md-3">
                     {{ form_row(ficheCoach.diplomeFile) }}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-6 mx-auto">
+                <div class="col">
                     {{ form_row(ficheCoach.descriptionCoach) }}
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">
+                <div class="col">
+
                     {{ form_row(ficheCoach.descriptionSeance) }}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-2">
+                <div class="col-4">
                     {{ form_row(ficheCoach.prix) }}
                 </div>
             </div>
@@ -103,16 +104,11 @@
 
 
 
-{#         {{ form_start(ficheCoach) }}#}
-{#         {{form_rest(ficheCoach)}}#}
-{#        <button class='btn btn-primary' type="submit">Envoyer</button>#}
-{#         {{ form_end(ficheCoach) }}#}
-
     {% else %}
             <h2>Vous n'avez pas accès à cette partie</h2>
             <a href="{{path('home')}}">Lien vers menu principal</a>
     {% endif %}
 
-
 </div>
+
 {% endblock %}
