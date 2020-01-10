@@ -1,45 +1,88 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+        <style>
+
+        </style>
+    {% endblock %}
+
+<div class="top-fond">
     <div class="container">
         {{form_start(form)}}
 
-            <div class="form-row d-flex justify-content-center">
-                <div class="col-3">
+                <div class="row align-items-center justify-content-center top-content">
 
-                    {{form_row(form.sport)}}
+                    <div class="col-4">
 
-                    <select name="" id="">
-                        {% for coach in coachs %}
-                            <option value="">{{coach.domaine}}</option>
-                        {% endfor %}
-                    </select>
+                        {{form_row(form.sport, {'attr': {'class': 'nom_id'}}) }}
 
-                </div>
-                <div class="col-3">
-{#                    {% for forms in form %}#}
-{#                        {{form_row(form.ville)}}#}
-{#                    {% endfor %}#}
+                    </div>
+                    <div class="col-4">
+
                         {{form_row(form.ville)}}
+                    </div>
+
+
+                    <button class="btn btn-primary" style="position: absolute; margin-top:70px;">Rechercher</button>
+
+
                 </div>
-                <div class="col-2">
-                    <button class="btn btn-primary">Rechercher</button>
-                </div>
-            </div>
+
         {{form_end(form)}}
     </div>
 </div>
-<h1>Bienvenue sur FINDACOACH</h1>
-{% for coach in coachs %}
-    {{coach.nom}}
-    {{coach.domaine}}
-    <a href="{{ path('fichefullcoach', {id: coach.id}) }}">Fiche complète du coach</a>
-{% endfor %}
+
+
+<div class="container-fluid bShadow-top" style="min-height: 50rem;border-top:solid 1px rgba(0,0,0,.3);">
+<div class="container p-5">
+
+    <div class="row">
+    {% for coach in coachs %}
+
+            <div class="col-4 text-center">
+
+                <div class="row">
+                <div class="col">
+                    <img class="rounded-circle img-coach" src="{{ vich_uploader_asset(coach, 'imageFile') }}" alt="">
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-white mt-4">
+                        <h5 class="display-4" style="font-size: 1.8em">{{coach.nom}} {{coach.prenom}}</h5><br>
+                        Ville : {{coach.ville}}<br>
+                        Catégorie : {{coach.domaine}}<br>
+                        {{coach.prix}}€/h<br>
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto culpa exercitationem fugit iste nam recusandae repudiandae temporibus veniam voluptates
+                        ...
+
+                        <br>
+                        <a href="{{ path('fichefullcoach', {id: coach.id}) }}">Voir fiche</a>
+                    </div>
+                </div>
+
+            </div>
+
+    {% endfor %}
+</div>
+</div>
+
+
+
 <div class="navigation d-flex justify-content-center">
     {{ knp_pagination_render(coachs) }}
 </div>
-{% if is_granted("ROLE_COACH") %}
-    Hi {{ app.user.id }}
-{% endif %}
+
+
+</div>  {# BODY #}
+
 {% endblock %}
+
+
+
+
+
+

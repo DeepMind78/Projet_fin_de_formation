@@ -3,48 +3,50 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"> 
+{#        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">#}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
+        <link rel="stylesheet" href="/css/app.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{path('home')}}">FINDACOACH</a>
+        <nav class="navbar navbar-expand-md navbar-light fixed-top nav-bar-back">
+            <a class="navbar-brand text-white text- center" href="{{path('home')}}">Find a Coach</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           
             <div class="collapse navbar-collapse" id="navbarColor03">
-              <ul class="navbar-nav ml-auto ">
+              <ul class="navbar-nav ml-auto">
                   {% if is_granted("ROLE_CLIENT") %}
                       <li class="nav-item">
-                          <a class="nav-link" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                          <a class="nav-link text-white" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                          <a class="nav-link text-white" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
                       </li>
                   {% endif %}
                 {% if is_granted("ROLE_COACH") %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                  <a class="nav-link text-white" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
                 </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                        <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
                     </li>
                 {% endif %}
                 {% if app.user %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{path('logout')}}">Se deconnecter</a>
+                  <a class="nav-link text-white" href="{{path('logout')}}">Se deconnecter</a>
                 </li>
                 {% else %}
                 <li class="nav-item  ">
-                  <a class="nav-link" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
+                  <a class="nav-link text-white" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{path('inscriptionClient')}}">Inscription Client </a>
+                  <a class="nav-link text-white" href="{{path('inscriptionClient')}}">Inscription Client </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{path('app_login')}}">Login </a>
+                  <a class="nav-link text-white" href="{{path('app_login')}}">Login </a>
                 </li>
                 {% endif %}
               </ul>

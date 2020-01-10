@@ -1,18 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fais ta fiche gentil roi client{% endblock %}
+{% block title %}Inscription Client{% endblock %}
 
 {% block body %}
-    {% if is_granted("ROLE_CLIENT") %}
-        <div class="container">
-            {{ form_start(ficheClient) }}
-            {{form_rest(ficheClient)}}
-            <button class='btn btn-primary' type="submit">Envoyer</button>
-            {{ form_end(ficheClient) }}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/client.css') }}">
+        <style>
+
+        </style>
+    {% endblock %}
+
+    <div class="row text-center mb-5">
+        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
+            <h1 class="display-4 mt-5">Compte client</h1>
         </div>
+    </div>
+
+<div class="container">
+
+    {% if is_granted("ROLE_CLIENT") %}
+
+
+
+            {{ form_start(ficheClient) }}
+
+
+            <p>
+{#            {{form_rest(ficheClient)}}#}
+            <div class="row justify-content-center">
+            <div class="col-8">
+
+
+            <div class="row">
+                <div class="col-6">
+                        {{ form_row(ficheClient.nom) }}
+                </div>
+                <div class="col-6">
+                        {{ form_row(ficheClient.prenom) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{ form_row(ficheClient.adresse) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(ficheClient.codePostal) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(ficheClient.ville) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    {{ form_row(ficheClient.telephone) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    {{ form_row(ficheClient.age) }}
+                </div>
+                <div class="col-4">
+                    {{ form_row(ficheClient.poids) }}
+                </div>
+                <div class="col-4">
+                    {{ form_row(ficheClient.taille) }}
+                </div>
+            </div>
+
+                <button class='btn btn-primary mt-3' type="submit">Envoyer</button>
+
+
+
+        </div>
+        </div>
+{#                {{form_rest(ficheClient)}}#}
+
+
+            </p>
+
+
+
+            {{ form_end(ficheClient) }}
+
+
+
+
     {% else %}
         <h2>Nous ne reconnaissons pas votre personne, veuillez vous identifier !!</h2>
         <a href="{{path('login')}}">Se connecter</a>
     {% endif %}
+    </div>
+
 
 {% endblock %}
