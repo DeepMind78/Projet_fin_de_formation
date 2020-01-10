@@ -17,16 +17,16 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class CalendarSubscriber implements EventSubscriberInterface
 {
 
-    private $manager;
+   
     private $repo;
     private $id;
-    private $router;
+   
 
-    public function __construct(EntityManagerInterface $manager, RdvRepository $repo, UrlGeneratorInterface $router)
+    public function __construct(RdvRepository $repo)
     {
-        $this->manager = $manager;
+        
         $this->repo = $repo;
-        $this->router = $router;
+        
     }
 
     public function setId($id) {
@@ -47,13 +47,15 @@ class CalendarSubscriber implements EventSubscriberInterface
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
-        
+        $url = $_SERVER['HTTP_REFERER'];
+        $x = explode('/',$url);
+        $client_id = end($x);
 
         // You may want to make a custom query from your database to fill the calendar
 
-        // $rdvs = $this->repo->findBy(['coach'=>$this->id]);
+        $rdvs = $this->repo->findBy(['coach'=>$client_id]);
         // dump($this->id);
-        $rdvs = $this->repo->findAll();
+        // $rdvs = $this->repo->findAll();
         dump($rdvs);
         foreach($rdvs as $rdv){
             $date = date_format($rdv->getHeure(), 'H:i') . ' Indisponible';

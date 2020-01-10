@@ -89,8 +89,9 @@ class CoachController extends AbstractController
         
         // $rdvs = $repoRdv->findBy(['coach'=>$id]);
         // dump($rdvs);
-        // $temp = new CalendarSubscriber($manager, $repoRdv);
-        // $temp->setId($id);
+        $temp = new CalendarSubscriber($repoRdv);
+        $temp->setId($id);
+        $temp->getSubscribedEvents();
         // $temp->onCalendarSetData($calendar);
         // $calandarTest->onCalendarSetData($repoRdv,$id);
 
