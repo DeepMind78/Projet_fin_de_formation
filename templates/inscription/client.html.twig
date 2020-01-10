@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Inscription Client{% endblock %}
+
 {% block body %}
 
-    <div class="row text-center">
+    <div class="row text-center mb-5">
         <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
             <h1 class="display-4 mt-5">Inscription client</h1>
         </div>
@@ -10,15 +12,20 @@
 
 <div class="container">
 
-    {{ form_start(formInscription) }}
-    {{ form_row(formInscription.pseudo) }}
-    {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
-    {{form_row(formInscription.password, {attr : { 'placeholder': 'mot de passe'}})}}
-    {{form_row(formInscription.confirm_password, {attr : { 'placeholder': 'confirmer mot de passe'}})}}
-    
-    <button type="submit" class='btn btn-primary'> Confirmer </button>
-    {{ form_end(formInscription) }}
+    <div class="row justify-content-center">
+    <div class="col-6">
 
+        {{ form_start(formInscription) }}
+        {{ form_row(formInscription.pseudo) }}
+        {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
+        {{form_row(formInscription.password, {attr : { 'placeholder': 'mot de passe'}})}}
+        {{form_row(formInscription.confirm_password, {attr : { 'placeholder': 'confirmer mot de passe'}})}}
+
+        <button type="submit" class='btn btn-primary'> Confirmer </button>
+        {{ form_end(formInscription) }}
+
+    </div>
+    </div>
 
 </div>
 {% endblock %}
