@@ -32,7 +32,9 @@ class CoachType extends AbstractType
             ->add('prix', null, ['attr'=>[
         'placeholder'=>"Prix à l'heure"
                 ]
-            ]);
+            ])
+            ->add('descriptionCoach')
+            ->add('descriptionSeance');
 
     }
 
