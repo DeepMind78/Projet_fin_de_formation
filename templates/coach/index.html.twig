@@ -71,17 +71,32 @@
 
             <div class="row">
                 <div class="col-6 mx-auto">
-                    {{ form_row(ficheCoach.telephone) }}
+                    {{ form_row(ficheCoach.imageFile) }}
                 </div>
                 <div class="col-2">
-                    {{ form_row(ficheCoach.age) }}
+                    {{ form_row(ficheCoach.diplomeFile) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    {{ form_row(ficheCoach.descriptionCoach) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    {{ form_row(ficheCoach.descriptionSeance) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    {{ form_row(ficheCoach.prix) }}
                 </div>
             </div>
 
 
-
-
-            <button class='btn btn-primary' type="submit">Envoyer</button>
+            <button class='btn btn-sm btn-primary m-3' type="submit">Enregistrer</button>
 
         </div>
     </div>
