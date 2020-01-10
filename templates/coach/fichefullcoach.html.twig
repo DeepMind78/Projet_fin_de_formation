@@ -33,7 +33,7 @@
        
 
         {% include '@Calendar/calendar.html' %}
-        <button id="test">Voir disponibilités</button>
+        <button id="test" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
 
         {% if is_granted("ROLE_CLIENT") %}
         
@@ -53,7 +53,8 @@
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
         <script>  
-            var test = document.getElementById('test').onclick = function()
+            
+            function afficherCalendar()
             {
             var calendarEl = document.getElementById('calendar-holder');
         
