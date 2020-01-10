@@ -106,6 +106,16 @@ class Coach
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description_coach;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description_seance;
+
     public function __construct()
     {
         $this->rdvs = new ArrayCollection();
@@ -351,6 +361,30 @@ class Coach
         if ($this->diplomeFile instanceof UploadedFile) {
             $this->updated_at = new \DateTime('now');
         }
+        return $this;
+    }
+
+    public function getDescriptionCoach(): ?string
+    {
+        return $this->description_coach;
+    }
+
+    public function setDescriptionCoach(string $description_coach): self
+    {
+        $this->description_coach = $description_coach;
+
+        return $this;
+    }
+
+    public function getDescriptionSeance(): ?string
+    {
+        return $this->description_seance;
+    }
+
+    public function setDescriptionSeance(string $description_seance): self
+    {
+        $this->description_seance = $description_seance;
+
         return $this;
     }
 
