@@ -122,7 +122,7 @@ class CoachController extends AbstractController
             $charge = \Stripe\Charge::create([
                 'amount' => $amount*100,
                 'currency' => 'eur',
-                'description' => $resultat[0]->getNom() . ' ' . $resultat[0]->getPrenom(),
+                'description' => 'Client: '.$resultat[0]->getNom() . ' ' . $resultat[0]->getPrenom() . '- Coach: ' . $coach->getNom() . ' ' . $coach->getPrenom(),
                 'source' => $token,
                 ]);
         
