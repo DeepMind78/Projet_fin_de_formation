@@ -3,38 +3,68 @@
 {% block title %}Mes rendez-vous{% endblock %}
 
 {% block body %}
+    {% block stylesheets %}
+        <style>
+            .name-site {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:4em;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
+            }
+            .img-top {
+                background: url(../bureau-girly.jpg) no-repeat center center fixed;
+                background-size: cover;
+                box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .5);
+            }
+        </style>
+    {% endblock %}
 
-    <div class="row text-center mb-5">
-        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
-            <h1 class="display-4 mt-5">Mes rendez-vous</h1>
+
+    <div class="row text-center mb-5 text-center img-top" style="box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .7);">
+        <div class="col p-5 text-center" style="min-height: 14rem;">
+            <h2 class="name-site" style="">FindACoach</h2>
+            <h1 class="display-4" style="font-size: 2.5em;">Mes Rendez-vous</h1>
         </div>
     </div>
 
     <div class="container">
-        {% for rdv in rdvcoachs %}
-            {% if rdv.total %}
-                <div>
-                    Vous avez rendez-vous avec {{ rdv.client.nom }},
-                    Le {{ rdv.jour | date("d/m/Y") }}
-                    à {{ rdv.heure | date("H:i") }}
-                    pour une durée de  {{ rdv.duree }} heure(s)
-                    à {{ rdv.lieu}}
-                    pour un montant de {{ rdv.total }} €.
-                </div>
-            {% endif %}
-        {% endfor %}
-        <h2>Ajouter les heures où vous ne pourrez pas être disponible </h2>
-        
-        {{form_start(form)}}
-        {{form_row(form.jour)}}
-        {{form_row(form.heure)}}
-        {{form_row(form.duree)}}
-        {{ form_row(form._token) }}
-        
-        
-        <button type="submit">Envoyer</button>
-        {{ form_end(form, {'render_rest': false}) }}
-    </div>
+
+        <div class="row">
+            <div class="col rounded border border-primary p-5">
+                {% for rdv in rdvcoachs %}
+                    {% if rdv.total %}
+                        <div>
+                            Vous avez rendez-vous avec {{ rdv.client.nom }},
+                            Le {{ rdv.jour | date("d/m/Y") }}
+                            à {{ rdv.heure | date("H:i") }}
+                            pour une durée de  {{ rdv.duree }} heure(s)
+                            à {{ rdv.lieu}}
+                            pour un montant de {{ rdv.total }} €.
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 mt-5">
+                <h2>Ajouter les heures où vous ne pourrez pas être disponible </h2>
+            </div>
+
+            <div class="col-5 mt-1 mb-5">
+                {{form_start(form)}}
+                {{form_row(form.jour)}}
+                {{form_row(form.heure)}}
+                {{form_row(form.duree)}}
+                {{ form_row(form._token) }}
+
+                <button class="btn btn-sm border-primary text-primary m-3">Envoyer</button>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+
+    </div>{#CONTAINER#}
     
 {% endblock %}
 
