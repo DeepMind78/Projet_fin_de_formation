@@ -87,9 +87,9 @@ class CoachController extends AbstractController
         $error= false;
 
 
-        $temp = new CalendarSubscriber($repoRdv);
-        $temp->setId($id);
-        $temp->getSubscribedEvents();
+        // $temp = new CalendarSubscriber($repoRdv);
+        // $temp->setId($id);
+        // $temp->getSubscribedEvents();
         // $temp->onCalendarSetData($calendar);
         // $calandarTest->onCalendarSetData($repoRdv,$id);
 
