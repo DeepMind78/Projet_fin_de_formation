@@ -36,7 +36,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
 
-
+            {{form_start(ficheCoach)}}
             <div class="row">
                 <div class="col-6">
                     {{ form_row(ficheCoach.nom) }}
@@ -96,9 +96,12 @@
                     {{ form_row(ficheCoach.prix) }}
                 </div>
             </div>
+                    {{form_rest(ficheCoach)}}
+
 
 
             <button class='btn btn-sm btn-primary m-3' type="submit">Enregistrer</button>
+            {{form_end(ficheCoach)}}
 
         </div>
     </div>
