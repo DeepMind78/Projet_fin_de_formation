@@ -35,25 +35,25 @@ class CoachController extends AbstractController
      * @param Coach|null $coach
      * @return Response
      */
-    public function index(Request $request, EntityManagerInterface $manager, Security $security, CoachRepository $repo, Coach $coach=null)
+    public function index(Request $request, EntityManagerInterface $manager, Security $security, CoachRepository $repo, Coach $coach=null, $user)
     {
-        // if ($repo->findBy(['user'=>$id])){
-        //     $coach = $repo->findBy(['user'=>$id]);
-        // } else {
-        //     $coach = new Coach;
-        // }
+        
+        $userCheck = $this->getUser()->getId();
+        $error = false;
 
         if(!$coach){
             $coach = new Coach();
+        } elseif($userCheck != $user) {
+            $error = true;
+            
         }
-        // $coach = new Coach;
+        
         $form = $this->createForm(CoachType::class,$coach);
         $form->handleRequest($request);
         
-        
         if($form->isSubmitted() && $form->isValid()){
-            $user = $security->getUser();
-            $coach->setUser($user);
+            $userConnected = $security->getUser();
+            $coach->setUser($userConnected);
             $manager->persist($coach);
             $manager->flush();
             $id = $coach->getId();
@@ -63,7 +63,8 @@ class CoachController extends AbstractController
         }
 
         return $this->render('coach/index.html.twig', [
-            'ficheCoach' => $form->createView()
+            'ficheCoach' => $form->createView(),
+            'error'=>$error
         ]);
     }
 
@@ -86,9 +87,6 @@ class CoachController extends AbstractController
         $error= false;
 
 
-        
-        // $rdvs = $repoRdv->findBy(['coach'=>$id]);
-        // dump($rdvs);
         $temp = new CalendarSubscriber($repoRdv);
         $temp->setId($id);
         $temp->getSubscribedEvents();
@@ -198,8 +196,5 @@ class CoachController extends AbstractController
             }
     }
 
-    public function showIdCoach(){
-
-    }
 
 }

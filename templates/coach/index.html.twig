@@ -10,7 +10,7 @@
         </div>
     </div>
 
-{% if is_granted("ROLE_COACH") %}
+{% if is_granted("ROLE_COACH") and error == false %}
 <div class="container">
  {{ form_start(ficheCoach) }}
  {{form_rest(ficheCoach)}}
@@ -23,4 +23,3 @@
 {% endif %}
 
 {% endblock %}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim iusto laborum modi, nesciunt nostrum porro quas quisquam sunt tenetur. Consequatur cumque, enim et iusto laudantium officia quaerat ratione rerum suscipit.
