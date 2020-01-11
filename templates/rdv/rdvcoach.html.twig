@@ -16,6 +16,9 @@
                 background-size: cover;
                 box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .5);
             }
+            .select2-results__option {
+                color: rgba(0, 0, 0, .9);;
+            }
         </style>
     {% endblock %}
 
@@ -34,12 +37,16 @@
                 {% for rdv in rdvcoachs %}
                     {% if rdv.total %}
                         <div>
-                            Vous avez rendez-vous avec {{ rdv.client.nom }},
-                            Le {{ rdv.jour | date("d/m/Y") }}
-                            à {{ rdv.heure | date("H:i") }}
-                            pour une durée de  {{ rdv.duree }} heure(s)
-                            à {{ rdv.lieu}}
-                            pour un montant de {{ rdv.total }} €.
+                            <div class="row">
+                                <div class="col">
+                                    Rendez-vous avec <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
+                                    Le : <span class="text-primary">{{ rdv.jour | date("d/m/Y") }}</span><br>
+                                    Horaire : <span class="text-primary">{{ rdv.heure | date("H:i") }}</span><br>
+                                    Temps :  <span class="text-primary">{{ rdv.duree }} heure(s)</span><br>
+                                    Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
+                                    Montant <span class="text-primary">{{ rdv.total }}</span> €.
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
                 {% endfor %}
