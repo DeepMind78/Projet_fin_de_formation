@@ -19,6 +19,8 @@ class RdvType extends AbstractType
         $builder
             ->add('jour', DateType::class, [
                 'years' => range(2020,2100),
+                'days'=> range(date('d'),31), 
+                'months' => range(date('m'), 12)
                 
             ])
             ->add('heure', TimeType::class, [
