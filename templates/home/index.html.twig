@@ -7,6 +7,13 @@
                 background: rgba(0,0,0,.9);
                 font-weight: 100;
             }
+            .name-site {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:4em;
+                position: absolute;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)
+            }
             .top-fond {
                 min-height: 100vh;
                 width: 100%;
@@ -40,9 +47,13 @@
 <div class="top-fond">
 
     <div class="container">
+
+
         {{form_start(form)}}
 
-                <div class="row align-items-center justify-content-center top-content">
+                <div class="row align-items-center justify-content-center top-content text-center">
+
+                    <h2 class="name-site" style="margin-top: -100px;">FindACoach</h2><br>
 
                     <div class="col-4">
 
@@ -54,21 +65,41 @@
                         {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
-
-                    <button class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;">Rechercher</button>
-
+                    <button class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)">Rechercher</button>
 
                 </div>
 
         {{form_end(form)}}
     </div>
 </div>
+    
+    <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 250px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_calendar.png') }}" alt="" style="height: 100px">
+            <p>Inscrivez vous et réservé dès maintenant</p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_gratuit.png') }}" alt="" style="height: 100px">
+            <p>Première Seance gratuite. </p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_rembourse.png') }}" alt="" style="height: 100px">
+            <p>Réservez une premiere seance et donné votre avi</p>
+        </div>
+    </div>
 
 
-<div class="container-fluid" style="min-height: 50rem;border-top:solid 1px rgba(0,0,0,.3);">
+
 <div class="container p-5">
 
     <div class="row">
+        <div class="col text-center p-5">
+            <h2 class="display-4">Nos Coachs</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus delectus dicta dolorem dolores facilis fugiat impedit </p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
     {% for coach in coachs %}
 
             <div class="col-4 text-center">
@@ -86,8 +117,7 @@
                         Catégorie : {{coach.domaine}}<br>
                         {{coach.prix}}€/h<br>
 
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto culpa exercitationem fugit iste nam recusandae repudiandae temporibus veniam voluptates
-                        ...
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto culpa exercitationem ...
 
                         <br>
                         <a href="{{ path('fichefullcoach', {id: coach.id}) }}">Voir fiche</a>
@@ -98,7 +128,7 @@
 
     {% endfor %}
 </div>
-</div>
+
 
 
 

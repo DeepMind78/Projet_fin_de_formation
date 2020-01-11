@@ -6,10 +6,11 @@
 
     <style>
         .img-coach {
-            height: 180px;
+            height: 200px;
             width: 200px;
             box-shadow: 10px 10px 35px 10px rgba(0, 0, 0, 1);
         }
+
         .card {
 
         }
@@ -28,6 +29,9 @@
         #calendar-holder {
             color: rgba(255, 255, 255, .9);
             font-size: .8em;
+        }
+        .select2-results__options {
+            color: rgba(0, 0, 0, .9);
         }
 
     </style>
@@ -136,12 +140,20 @@
                     <div class="card-header bg-primary">
                         Réservation
                     </div>
-                    <div class="card-body p-5">
+                    <div class="card-body p-5 text-light">
                         {% if is_granted("ROLE_CLIENT") %}
-                        <p style="color: white;">
+                        <p>
+
                             {{ form_start(formRdv) }}
+
+
+                            {{ form_row(formRdv.jour) }}
+                            {{ form_row(formRdv.heure) }}
+
+
+
                             {{ form_rest(formRdv) }}
-                            <button class="btn btn-primary m-3">Réserver</button>
+                            <button class="btn btn-sm border-primary text-primary m-3">Réserver</button>
                             {{ form_end(formRdv) }}
                         </p>
                         {% else %}

@@ -3,10 +3,27 @@
 {% block title %}Inscription Client{% endblock %}
 
 {% block body %}
+    {% block stylesheets %}
+        <style>
+            .name-site {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:4em;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
+            }
+            .img-top {
+                background: url(../slides/grp-coach.jpg) no-repeat center center fixed;
+                background-size: cover;
+                box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .7);
+            }
+        </style>
+    {% endblock %}
 
-    <div class="row text-center mb-5">
-        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
-            <h1 class="display-4 mt-5">Inscription client</h1>
+
+    <div class="row text-center mb-5 text-center img-top">
+        <div class="col p-5 text-center" style="min-height: 14rem;">
+            <h2 class="name-site" style="">FindACoach</h2>
+            <h1 class="display-4" style="font-size: 2.5em;">Devenir Client</h1>
         </div>
     </div>
 
