@@ -2,26 +2,28 @@
 
 namespace App\Controller;
 
+use Stripe\Charge;
+use Stripe\Stripe;
 use App\Entity\Rdv;
 use App\Entity\User;
 use App\Entity\Coach;
-use App\EventSubscriber\CalendarSubscriber;
-use App\Form\CoachType;
 use App\Form\RdvType;
-use App\Repository\ClientRepository;
-use App\Repository\CoachRepository;
+use App\Form\CoachType;
+use App\Service\MailerService;
 use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
-use App\Service\MailerService;
+use App\Repository\CoachRepository;
+use App\Repository\ClientRepository;
 use CalendarBundle\Event\CalendarEvent;
 use Doctrine\ORM\EntityManagerInterface;
+use App\EventSubscriber\CalendarSubscriber;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CoachController extends AbstractController
 {
@@ -87,15 +89,20 @@ class CoachController extends AbstractController
         $error= false;
 
 
-        // $temp = new CalendarSubscriber($repoRdv);
-        // $temp->setId($id);
-        // $temp->getSubscribedEvents();
-        // $temp->onCalendarSetData($calendar);
-        // $calandarTest->onCalendarSetData($repoRdv,$id);
+        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
 
+        // Token is created using Stripe Checkout or Elements!
+        // Get the payment token ID submitted by the form:
 
-        if($form->isSubmitted() && $form->isValid()){
+            // dump($request);
+        
+            if($_POST){
+                $token = $_POST['stripeToken'];
+            }
+            
 
+        if($form->isSubmitted() && $form->isValid() && $token){
+            
             // GESTION RENDEZ-VOUS DE L'UTILISATEUR FORMULAIRE
             $user = $this->getUser()->getId();
             $resultat = $repoClient->findBy(['user'=>$user]);
@@ -106,8 +113,20 @@ class CoachController extends AbstractController
         
             $test = ($request->request->get('rdv'));
             $rdv->setTotal($prix * $test['duree']);
+            $amount= $prix*$test['duree'];
+            dump($amount);
             
             // FIN GESTION RENDEZ-VOUS UTILISATEUR FORMULAIRE
+
+            // GESTION PAIEMENT RESERVATION 
+            $charge = \Stripe\Charge::create([
+                'amount' => $amount*100,
+                'currency' => 'eur',
+                'description' => $resultat[0]->getNom() . ' ' . $resultat[0]->getPrenom(),
+                'source' => $token,
+                ]);
+        
+            // FIN GESTION PAIEMENT RESERVATION
             
 
             // VARIABLES DONNEES RDV 
@@ -165,12 +184,16 @@ class CoachController extends AbstractController
                 
             }
            
+        } else {
+            $problemCard = 'Veuillez renseigner vos coordonnées bancaires';
         }
+        $problemCard = '';
 
     return $this->render('coach/fichefullcoach.html.twig', [
         'fichefull' => $coach,
         'formRdv' => $form->createView(),
-        'error' => $error
+        'error' => $error,
+        'problemCard' => $problemCard
     ]);
     }
 
