@@ -30,7 +30,7 @@ class CoachType extends AbstractType
                 ])
             ->add('domaine')
             ->add('prix', null, ['attr'=>[
-        'placeholder'=>"Prix à l'heure"
+                'placeholder'=>"Prix à l'heure"
                 ]
             ])
             ->add('descriptionCoach')

@@ -2,13 +2,43 @@
 
 {% block body %}
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
         <style>
+            body {
+                background: rgba(0,0,0,.9);
+                font-weight: 100;
+            }
+            .top-fond {
+                min-height: 100vh;
+                width: 100%;
+
+                box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, 0.8) inset;
+                background: url(../slides/bruce-mars-559226-unsplash.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+            .btn-home:hover {
+                background: #007BFF;
+            }
+
+            .top-content {
+                height: 100vh;
+            }
+
+            .img-coach {
+                transition-duration: 1s;
+                height: 180px;
+                width: 200px;
+                box-shadow: 10px 10px 35px 10px rgba(0, 0, 0, 1);
+            }
+            .img-coach:hover {
+                transition-duration: 1s;
+                transform: scale(1.2, 1.2);
+            }
 
         </style>
     {% endblock %}
 
 <div class="top-fond">
+
     <div class="container">
         {{form_start(form)}}
 
@@ -16,16 +46,16 @@
 
                     <div class="col-4">
 
-                        {{form_row(form.sport, {'attr': {'class': 'nom_id'}}) }}
+                        {{form_row(form.sport, {'attr': {'class': 'bShadow'}}) }}
 
                     </div>
                     <div class="col-4">
 
-                        {{form_row(form.ville)}}
+                        {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
 
-                    <button class="btn btn-primary" style="position: absolute; margin-top:70px;">Rechercher</button>
+                    <button class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;">Rechercher</button>
 
 
                 </div>
@@ -35,7 +65,7 @@
 </div>
 
 
-<div class="container-fluid bShadow-top" style="min-height: 50rem;border-top:solid 1px rgba(0,0,0,.3);">
+<div class="container-fluid" style="min-height: 50rem;border-top:solid 1px rgba(0,0,0,.3);">
 <div class="container p-5">
 
     <div class="row">
@@ -45,7 +75,7 @@
 
                 <div class="row">
                 <div class="col">
-                    <img class="rounded-circle img-coach" src="{{ vich_uploader_asset(coach, 'imageFile') }}" alt="">
+                    <a href="{{ path('fichefullcoach', {id: coach.id}) }}"> <img class="rounded-circle img-coach" src="{{ vich_uploader_asset(coach, 'imageFile') }}" alt=""></a>
                 </div>
                 </div>
 
