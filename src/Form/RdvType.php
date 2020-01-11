@@ -23,6 +23,8 @@ class RdvType extends AbstractType
             ])
             ->add('heure', TimeType::class, [
                 'hours' => range(7,22),
+                'minutes'=>range(0,0)
+                // 'with_minutes'=>false
                 
             ])
             ->add('duree', null, [
