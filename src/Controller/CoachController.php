@@ -87,6 +87,7 @@ class CoachController extends AbstractController
         $form = $this->createForm(RdvType::class,$rdv);
         $form->handleRequest($request);
         $error= false;
+        $succesPaiement=false;
 
 
         \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
@@ -100,8 +101,8 @@ class CoachController extends AbstractController
                 $token = $_POST['stripeToken'];
             }
             
-
-        if($form->isSubmitted() && $form->isValid() && $token){
+            
+        if($form->isSubmitted() && $form->isValid()){
             
             // GESTION RENDEZ-VOUS DE L'UTILISATEUR FORMULAIRE
             $user = $this->getUser()->getId();
@@ -114,7 +115,6 @@ class CoachController extends AbstractController
             $test = ($request->request->get('rdv'));
             $rdv->setTotal($prix * $test['duree']);
             $amount= $prix*$test['duree'];
-            dump($amount);
             
             // FIN GESTION RENDEZ-VOUS UTILISATEUR FORMULAIRE
 
@@ -155,7 +155,8 @@ class CoachController extends AbstractController
 
             $heureTest = $heureUtilisateur;
             $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur);
-            // dump($variable);
+            dump($variable);
+            
 
             
             // CONTROLE SI RDV EXISTE DEJA DANS BDD OU NON, REMPLISSAGE DES PLAGES HORRAIRES
@@ -163,6 +164,8 @@ class CoachController extends AbstractController
             if($variable==true){
                 $error = true;
             } else {
+                dump($variable);
+                dump($error);
                 date_modify($heureUtilisateur,'-'.($dureeUtilisateur).' hours');
                 for($i=0; $i<$dureeUtilisateur;$i++){
                     $rdvPlage = new Rdv();
@@ -180,19 +183,18 @@ class CoachController extends AbstractController
                 }
                 $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
                 $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
+                $succesPaiement = true;
                 
             }
            
-        } else {
-            $problemCard = 'Veuillez renseigner vos coordonnées bancaires';
-        }
-        $problemCard = '';
+        } 
+        
 
     return $this->render('coach/fichefullcoach.html.twig', [
         'fichefull' => $coach,
         'formRdv' => $form->createView(),
         'error' => $error,
-        'problemCard' => $problemCard
+        'success' => $succesPaiement
     ]);
     }
 

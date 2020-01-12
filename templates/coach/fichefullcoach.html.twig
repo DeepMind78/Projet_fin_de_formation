@@ -143,6 +143,11 @@
                     <div class="card-header bg-primary">
                         Réservation
                     </div>
+                    {% if error %}
+                    <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+                    {% elseif success %}
+                    <div class="alert alert-success"> Rendez-vous bien pris </div>
+                    {% endif %}
                     <div class="card-body p-5">
                         {% if is_granted("ROLE_CLIENT") %}
                         <p style="color: white;">
@@ -163,7 +168,7 @@
 
                             <button class="btn btn-primary m-3">Réserver</button>
                             {{ form_end(formRdv) }}
-                            {{problemCard}}
+                           
                         </p>
                         {% else %}
                             <p>Vous devez être connecté/inscrit pour réserver! </p>
@@ -180,9 +185,7 @@
     </div>{#CONTAINER#}
 
 
-        {% if error %}
-            <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
-        {% endif %}
+        
 
 
 
