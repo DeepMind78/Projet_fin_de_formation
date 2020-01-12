@@ -211,6 +211,7 @@ class CoachController extends AbstractController
         $coachRequete = $repoCoach->findBy(['id'=>$idCoach]);
         $coach = $coachRequete[0];
         $coachNom = $coach->getNom();
+        $coachPrenom = $coach->getPrenom();
         
 
         // TROUVER COACH DANS TABLE USER
@@ -218,7 +219,7 @@ class CoachController extends AbstractController
         $coachUserRequete = $repoUser->findBy(['id'=>$idUserCoach]);
         $coachUser = $coachUserRequete[0];
         $coachEmail = $coachUser->getEmail();
-        
+
 
         // RECUPERATION DONNEES RDV UTILISATEUR 
         
@@ -237,12 +238,13 @@ class CoachController extends AbstractController
         $user = $this->getUser()->getId();
         $requeteClient = $repoClient->findBy(['user'=>$user]);
         $clientNom = $requeteClient[0]->getNom();
+        $clientPrenom = $requeteClient[0]->getPrenom();
         $clientEmail = $this->getUser()->getEmail();
         
 
 
         
-        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
+        \Stripe\Stripe::setApiKey('sk_test_D75XiUOxctvVVfaK93BHQro6007yoi24NH');
 
         if(isset($_POST['stripeToken'])){
             $token = $_POST['stripeToken'];
@@ -250,7 +252,7 @@ class CoachController extends AbstractController
             $charge = \Stripe\Charge::create([
             'amount' => $amount*100,
             'currency' => 'eur',
-            'description' => 'TEST',
+            'description' => 'Client:' ." ". $clientNom ." ". $clientPrenom ." ". '-' ." ". 'Coach:' ." ". $coachNom ." ". $coachPrenom ,
             'source' => $token,
             ]);
             
