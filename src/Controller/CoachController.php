@@ -253,9 +253,10 @@ class CoachController extends AbstractController
             'description' => 'TEST',
             'source' => $token,
             ]);
-
+            
+            $heure = date_modify($heure, '-'.$duree.' hours');
             for($i=0; $i<$duree;$i++){
-                    $heure = date_modify($heure, '-'.$duree.' hours');
+                    
                     $rdvPlage = new Rdv();
                     $rdvPlage->setClient($requeteClient[0]);
                     $rdvPlage->setCoach($coach);
