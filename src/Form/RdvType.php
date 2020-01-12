@@ -36,10 +36,7 @@ class RdvType extends AbstractType
                     2=>2,
                     3=>3
                 ],
-                'attr' => [
-                    "placeholder" => "Nombre d'heure",
-                   
-                ]
+                    "label" => "Durée en heure",
             ])
             ->add('lieu')
         
