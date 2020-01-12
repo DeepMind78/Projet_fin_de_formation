@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Stripe\Charge;
 use Stripe\Stripe;
 use App\Entity\Rdv;
@@ -80,7 +81,7 @@ class CoachController extends AbstractController
      * @return Response
      */
 
-    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient, UserRepository $repoUser, MailerService $mailer, RdvRepository $repoRdv){
+    public function afficherFiche (CoachRepository $repoCoach, $id, Request $request, EntityManagerInterface $manager, ClientRepository $repoClient, UserRepository $repoUser, RdvRepository $repoRdv){
         $coach = $repoCoach->find($id);
         $prix = $coach->getPrix();
         $rdv = new Rdv();
@@ -88,18 +89,15 @@ class CoachController extends AbstractController
         $form->handleRequest($request);
         $error= false;
         $succesPaiement=false;
-
-
-        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
+        $this->addFlash('prix', $prix);
+        $this->addFlash('coach', $id);
+        
 
         // Token is created using Stripe Checkout or Elements!
         // Get the payment token ID submitted by the form:
 
             // dump($request);
         
-            if($_POST){
-                $token = $_POST['stripeToken'];
-            }
             
             
         if($form->isSubmitted() && $form->isValid()){
@@ -115,19 +113,12 @@ class CoachController extends AbstractController
             $test = ($request->request->get('rdv'));
             $rdv->setTotal($prix * $test['duree']);
             $amount= $prix*$test['duree'];
+
+            
             
             // FIN GESTION RENDEZ-VOUS UTILISATEUR FORMULAIRE
 
-            // GESTION PAIEMENT RESERVATION 
-            $charge = \Stripe\Charge::create([
-                'amount' => $amount*100,
-                'currency' => 'eur',
-                'description' => 'Client: '.$resultat[0]->getNom() . ' ' . $resultat[0]->getPrenom() . '- Coach: ' . $coach->getNom() . ' ' . $coach->getPrenom(),
-                'source' => $token,
-                ]);
-        
-            // FIN GESTION PAIEMENT RESERVATION
-            
+           
 
             // VARIABLES DONNEES RDV 
             $jourUtilisateur = $rdv->getJour();
@@ -139,7 +130,7 @@ class CoachController extends AbstractController
             // FIN VARIABLES DONNEES RDV 
 
             // GESTION PARTIE VARIABLES EMAIL LORS DE L'INSCRIPTION
-            $clientemail = $this->getUser()->getEmail();
+            
             $coachRequette = $repoUser->findBy(['id'=> $coach->getUser()]);
             $coachEmail = $coachRequette[0]->getEmail();
             $jourTab = $test['jour'];
@@ -155,37 +146,24 @@ class CoachController extends AbstractController
 
             $heureTest = $heureUtilisateur;
             $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur);
-            dump($variable);
+            if ($variable == true){
+                $error = true;
+            } else {
+                return $this->redirectToRoute('confirmation.rdv', [
+                    'request' => $request,
+                    'id' => $id,
+                    'lieu'=> $lieuUtilisateur,
+                    'duree'=> $dureeUtilisateur,
+                    'heure'=> $heureUtilisateur, 
+                    'jour'=> $jourUtilisateur, 
             
-
+                    
+                ], 307);
+            }
             
             // CONTROLE SI RDV EXISTE DEJA DANS BDD OU NON, REMPLISSAGE DES PLAGES HORRAIRES
             // $jourBdd=($repoRdv->findBy(['jour'=>$jourUtilisateur, 'heure'=>$heureUtilisateur]));
-            if($variable==true){
-                $error = true;
-            } else {
-                dump($variable);
-                dump($error);
-                date_modify($heureUtilisateur,'-'.($dureeUtilisateur).' hours');
-                for($i=0; $i<$dureeUtilisateur;$i++){
-                    $rdvPlage = new Rdv();
-                    $rdvPlage->setClient($resultat[0]);
-                    $rdvPlage->setCoach($coach);
-                    $rdvPlage->setDuree($dureeUtilisateur);
-                    $rdvPlage->setJour($jourUtilisateur);
-                    $rdvPlage->setHeure(date_modify($heureUtilisateur, "+1 hours"));
-                    $rdvPlage->setLieu($lieuUtilisateur);
-                    if($i==0){
-                        $rdvPlage->setTotal($prix * $test['duree']);
-                    }
-                    $manager->persist($rdvPlage);
-                    $manager->flush();
-                }
-                $mailer->sendRdvCoach($coachEmail,$infoClient,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvCoach.html.twig');
-                $mailer->sendRdvClient($clientemail,$infoCoach,$duree,$heure, $jourRdv, $lieu,$total,'confirmationRdvClient.html.twig');
-                $succesPaiement = true;
-                
-            }
+            
            
         } 
         
@@ -194,7 +172,6 @@ class CoachController extends AbstractController
         'fichefull' => $coach,
         'formRdv' => $form->createView(),
         'error' => $error,
-        'success' => $succesPaiement
     ]);
     }
 
@@ -219,6 +196,89 @@ class CoachController extends AbstractController
                 }
             }
     }
+    
+    /**
+     * @Route("/confirmation/rdv", name="confirmation.rdv")
+    */
+    public function confirmation(Request $request, ClientRepository $repoClient, EntityManagerInterface $manager, MailerService $mailer, CoachRepository $repoCoach, UserRepository $repoUser){
+        $token=null;
 
+        $prixFlash = $this->get('session')->getFlashBag()->get('prix');
+        $coachFlash = $this->get('session')->getFlashBag()->get('coach');
+        $idCoach = $_GET['id'];
+        dump($idCoach);
+        $rdv = $request->get('rdv');
+        $coachRequete = $repoCoach->findBy(['id'=>$idCoach]);
+        $coach = $coachRequete[0];
+        $coachNom = $coach->getNom();
+        
+
+        // TROUVER COACH DANS TABLE USER
+        $idUserCoach= $coach->getUser();
+        $coachUserRequete = $repoUser->findBy(['id'=>$idUserCoach]);
+        $coachUser = $coachUserRequete[0];
+        $coachEmail = $coachUser->getEmail();
+        
+
+        // RECUPERATION DONNEES RDV UTILISATEUR 
+        
+        $jour = date_create($_GET['jour']['date']); 
+        $heure = date_create($_GET['heure']['date']);
+        $jourMailer = date_format($jour, 'd-m-Y');
+        $heureMailer = date_format($heure, 'h');
+        $duree = $_GET['duree'];
+        $lieu = $_GET['lieu'];
+        $prix = $coach->getPrix();
+        $amount = $duree*$prix;
+        dump($amount);
+        // FIN RECUPERATION 
+
+        // RECUPERATION INFOS CLIENT
+        $user = $this->getUser()->getId();
+        $requeteClient = $repoClient->findBy(['user'=>$user]);
+        $clientNom = $requeteClient[0]->getNom();
+        $clientEmail = $this->getUser()->getEmail();
+        
+
+
+        
+        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
+
+        if(isset($_POST['stripeToken'])){
+            $token = $_POST['stripeToken'];
+
+            $charge = \Stripe\Charge::create([
+            'amount' => $amount*100,
+            'currency' => 'eur',
+            'description' => 'TEST',
+            'source' => $token,
+            ]);
+
+            for($i=0; $i<$duree;$i++){
+                    $heure = date_modify($heure, '-'.$duree.' hours');
+                    $rdvPlage = new Rdv();
+                    $rdvPlage->setClient($requeteClient[0]);
+                    $rdvPlage->setCoach($coach);
+                    $rdvPlage->setDuree($duree);
+                    $rdvPlage->setJour($jour);
+                    $rdvPlage->setHeure(date_modify($heure, "+1 hours"));
+                    $rdvPlage->setLieu($lieu);
+                    if($i==0){
+                        $rdvPlage->setTotal($amount);
+                    }
+                    $manager->persist($rdvPlage);
+                    $manager->flush();
+                }
+                $mailer->sendRdvCoach($coachEmail,$clientNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
+                $mailer->sendRdvClient($clientEmail,$coachNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
+
+             return $this->redirectToRoute('client.rdv');   
+        }
+
+    
+
+        return $this->render('/client/confirmationRdv.html.twig');
+
+    }
 
 }
