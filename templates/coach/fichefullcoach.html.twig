@@ -31,10 +31,7 @@
             font-size: .8em;
         }
         .carousel {
-            box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .5);
-        }
-        .select2-results__option {
-            color: rgba(0, 0, 0, .9);;
+            box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);
         }
 
     </style>
@@ -73,7 +70,7 @@
     <div class="container">
     <div class="row mt-5">
 
-        <div class="col-lg-8">
+        <div class="col-lg-8 rounded p-5" style="box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.3) inset;">
                 <div class="row">
                     <div class="col-4">
                         <img class="rounded-circle img-coach text-center" src="{{ vich_uploader_asset(fichefull, 'imageFile') }}" alt="">
@@ -115,14 +112,6 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center mt-5">
-                    <div class="col">
-                        <h3 class="display-4">Mon calendrier</h3>
-                        {% include '@Calendar/calendar.html' %}
-                        <button class="btn btn-sm border border-primary text-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
-                    </div>
-                </div>
-
                 <div class="row mt-5" style="margin-bottom: 150px;">
                     <div class="col">
                         <h3 class="display-4">Ma Localisation</h3>
@@ -134,18 +123,27 @@
                         </iframe>
                     </div>
                 </div>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col">
+                        <h3 class="display-4">Mon calendrier</h3>
+                        {% include '@Calendar/calendar.html' %}
+                        <button class="btn btn-sm border border-primary text-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
+                    </div>
+                </div>
+
         </div>
 
             
 
             <div class="col-lg-4 mt-5 mb-5">
-                <div class="card text-center border-secondary" style="box-shadow: 0px 0px 15px 20px rgba(0, 0, 0, .5);">
+                <div class="card text-center border-secondary" style="box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, .5);">
                     <div class="card-header bg-primary">
                         Réservation
                     </div>
                     {% if error %}
                     <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
-                    {% elseif success %}
+                    {% else %}
                     <div class="alert alert-success"> Rendez-vous bien pris </div>
                     {% endif %}
                     <div class="card-body p-5">
@@ -185,7 +183,6 @@
     </div>{#CONTAINER#}
 
 
-        
 
 
 

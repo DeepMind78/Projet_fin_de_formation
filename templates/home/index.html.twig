@@ -13,6 +13,7 @@
                 font-size:4em;
                 position: absolute;
                 text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)
+
             }
             .top-fond {
                 min-height: 100vh;
@@ -41,6 +42,74 @@
                 transform: scale(1.2, 1.2);
             }
 
+            .bounceInLeft {
+                -webkit-animation-name: bounceInLeft;
+                animation-name: bounceInLeft;
+                -webkit-animation-duration: 1s;
+                animation-duration: 1s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+            @-webkit-keyframes bounceInLeft {
+                0%, 60%, 75%, 90%, 100% {
+                    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                }
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translate3d(-3000px, 0, 0);
+                    transform: translate3d(-3000px, 0, 0);
+                }
+                60% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(25px, 0, 0);
+                    transform: translate3d(25px, 0, 0);
+                }
+                75% {
+                    -webkit-transform: translate3d(-10px, 0, 0);
+                    transform: translate3d(-10px, 0, 0);
+                }
+                90% {
+                    -webkit-transform: translate3d(5px, 0, 0);
+                    transform: translate3d(5px, 0, 0);
+                }
+                100% {
+                    -webkit-transform: none;
+                    transform: none;
+                }
+            }
+            @keyframes bounceInLeft {
+                0%, 60%, 75%, 90%, 100% {
+                    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                }
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translate3d(-3000px, 0, 0);
+                    transform: translate3d(-3000px, 0, 0);
+                }
+                60% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(25px, 0, 0);
+                    transform: translate3d(25px, 0, 0);
+                }
+                75% {
+                    -webkit-transform: translate3d(-10px, 0, 0);
+                    transform: translate3d(-10px, 0, 0);
+                }
+                90% {
+                    -webkit-transform: translate3d(5px, 0, 0);
+                    transform: translate3d(5px, 0, 0);
+                }
+                100% {
+                    -webkit-transform: none;
+                    transform: none;
+                }
+            }
+
+
+
+
         </style>
     {% endblock %}
 
@@ -53,7 +122,7 @@
 
                 <div class="row align-items-center justify-content-center top-content text-center">
 
-                    <h2 class="name-site" style="margin-top: -100px;">FindACoach</h2><br>
+                    <h2 class="name-site bounceInLeft" style="margin-top: -100px;">FindACoach</h2><br>
 
                     <div class="col-4">
 
@@ -73,7 +142,7 @@
     </div>
 </div>
     
-    <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 250px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
+    <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 200px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
         <div class="col-4 text-center">
             <img src="{{ asset('logos/logo_calendar.png') }}" alt="" style="height: 100px">
             <p>Inscrivez vous et réservé dès maintenant</p>
@@ -99,10 +168,10 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row">
     {% for coach in coachs %}
 
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center mt-5">
 
                 <div class="row">
                 <div class="col">
@@ -114,20 +183,22 @@
                     <div class="col text-white mt-4">
                         <h5 class="display-4" style="font-size: 1.8em">{{coach.nom}} {{coach.prenom}}</h5><br>
                         Ville : {{coach.ville}}<br>
-                        Catégorie : {{coach.domaine}}<br>
+                        Domaine  : {{coach.domaine}}<br>
                         {{coach.prix}}€/h<br>
 
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto culpa exercitationem ...
 
                         <br>
-                        <a href="{{ path('fichefullcoach', {id: coach.id}) }}">Voir fiche</a>
+                        <a href="{{ path('fichefullcoach', {id: coach.id}) }}" class="text-primary">Voir fiche</a>
                     </div>
                 </div>
 
             </div>
 
     {% endfor %}
+
 </div>
+
 
 
 
@@ -138,7 +209,17 @@
 
 
 </div>  {# BODY #}
+{% endblock %}
 
+{% block javascripts %}
+    <script>
+
+
+
+
+
+
+    </script>
 {% endblock %}
 
 

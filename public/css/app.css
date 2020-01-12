@@ -18,6 +18,13 @@ p {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.5)
 }
 
+.color-blue:hover {
+    color: #007BFF;
+}
+
+
+
+
 .bShadow {
     box-shadow: 12px 12px 5px 0px rgba(0, 0, 0, .6);
 }
@@ -31,5 +38,17 @@ p {
 h3 {
     color: rgba(255, 255, 255, 1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

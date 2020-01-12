@@ -8,10 +8,46 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
         <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+
+        {% endblock %}
+        <style>
+            a {
+                color: #464646;
+            }
+            .img-contact {
+                height: 50px;
+                transition-duration: .5s;
+                cursor: pointer;
+            }
+            .img-contact:hover {
+                transition-duration: .5s;
+                height: 60px;
+            }
+            .color-blue:hover {
+                color: #007BFF;
+            }
+
+            .progress-container {
+                width: 100%;
+                height: 4px;
+                background: rgba(0,0,0,0);
+            }
+            .progress-bar {
+                height: 4px;
+                background: #5bc65b;
+                width: 0%;
+            }
+        </style>
     </head>
 
     <body>
+
+
+            <div class="progress-container" style="position: fixed;z-index: 500; top: 0px;left: 0px;">
+                <div class="progress-bar" id="myBar" style="position: fixed;z-index: 500; top: 0px;left: 0px;"></div>
+            </div>
+
         <nav class="navbar navbar-expand-md navbar-light fixed-top nav-bar-back">
             <a class="navbar-brand text-white text- center" href="{{path('home')}}">Find a Coach</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,47 +58,141 @@
               <ul class="navbar-nav ml-auto">
                   {% if is_granted("ROLE_CLIENT") %}
                       <li class="nav-item">
-                          <a class="nav-link text-white" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                          <a class="nav-link text-white color-blue" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link text-white" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                          <a class="nav-link text-white color-blue" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
                       </li>
                   {% endif %}
                 {% if is_granted("ROLE_COACH") %}
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                  <a class="nav-link text-white color-blue" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
                 </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                        <a class="nav-link text-white color-blue" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
                     </li>
                 {% endif %}
                 {% if app.user %}
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{{path('logout')}}">Se deconnecter</a>
+                  <a class="nav-link text-white color-blue" href="{{path('logout')}}">Se deconnecter</a>
                 </li>
                 {% else %}
-                <li class="nav-item  ">
-                  <a class="nav-link text-white" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
+                <li class="nav-item">
+                  <a class="nav-link text-white color-blue" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{{path('inscriptionClient')}}">Inscription Client </a>
+                  <a class="nav-link text-white color-blue" href="{{path('inscriptionClient')}}">Inscription Client </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{{path('app_login')}}">Login </a>
+                  <a class="nav-link text-white color-blue" href="{{path('app_login')}}">Login </a>
                 </li>
                 {% endif %}
               </ul>
-             
+
             </div>
           </nav>
+
+
         {% block body %}{% endblock %}
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+
+
+
+        {# CONTACT #}
+        <div id="contact" style="color: red; position: fixed;z-index: 500; bottom: 20px;right: 30px;">
+            <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
+        </div>
+        <div id="block-contact" class="bg-primary rounded" style="position: fixed;z-index: 500; bottom: 0;right: 80px; height: 300px;width: 200px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
+            <div class="row text-center">
+                <div class="col-12">
+                    Nous Contacter
+                </div>
+                <div class="col-12">
+                    nom
+                    <br>
+                    prenom
+                    <br>
+                    Champ email
+                    <br>
+                    Champ textarea
+                    <br>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+        </div>
+
+
+        {# FOOTER #}
+        <div class="mt-5" style="min-height: 200px; background: #232323">
+
+            <div class="row" style="height: 1px;background: rgba(0,0,0, .5); box-shadow: -3px -3px 5px 1px rgba(0, 0, 0, .6);"></div>
+
+            <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-4 mt-4 text-center">
+                    <h2 class="name-site text-left " style="font-size: 1.8em;">FindACoach</h2>
+                    <br><br><br>
+                    <a href="#">Lien vers page du site</a><br>
+                    <a href="#">Lien vers page du site</a><br>
+                    <a href="#">Lien vers page du site</a><br>
+                    <a href="#">Lien vers page du site</a><br>
+                    <a href="#">Lien vers page du site</a><br>
+                    <a href="#">Lien vers page du site</a><br>
+
+                </div>
+                <div class="col-4 mt-4">
+
+                </div>
+                <div class="col-4 mt-4">
+                    A propos <br><br>
+                    Politique de confidentialité <br>
+                    Aide et FAQ <br>
+                    Conditions Générales d'Utilisation <br>
+                    Politique de Protection des Données Personnelles <br>
+                </div>
+
+
+                    <div class="col m-3 text-center text-secondary" style="font-size: .8em;">
+                        findacoach.com - 2019 - All rights reserved - Made in Damien, Sullivan, Benjamin
+                    </div>
+
+
+            </div>
+            </div>
+
+        </div>
+
+
+{#        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+        <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
-        <script> 
-          $('select').select2();
-          $('span').css('color','black');
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+              $('select').select2();
+              $('span').css('color','black');
+
+
+              $("#block-contact").hide();
+              $("#contact").click(function(){
+                  $("#block-contact").slideToggle();
+              });
+
+
+              // When the user scrolls the page, execute myFunction
+              window.onscroll = function() {myFunction()};
+              function myFunction() {
+                  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                  var scrolled = (winScroll / height) * 100;
+                  document.getElementById("myBar").style.width = scrolled + "%";
+              }
+
+
         </script>
         {% block javascripts %}{% endblock %}
     </body>
