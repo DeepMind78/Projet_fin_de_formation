@@ -32,7 +32,8 @@
         "symfony/web-link": "5.0.*",
         "symfony/yaml": "5.0.*",
         "tattali/calendar-bundle": "^1.1",
-        "vich/uploader-bundle": "^1.12"
+        "vich/uploader-bundle": "^1.12",
+      "ext-json": "*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

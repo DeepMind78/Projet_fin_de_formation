@@ -1,0 +1,13 @@
+{# templates/emails/registration.html.twig #}
+<h3>Contact SAV</h3>
+
+{{ nom }} {{ prenom }} vous contact :
+
+{{ message }}.
+
+Vous pouvez lui répondre avec l'adresse mail : {{ email }}.
+
+Cordialement.
+
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('images/logo.png')) }}" alt="">
