@@ -149,6 +149,7 @@
                 </div>
                 {% if error %}
                 <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+                    <script>alert("Test")</script>
                 {% endif %}
                 <div class="card-body p-5">
                     {% if is_granted("ROLE_CLIENT") %}
@@ -160,6 +161,8 @@
 
                         <button class="btn btn-primary m-3">Réserver</button>
                         {{ form_end(formRdv) }}
+
+
 
                     </p>
 
@@ -175,14 +178,11 @@
 
 
 
-
     </div>{#ROW#}
     </div>{#CONTAINER#}
 
 
         
-
-
 
         {% block javascripts %}
 
