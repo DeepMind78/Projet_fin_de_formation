@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/effetCss.css') }}">
     <style>
         .img-coach {
             height: 200px;
@@ -43,25 +43,32 @@
             border: 1px solid black;
         }
 
-
-        .custom-box {
-            border: 2px solid grey;
-            text-align: center;
-            padding: 10px;
-            width: fit-content;
-            background-color: white;
-            margin: auto;
+        .btn-alert {
+            background-color: #0090c5;
+            border: none;
+            padding: 1em;
+            color: white;
+            margin: 1em;
+            border-radius: 5px;
         }
-
         #modal {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            display: flex;
-            width: 100%;
+            z-index: 850;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            background: rgba(0,0,0, .9);
         }
+        .custom-box {
+            position: fixed;
+            top: 10%;
+            right: 20px;
+            z-index: 900;
+            background: rgba(0,0,0,.9);
+        }
+
+
 
     </style>
 {% endblock %}
@@ -145,7 +152,7 @@
                     {# <h3 class="display-4">Mon calendrier</h3>#}
                     {% include '@Calendar/calendar.html' %}
                     {#<script>afficherCalendar()</script>#}
-                    <button class="btn btn-sm border border-primary text-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
+                    <button class="btn btn-outline-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
                 </div>
             </div>
 
@@ -166,26 +173,37 @@
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBb5PjquVcMufKEVLRmvC_g_iyt-78FdTQ&q={{fichefull.ville}}+France" allowfullscreen>
             </iframe>
 
-            <div class="card text-center border-secondary mt-4" style="box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);">
+            <div class="card border-secondary text-center mt-4" style="box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);">
                 <div class="card-header bg-primary">
                     Réservation
                 </div>
+                <div class="col card-body p-5">
                 {% if error %}
+{#                    <script>console.log('test de merde'); boxAlertPop()</script>#}
+
+                <div class="custom-box shake">
+                    <div class="custom-box rounded p-1 bounceInRight" onclick="$('.custom-box').addClass('bounceOutRight');" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 200px;cursor: pointer">
+{#                        <button  class="btn btn-outline-dark text-left" style="font-size: .8em">X</button>#}
+                        <div class="col text-center">
+
+                        <img src="{{ asset('probleme.png') }}" alt="" style="height: 50px;">
+                       <p>Problème lors de la résèrvation ! </p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
-{#                    <script>alert("Test")</script>#}
+
                 {% endif %}
-                <div class="card-body p-5">
                     {% if is_granted("ROLE_CLIENT") %}
                     <p style="color: white;">
+
                         {{ form_start(formRdv, {attr: { 'id': 'payment-form'}}) }}
 
                         {{ form_rest(formRdv) }}
 
-
-                        <button class="btn btn-primary m-3">Réserver</button>
+                        <button class="btn btn-outline-primary m-3">Réserver</button>
                         {{ form_end(formRdv) }}
-
-
 
                     </p>
 
@@ -200,13 +218,12 @@
         </div>{#COL#}
 
         <!-- Boîte d'alerte -->
-        <button id="custom-alert-box-button">Cliquez pour afficher une boîte d'alerte</button>
+{#        <button onclick="boxAlertPop();" id="boxAlertCustom" class="btn-alert">Cliquez pour afficher une boîte d'alerte</button>#}
 
     </div>{#ROW#}
     </div>{#CONTAINER#}
 
 
-        
 
         {% block javascripts %}
 
@@ -214,21 +231,38 @@
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+            <script>
+
+                function boxAlertPop() {
+                    var boxAlert = document.createElement('div')
+                    boxAlert.setAttribute('id', 'modal')
+                    var customBoxAlert = document.createElement('div')
+                    customBoxAlert.className = 'custom-box rounded-pill p-3 text-center lightSpeedIn';
+                    customBoxAlert.innerHTML = '<p>Test Boite alert</p>'
+                    customBoxAlert.innerHTML += '<button id="boxClose" class="btn btn-outline-primary mt-3" style="width: 60px"> OK</button>'
+
+                    boxAlert.appendChild(customBoxAlert);
+
+                    document.getElementById('boxAlertCustom').addEventListener('', function () {
+                        // console.log('test')
+
+                        document.body.appendChild(boxAlert)
+
+                        document.getElementById('boxClose').addEventListener('', function () {
+                            while (boxAlert.hasChildNodes()) {
+                                boxAlert.removeChild(boxAlert.firstChild)
+                            }
+                            document.body.removeChild(boxAlert)
+                        })
+                    })
+                }
+
+            </script>
+        {% endblock %}
         <script>
 
-            /********* Boîtes personnalisées *********/
-            var modalContainer = document.createElement('div');
-            modalContainer.setAttribute('id', 'modal');
 
-            var customBox = document.createElement('div');
-            customBox.className = 'custom-box';
 
-            // Affichage boîte d'alerte
-            document.getElementById('custom-alert-box-button').addEventListener('click', function() {
-                customBox.innerHTML = '<p>Je suis une boîte d\'alerte customisée !</p>';
-                customBox.innerHTML += '<button id="modal-close">OK</button>';
-                
-            });
 
 
             function afficherCalendar() {
@@ -264,6 +298,6 @@
         </script>
 
 
-    {% endblock %}
+
 
 {% endblock %}

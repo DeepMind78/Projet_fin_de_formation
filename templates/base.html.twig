@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
         <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ asset('css/effetCss.css') }}">
+
         {% block stylesheets %}
 
         {% endblock %}
@@ -140,6 +142,7 @@
             </div>
           </nav>
 
+
         {% block body %}{% endblock %}
 
 
@@ -148,7 +151,7 @@
             <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
         </div>
 
-        <div id="block-contact" class="bg-primary rounded p-2" style="display:none; position: fixed;z-index: 500; bottom: 0;right: 80px; height: 400px;width: 350px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
+        <div id="block-contact" class="bg-primary rounded p-2" style="display:none; position: fixed;z-index: 500; bottom: 0;right: 85px; height: 400px;width: 350px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
             <div class="row text-center justify-content-center">
                 <form action="{{path('contact')}}" method="post" id="contact-form">
                     <aside class="alert d-none">
@@ -165,7 +168,7 @@
 
                         <textarea placeholder="Message" name="message"  cols="40" rows="6" class="form-control mb-2" style="max-height: 170px"></textarea>
 
-                        <button>Envoyer</button>
+                        <button class="btn btn-outline-warning">Envoyer</button>
                     </div>
                 </form>
             </div>
@@ -270,6 +273,7 @@
                       return false;
                   })
               });
+
 
 
         </script>
