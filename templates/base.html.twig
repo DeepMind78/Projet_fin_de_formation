@@ -38,6 +38,10 @@
                 background: #5bc65b;
                 width: 0%;
             }
+            .form-control {
+                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
+                border: 1px solid black;
+            }
         </style>
     </head>
 
@@ -98,24 +102,31 @@
         <div id="contact" style="color: red; position: fixed;z-index: 500; bottom: 20px;right: 30px;">
             <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
         </div>
-        <div id="block-contact" class="bg-primary rounded" style="display: none; position: fixed;z-index: 500; bottom: 0;right: 80px; height: 300px;width: 200px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
-            <div class="row text-center">
-                <div class="col-12">
-                    Nous Contacter
-                </div>
-                <div class="col-12">
-                    nom
-                    <br>
-                    prenom
-                    <br>
-                    Champ email
-                    <br>
-                    Champ textarea
-                    <br>
-                </div>
-                <div class="col">
 
-                </div>
+{#        <div id="block-contact" class="bg-primary rounded" style="display: none; position: fixed;z-index: 500; bottom: 0;right: 80px; height: 300px;width: 200px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">#}
+
+        <div id="block-contact" class="bg-primary rounded" style="display: none; position: fixed;z-index: 500; bottom: 0;right: 90px; height: 400px;width: 300px; border: solid 1px black;box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);">
+
+            <div class="row text-center justify-content-center p-2">
+                <form action="" method="post" id="contact" class="form-group">
+                    <aside class="alert d-none">
+
+                    </aside>
+                    <div class="col">
+                        <h5 class="display-4" style="font-size: 1.5em">Nous Contacter</h5>
+
+                        <input type="text" placeholder="Nom" name="nom" class="form-control mb-2">
+
+                        <input type="text" placeholder="Prenom" name="prenom" class="form-control mb-2">
+
+                        <input type="email" placeholder="Email" name="email" class="form-control mb-2">
+
+                        <textarea placeholder="Message" name="message"  cols="40" rows="6" class="form-control mb-2" style="max-height: 170px"></textarea>
+
+                        <button>Envoyer</button>
+                    </div>
+
+                </form>
             </div>
         </div>
 
@@ -160,12 +171,33 @@
 
 
 {#        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{#            <script src="js/app.js"></script>#}
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
         <script src="https://unpkg.com/scrollreveal"></script>
         <script>
+
+            $(function () {
+
+                $("#contact").click(function(){
+                    event.preventDefault();
+                    $.ajax({
+                       url : '/contact', // La ressource ciblée
+                       type : 'POST', // Le type de la requête HTTP.
+                       data : '&email=' + email + '&nom=' + nom + '&prenom=' + prenom + '&message=' + message,
+                       dataType : 'html',
+                       success : function(json,statut){
+                        let $aside = $('#contact aside');
+                        $aside.addClass('alert-success').text('Le message a bien été envoyé !').removeClass('d-none');
+                       }
+                    });
+
+                });
+
+            });
               $('select').select2();
               $('span').css('color','black');
 
@@ -195,6 +227,7 @@
                       return false;
                   })
               });
+
 
         </script>
         {% block javascripts %}{% endblock %}

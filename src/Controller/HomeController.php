@@ -5,10 +5,15 @@ namespace App\Controller;
 use App\Entity\Coach;
 use App\Entity\CoachSearch;
 use App\Form\CoachSearchType;
+use App\Service\MailerService;
 use App\Repository\CoachRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -25,7 +30,7 @@ class HomeController extends AbstractController
 //         $coachlist2 = $repo->findAll();
         $coachlist = $paginator->paginate(
             $repo->findGoodCoach($search),
-            $request->query->getInt('page',1),
+            $request->query->getInt('page', 1),
             12
         );
 
@@ -51,11 +56,24 @@ class HomeController extends AbstractController
 
     }
 
+    /**
+     * @Route("/contact", name="contact", methods={"POST"})
+     */
 
-//    public function recupDomaines(Request $request)
-//    {
-//        $searchDomaine = new DomaineSearch;
-//        $select = $this->creatSelected(DomaineSearchType::class, $searchDomaine);
-//        $select->handleRequest($request);
-//    }
+    public function contact(MailerService $mailer, SerializerInterface $serializer)
+    {
+        if (!empty($_POST)) {
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $email = $_POST['email'];
+            $message = $_POST['message'];
+            $result = $mailer->sendContact($nom, $prenom, $email, $message, 'contact.html.twig');
+
+            $json = json_encode([
+                'result' => 'ok'
+            ]);
+
+            return new JsonResponse($json);
+        }
+    }
 }

@@ -116,4 +116,24 @@ class MailerService extends AbstractController
             );
         $this->mailer->send($message);
     }
+
+    public function sendContact($nom, $prenom, $email, $messageUtilisateur, $template) {
+        $message = (new \Swift_Message('Contact SAV'))
+            ->setFrom('cullellsullivan78@gmail.com')
+            ->setTo('cullellsullivan78@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'email/' . $template,
+                    [
+                        'nom' => $nom,
+                        'prenom' => $prenom,
+                        'email' => $email,
+                        'message' => $messageUtilisateur,
+
+                    ]
+                ),
+                'text/html'
+            );
+        $this->mailer->send($message);
+    }
 }
