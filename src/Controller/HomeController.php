@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Coach;
 use App\Entity\CoachSearch;
 use App\Form\CoachSearchType;
 use App\Repository\CoachRepository;
@@ -21,18 +22,33 @@ class HomeController extends AbstractController
         $form = $this->createForm(CoachSearchType::class, $search);
         $form->handleRequest($request);
 
-        // $coachlist = $repo->findAll();
+//         $coachlist2 = $repo->findAll();
         $coachlist = $paginator->paginate(
             $repo->findGoodCoach($search),
             $request->query->getInt('page',1),
             12
         );
 
+
+
+
+
+
+
+
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'form' => $form->createView(),
             'coachs' => $coachlist
         ]);
+
+
+
+
+
+
+
     }
 
 

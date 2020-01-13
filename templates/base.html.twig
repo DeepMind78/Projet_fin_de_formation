@@ -98,7 +98,7 @@
         <div id="contact" style="color: red; position: fixed;z-index: 500; bottom: 20px;right: 30px;">
             <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
         </div>
-        <div id="block-contact" class="bg-primary rounded" style="position: fixed;z-index: 500; bottom: 0;right: 80px; height: 300px;width: 200px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
+        <div id="block-contact" class="bg-primary rounded" style="display: none; position: fixed;z-index: 500; bottom: 0;right: 80px; height: 300px;width: 200px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
             <div class="row text-center">
                 <div class="col-12">
                     Nous Contacter
@@ -170,7 +170,7 @@
               $('span').css('color','black');
 
 
-              $("#block-contact").hide();
+              // $("#block-contact").hide();
               $("#contact").click(function(){
                   $("#block-contact").slideToggle();
               });
