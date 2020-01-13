@@ -43,10 +43,9 @@
 
     <body>
 
-
-            <div class="progress-container" style="position: fixed;z-index: 500; top: 0px;left: 0px;">
-                <div class="progress-bar" id="myBar" style="position: fixed;z-index: 500; top: 0px;left: 0px;"></div>
-            </div>
+        <div class="progress-container" style="position: fixed;z-index: 500; top: 0px;left: 0px;">
+            <div class="progress-bar" id="myBar" style="position: fixed;z-index: 500; top: 0px;left: 0px;"></div>
+        </div>
 
         <nav class="navbar navbar-expand-md navbar-light fixed-top nav-bar-back">
             <a class="navbar-brand text-white text- center" href="{{path('home')}}">Find a Coach</a>
@@ -55,47 +54,44 @@
             </button>
           
             <div class="collapse navbar-collapse" id="navbarColor03">
-              <ul class="navbar-nav ml-auto">
-                  {% if is_granted("ROLE_CLIENT") %}
-                      <li class="nav-item">
-                          <a class="nav-link text-white color-blue" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link text-white color-blue" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
-                      </li>
-                  {% endif %}
-                {% if is_granted("ROLE_COACH") %}
-                <li class="nav-item">
-                  <a class="nav-link text-white color-blue" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
-                </li>
+                <ul class="navbar-nav ml-auto">
+                      {% if is_granted("ROLE_CLIENT") %}
+                          <li class="nav-item">
+                              <a class="nav-link text-white color-blue" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link text-white color-blue" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                          </li>
+                      {% endif %}
+                    {% if is_granted("ROLE_COACH") %}
                     <li class="nav-item">
-                        <a class="nav-link text-white color-blue" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                      <a class="nav-link text-white color-blue" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
                     </li>
-                {% endif %}
-                {% if app.user %}
-                <li class="nav-item">
-                  <a class="nav-link text-white color-blue" href="{{path('logout')}}">Se deconnecter</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link text-white color-blue" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white color-blue" href="{{path('inscriptionClient')}}">Inscription Client </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white color-blue" href="{{path('app_login')}}">Login </a>
-                </li>
-                {% endif %}
-              </ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-white color-blue" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                        </li>
+                    {% endif %}
+                    {% if app.user %}
+                    <li class="nav-item">
+                      <a class="nav-link text-white color-blue" href="{{path('logout')}}">Se deconnecter</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link text-white color-blue" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-white color-blue" href="{{path('inscriptionClient')}}">Inscription Client </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-white color-blue" href="{{path('app_login')}}">Login </a>
+                    </li>
+                    {% endif %}
+                </ul>
 
             </div>
           </nav>
 
-
         {% block body %}{% endblock %}
-
-
 
 
         {# CONTACT #}
@@ -122,7 +118,6 @@
                 </div>
             </div>
         </div>
-
 
         {# FOOTER #}
         <div class="mt-5" style="min-height: 200px; background: #232323">
@@ -154,11 +149,9 @@
                     Politique de Protection des Données Personnelles <br>
                 </div>
 
-
-                    <div class="col m-3 text-center text-secondary" style="font-size: .8em;">
-                        findacoach.com - 2019 - All rights reserved - Made in Damien, Sullivan, Benjamin
-                    </div>
-
+                <div class="col m-3 text-center text-secondary" style="font-size: .8em;">
+                    findacoach.com - 2019 - All rights reserved - Made in Damien, Sullivan, Benjamin
+                </div>
 
             </div>
             </div>

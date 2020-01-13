@@ -37,7 +37,7 @@
                 {% for rdv in rdvcoachs %}
                     {% if rdv.total %}
 
-                            <div class="row">
+                            <div class="row text-center">
                                 <div class="col">
                                     Client <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
                                     Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
@@ -47,7 +47,7 @@
                                     Montant <span class="text-primary">{{ rdv.total }}</span> €.
                                 </div>
                             </div>
-
+                        <div class="bg-primary m-3" style="height: 1px"></div>
                     {% endif %}
                 {% endfor %}
             </div>
