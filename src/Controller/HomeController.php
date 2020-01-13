@@ -4,15 +4,16 @@ namespace App\Controller;
 
 use App\Entity\CoachSearch;
 use App\Form\CoachSearchType;
-use App\Repository\CoachRepository;
 use App\Service\MailerService;
+use App\Repository\CoachRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -56,10 +57,7 @@ class HomeController extends AbstractController
                 'result' => 'ok'
             ]);
 
-
-            $response = $serializer->serialize($json,'json');
-
-            return new Response($response);
+            return new JsonResponse($json);
         }
     }
 }
