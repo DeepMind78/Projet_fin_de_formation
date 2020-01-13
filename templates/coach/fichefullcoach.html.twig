@@ -38,13 +38,35 @@
         #fc-widget-content {
             height: 100px;
         }
+        .form-control {
+            box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
+            border: 1px solid black;
+        }
+
+
+        .custom-box {
+            border: 2px solid grey;
+            text-align: center;
+            padding: 10px;
+            width: fit-content;
+            background-color: white;
+            margin: auto;
+        }
+
+        #modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
     </style>
 {% endblock %}
 {% block body %}
 
-
-{#               <h1 class="display-4 mt-5">Réserver votre séance de {{ fichefull.domaine }} avec {{ fichefull.prenom }}</h1>#}
 
 
             <div id="carouselExampleFade" class="carousel slide carousel-fade slide-top" data-ride="carousel">
@@ -75,6 +97,7 @@
     <div class="container">
     <div class="row mt-5">
 
+
         <div class="col-lg-8">
                 <div class="row">
                     <div class="col-4">
@@ -97,7 +120,7 @@
                     <div class="col">
                         <h3 class="display-4">A propos de moi</h3>
                         <p>
-                            {#            {{ fichefull.description_coach }}#}
+                            {# {{ fichefull.description_coach }}#}
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at debitis facilis id inventore magni molestiae quae rem.
                             Eaque fugit illo labore laborum magnam magni quasi ratione similique voluptate voluptatum!
                         </p>
@@ -121,7 +144,7 @@
                 <div class="col">
                     {# <h3 class="display-4">Mon calendrier</h3>#}
                     {% include '@Calendar/calendar.html' %}
-                    {#                <script>afficherCalendar()</script>#}
+                    {#<script>afficherCalendar()</script>#}
                     <button class="btn btn-sm border border-primary text-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
                 </div>
             </div>
@@ -132,7 +155,7 @@
 
 
 
-
+        {#SIDEBAR#}
         <div class="col-lg-4 mb-5">
 
 {#            <h3 class="display-4">Ma Localisation</h3>#}
@@ -149,7 +172,7 @@
                 </div>
                 {% if error %}
                 <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
-                    <script>alert("Test")</script>
+{#                    <script>alert("Test")</script>#}
                 {% endif %}
                 <div class="card-body p-5">
                     {% if is_granted("ROLE_CLIENT") %}
@@ -176,7 +199,8 @@
 
         </div>{#COL#}
 
-
+        <!-- Boîte d'alerte -->
+        <button id="custom-alert-box-button">Cliquez pour afficher une boîte d'alerte</button>
 
     </div>{#ROW#}
     </div>{#CONTAINER#}
@@ -192,6 +216,19 @@
         <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
         <script>
 
+            /********* Boîtes personnalisées *********/
+            var modalContainer = document.createElement('div');
+            modalContainer.setAttribute('id', 'modal');
+
+            var customBox = document.createElement('div');
+            customBox.className = 'custom-box';
+
+            // Affichage boîte d'alerte
+            document.getElementById('custom-alert-box-button').addEventListener('click', function() {
+                customBox.innerHTML = '<p>Je suis une boîte d\'alerte customisée !</p>';
+                customBox.innerHTML += '<button id="modal-close">OK</button>';
+                
+            });
 
 
             function afficherCalendar() {
