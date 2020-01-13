@@ -11,16 +11,15 @@
                 font-size:4em;
                 text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
             }
-            .img-top {
-                background: url(../login.jpg) no-repeat center center fixed;
-                background-size: cover;
-                box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);
+            .form-control {
+                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
+                border: 1px solid black;
             }
         </style>
     {% endblock %}
 
 
-    <div class="row text-center mb-5 text-center img-top">
+    <div class="row text-center">
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site">FindACoach</h2>
             <h1 class="display-4" style="font-size: 2.5em;">Me Connecter</h1>
@@ -29,11 +28,15 @@
 
     <div class="container">
 
+        <div class="row justify-content-center">
+            <img class="m-5" src="{{ asset('login-logo.png') }}" alt="" style="height: 150px;">
+        </div>
     <form method="post">
 
         <div class="row justify-content-center">
-        <div class="col-6">
 
+
+        <div class="col-6">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}

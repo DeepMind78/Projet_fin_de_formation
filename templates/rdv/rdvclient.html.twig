@@ -3,26 +3,54 @@
 {% block title %}Mes rendez-vous{% endblock %}
 
 {% block body %}
+    {% block stylesheets %}
+        <style>
+            .name-site {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:4em;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
+            }
+        </style>
+    {% endblock %}
 
-    <div class="row text-center mb-5">
-        <div class="col-12 p-5" style="min-height: 14rem; background: #6faae2">
-            <h1 class="display-4 mt-5">Mes rendez-vous</h1>
+
+
+    <div class="row text-center">
+        <div class="col p-5 text-center" style="min-height: 14rem;">
+            <h2 class="name-site" style="">FindACoach</h2>
+            <h1 class="display-4" style="font-size: 2.5em;">Mes Rendez-vous</h1>
+            <img src="{{ asset('picto_15_partenaires2.png') }}" alt="">
         </div>
     </div>
 
 
 <div class="container">
-    {% for rdv in rdvclients %}
-        {% if rdv.total %}
-            <div>
-                Vous avez rendez-vous avec {{ rdv.coach.nom }},
-                Le {{ rdv.jour | date("d/m/Y") }}
-                à {{ rdv.heure | date("H:i") }}
-                pour une durée de  {{ rdv.duree }} heure(s)
-                à {{ rdv.lieu}}
-                pour un montant de {{ rdv.total }} €.
-            </div>
-        {% endif %}
-    {% endfor %}
+
+    <div class="row">
+        <div class="col rounded border border-primary p-5 text-center">
+            {% for rdv in rdvclients %}
+                {% if rdv.total %}
+
+                    <div class="row">
+                        <div class="col">
+                            Coach : <span class="text-primary">{{ rdv.coach.nom }} {{ rdv.coach.prenom }}</span><br>
+                            Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
+                            Le : <span class="text-danger">{{ rdv.jour | date("d/m/Y") }}</span><br>
+                            Horaire : <span class="text-danger">{{ rdv.heure | date("H:i") }}</span><br>
+                            Temps :  <span class="text-danger">{{ rdv.duree }} heure(s)</span><br>
+                            Montant <span class="text-primary">{{ rdv.total }}</span> €.
+                        </div>
+                    </div>
+                    <div class="bg-primary m-3" style="height: 1px"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+
 </div>
+
+
+
 {% endblock %}

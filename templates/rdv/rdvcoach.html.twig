@@ -23,7 +23,7 @@
     {% endblock %}
 
 
-    <div class="row text-center mb-5 text-center img-top" style="box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .7);">
+    <div class="row text-center mb-5 img-top" style="box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .7);">
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site" style="">FindACoach</h2>
             <h1 class="display-4" style="font-size: 2.5em;">Mes Rendez-vous</h1>
@@ -36,18 +36,18 @@
             <div class="col rounded border border-primary p-5">
                 {% for rdv in rdvcoachs %}
                     {% if rdv.total %}
-                        <div>
+
                             <div class="row">
                                 <div class="col">
-                                    Rendez-vous avec <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
-                                    Le : <span class="text-primary">{{ rdv.jour | date("d/m/Y") }}</span><br>
-                                    Horaire : <span class="text-primary">{{ rdv.heure | date("H:i") }}</span><br>
-                                    Temps :  <span class="text-primary">{{ rdv.duree }} heure(s)</span><br>
+                                    Client <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
                                     Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
+                                    Le : <span class="text-danger">{{ rdv.jour | date("d/m/Y") }}</span><br>
+                                    Horaire : <span class="text-danger">{{ rdv.heure | date("H:i") }}</span><br>
+                                    Temps :  <span class="text-danger">{{ rdv.duree }} heure(s)</span><br>
                                     Montant <span class="text-primary">{{ rdv.total }}</span> €.
                                 </div>
                             </div>
-                        </div>
+
                     {% endif %}
                 {% endfor %}
             </div>
