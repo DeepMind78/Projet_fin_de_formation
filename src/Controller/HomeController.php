@@ -62,18 +62,20 @@ class HomeController extends AbstractController
 
     public function contact(MailerService $mailer, SerializerInterface $serializer)
     {
-        if (!empty($_POST)) {
+        
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
             $message = $_POST['message'];
-            $result = $mailer->sendContact($nom, $prenom, $email, $message, 'contact.html.twig');
-
-            $json = json_encode([
+            $mailer->sendContact($nom, $prenom, $email, $message, 'contact.html.twig');
+            $json = $serializer->serialize([
                 'result' => 'ok'
-            ]);
+            ],'json');
+            header('Content-Type: application/json');
 
-            return new JsonResponse($json);
-        }
+            
+           
+            return new Response($json);
+
     }
 }
