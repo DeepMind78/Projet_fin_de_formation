@@ -186,6 +186,16 @@
               }
 
 
+              // Scroll lisse
+              $(document).ready(function() {
+                  $('.js-scrollTo').on('click', function() {
+                      let page = $(this).attr('href')
+                      let speed = 750;
+                      $('html, body').animate({scrollTop: $(page).offset().top}, speed);
+                      return false;
+                  })
+              });
+
         </script>
         {% block javascripts %}{% endblock %}
     </body>
