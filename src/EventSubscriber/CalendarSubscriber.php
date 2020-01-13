@@ -56,7 +56,7 @@ class CalendarSubscriber implements EventSubscriberInterface
         $rdvs = $this->repo->findBy(['coach'=>$client_id]);
         
         foreach($rdvs as $rdv){
-            $date = date_format($rdv->getHeure(), 'H:i') . ' Indisponible';
+            $date = date_format($rdv->getHeure(), 'H:i') . ' Réservé';
             $calendar->addEvent( $booking = new Event(
                 $date,
                 $rdv->getJour()
