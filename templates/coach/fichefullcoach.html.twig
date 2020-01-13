@@ -60,13 +60,7 @@
             width: 100%;
             background: rgba(0,0,0, .9);
         }
-        .custom-box {
-            position: fixed;
-            top: 10%;
-            right: 20px;
-            z-index: 900;
-            background: rgba(0,0,0,.9);
-        }
+
 
 
 
@@ -180,19 +174,16 @@
                 <div class="col card-body p-5">
                 {% if error %}
 {#                    <script>console.log('test de merde'); boxAlertPop()</script>#}
-
-                <div class="custom-box shake">
-                    <div class="custom-box rounded p-1 bounceInRight" onclick="$('.custom-box').addClass('bounceOutRight');" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 200px;cursor: pointer">
-{#                        <button  class="btn btn-outline-dark text-left" style="font-size: .8em">X</button>#}
-                        <div class="col text-center">
-
-                        <img src="{{ asset('probleme.png') }}" alt="" style="height: 50px;">
-                       <p>Problème lors de la résèrvation ! </p>
+                    <div class="custom-box shake">
+                        <div class="custom-box rounded p-1 bounceInRight" onclick="$('.custom-box').addClass('bounceOutRight');" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 200px;cursor: pointer">
+                            <div class="col text-center">
+                            <img src="{{ asset('croix.png') }}" alt="" style="height: 50px;">
+                           <p>Problème lors de la résèrvation ! </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+                    <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
 
                 {% endif %}
                     {% if is_granted("ROLE_CLIENT") %}
@@ -217,8 +208,6 @@
 
         </div>{#COL#}
 
-        <!-- Boîte d'alerte -->
-{#        <button onclick="boxAlertPop();" id="boxAlertCustom" class="btn-alert">Cliquez pour afficher une boîte d'alerte</button>#}
 
     </div>{#ROW#}
     </div>{#CONTAINER#}
@@ -260,8 +249,6 @@
             </script>
         {% endblock %}
         <script>
-
-
 
 
 
