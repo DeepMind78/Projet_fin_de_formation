@@ -42,6 +42,50 @@
                 box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
                 border: 1px solid black;
             }
+            .down-box {
+
+            }
+            .bounceOutDown {
+                animation-delay: 1s;
+                -webkit-animation-name: bounceOutDown;
+                animation-name: bounceOutDown;
+                -webkit-animation-duration: 1s;
+                animation-duration: 1s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+            @-webkit-keyframes bounceOutDown {
+                20% {
+                    -webkit-transform: translate3d(0, 10px, 0);
+                    transform: translate3d(0, 10px, 0);
+                }
+                40%, 45% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(0, -20px, 0);
+                    transform: translate3d(0, -20px, 0);
+                }
+                100% {
+                    opacity: 0;
+                    -webkit-transform: translate3d(0, 2000px, 0);
+                    transform: translate3d(0, 2000px, 0);
+                }
+            }
+            @keyframes bounceOutDown {
+                20% {
+                    -webkit-transform: translate3d(0, 10px, 0);
+                    transform: translate3d(0, 10px, 0);
+                }
+                40%, 45% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(0, -20px, 0);
+                    transform: translate3d(0, -20px, 0);
+                }
+                100% {
+                    opacity: 0;
+                    -webkit-transform: translate3d(0, 2000px, 0);
+                    transform: translate3d(0, 2000px, 0);
+                }
+            }
         </style>
     </head>
 
@@ -104,7 +148,7 @@
             <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
         </div>
 
-        <div id="block-contact" class="bg-primary rounded" style="position: fixed;z-index: 500; bottom: 0;right: 80px; height: 400px;width: 350px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
+        <div id="block-contact" class="bg-primary rounded p-2" style="display:none; position: fixed;z-index: 500; bottom: 0;right: 80px; height: 400px;width: 350px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
             <div class="row text-center justify-content-center">
                 <form action="{{path('contact')}}" method="post" id="contact-form">
                     <aside class="alert d-none">
@@ -184,9 +228,11 @@
                     $.post($(this).attr('action'), $(this).serializeArray(), function (data) {
 
                         let $aside = $('#contact-form aside');
+                        let $blockContact = $('#block-contact');
                         // Notifications
                         if (data) {
                             $aside.addClass('alert-success').text('Le message a bien été envoyé !').removeClass('d-none');
+                                $blockContact.addClass("bounceOutDown");
                         } else {
                             $aside.addClass('alert-danger').text('Erreur lors de l\'envoi du message !').removeClass('d-none');
                         }

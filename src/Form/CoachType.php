@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Coach;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -33,8 +34,8 @@ class CoachType extends AbstractType
                 'placeholder'=>"Prix à l'heure"
                 ]
             ])
-            ->add('descriptionCoach')
-            ->add('descriptionSeance');
+            ->add('descriptionCoach', TextareaType::class)
+            ->add('descriptionSeance', TextareaType::class);
 
     }
 
