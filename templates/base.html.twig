@@ -104,7 +104,7 @@
         </div>
         <div id="block-contact" class="bg-primary rounded" style="position: fixed;z-index: 500; bottom: 0;right: 180px; height: 350px;width: 450px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
             <div class="row text-center">
-                <form action="" method="post" id="contact">
+                <form action="{{path('contact')}}" method="post" id="contact-form">
                     <aside class="alert d-none">
 
                     </aside>
@@ -122,7 +122,7 @@
                     <br>
                 </div>
                     <div class="col-12">
-                        <button>Envoyer</button>
+                        <button type="submit" id="push">Envoyer</button>
                     </div>
                 </form>
             </div>
@@ -173,7 +173,6 @@
 
 {#        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="js/app.js"></script>
             <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -181,24 +180,27 @@
         <script src="https://unpkg.com/scrollreveal"></script>
         <script>
 
-            $(function () {
+            
 
-                $("#contact").click(function(){
-                    event.preventDefault();
-                    $.ajax({
-                       url : '/contact', // La ressource ciblée
-                       type : 'POST', // Le type de la requête HTTP.
-                       data : 'email=' + email + '&nom' + nom + '&prenom' + prenom + '&message=' + message,
-                       dataType : 'html',
-                       success : function(json,statut){
-                        let $aside = $('#contact aside');
-                        $aside.addClass('alert-success').text('Le message a bien été envoyé !').removeClass('d-none');
-                       }
+                $(function () {
+                    $('#contact-form').submit(function (event) {
+                        // Annule l'action par défaut (on ne veut pas que la page se recharge)
+                        event.preventDefault();
+                        // Envoi de la requête XHR
+                        $.post($(this).attr('action'), $(this).serializeArray(), function (data) {
+                            
+                            let $aside = $('#contact-form aside');
+                            // Notifications
+                            if (data) {
+                                $aside.addClass('alert-success').text('Le message a bien été envoyé !').removeClass('d-none');
+                            } else {
+                                $aside.addClass('alert-danger').text('Erreur lors de l\'envoi du message !').removeClass('d-none');
+                            }
+                        });
                     });
-                   
                 });
             
-            });
+            
               $('select').select2();
               $('span').css('color','black');
 
