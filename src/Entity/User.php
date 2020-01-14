@@ -37,6 +37,12 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 58,
+     *      minMessage = "Votre mot de passe doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre mot de passe doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $password;
 
@@ -47,6 +53,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez mettre un pseudo s'il vous plait.")
      */
     private $pseudo;
 
