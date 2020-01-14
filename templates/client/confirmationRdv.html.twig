@@ -4,37 +4,29 @@
 
 {% block body %}
     {% block stylesheets %}
-        <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {% endblock %}
 
 
+    {#TOP#}
     <div class="row text-center">
         <div class="col p-5 text-center" style="min-height: 14rem;">
-            <h2 class="name-site" style="">FindACoach</h2>
-            <h1 class="display-4" style="font-size: 2.5em;">Paiement en ligne</h1>
+            <h2 class="name-site">FindACoach</h2>
+            <h1 class="display-4" style="">Paiement en ligne</h1>
         </div>
     </div>
 
 
-<div class="container justify-content-center text-center p-3 rounded border border-primary">
-
+    <div class="container justify-content-center text-center p-3 rounded border border-primary">
 
         <div class="row">
         <div class="col " style="min-height: 20vh">
-
             <img src="{{ asset('Paiement_en_ligne.png') }}" alt="" style="height: 200px">
         </div>
         </div>
 
         <div class="row">
-        <div class="col p-5">
+        <div class="col p-6">
             <h5 style="font-size: 1.8em">Recapitulatif de la commande</h5>
             Coach : {{coachPrenom}} {{coachNom}} <br>
             Horaire : {{heureRdv | date('h:i')}} <br>
@@ -59,7 +51,6 @@
 
                 <button class="mt-2">Paiement</button>
                 <div class="row justify-content-end">
-
                     <img class="m-2" src="{{ asset('paiement-stripe.png') }}" alt="" style="height: 50px">
                 </div>
             </form>
@@ -68,7 +59,7 @@
         </div>
 
 
-</div>
+    </div>
 
 {% endblock %}
 

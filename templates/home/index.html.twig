@@ -151,28 +151,45 @@
                 // Envoi de la requête XHR
                 $.post($(this).attr('action'), $(this).serializeArray(), function (data) {
 
-                    console.log(data);
+                    // console.log(data);
                     const coach = JSON.parse(data);
-                    // console.log('longueur est de ' + test.length);
-                    for(i = 0; i < coach.length; i++){
+                    console.log(data)
 
-                        let img = coach[i].image;
-                        let coachId = coach[i].id;
+                    if (coach.length == 0) {
 
-                        var customCard = document.createElement('div');
-                        customCard.className = 'contentCoach col-md-4 text-center mt-5';
-                        customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\"><img class=\"rounded-circle img-coach mb-3\" style='height: 170px; ' src=\"images/properties/" + img + "\"></a> " + ' <br>';
-                        // customCard.innerHTML += capitalizeFirstLetter(coach[i].prenom) + ' <br>';
-                        customCard.innerHTML += "<strong class='text-primary' style='font-size: 1.3em;font-weight: bold; '>" + capitalizeFirstLetter(coach[i].prenom) + "</strong><br>";
+                        let messageVide = document.createElement('div')
+                        messageVide.className = 'text-center mt-5 text-';
+                        messageVide.innerHTML += 'Aucun résultat' ;
 
-                        customCard.innerHTML += coach[i].domaine + ' / ';
-                        customCard.innerHTML += coach[i].ville.toUpperCase() + '<br>';
-                        customCard.innerHTML += "<strong style='font-weight: bold'>" + coach[i].prix + "€/h </strong><br>";
-                        customCard.innerHTML += coach[i].description.substr(1,100) + '... <br>';
-                        customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\">Voir Fiche</a>";
+                        document.getElementById('coachAjax').appendChild(messageVide)
 
-                        document.getElementById('coachAjax').appendChild(customCard)
+                    } else {
+
+
+
+                        for(i = 0; i < coach.length; i++){
+
+                            let img = coach[i].image;
+                            let coachId = coach[i].id;
+
+                            var customCard = document.createElement('div');
+                            customCard.className = 'contentCoach col-md-4 text-center mt-5';
+                            customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\"><img class=\"rounded-circle img-coach mb-3\" style='height: 170px; ' src=\"images/properties/" + img + "\"></a> " + ' <br>';
+                            // customCard.innerHTML += capitalizeFirstLetter(coach[i].prenom) + ' <br>';
+                            customCard.innerHTML += "<strong class='text-primary' style='font-size: 1.3em;font-weight: bold; '>" + capitalizeFirstLetter(coach[i].prenom) + "</strong><br>";
+
+                            customCard.innerHTML += coach[i].domaine + ' / ';
+                            customCard.innerHTML += coach[i].ville.toUpperCase() + '<br>';
+                            customCard.innerHTML += "<strong style='font-weight: bold'>" + coach[i].prix + "€/h </strong><br>";
+                            customCard.innerHTML += coach[i].description.substr(1,100) + '... <br>';
+                            customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\">Voir Fiche</a>";
+
+                            document.getElementById('coachAjax').appendChild(customCard)
+                        }
+
                     }
+
+
                 });
             });
         });
