@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Coach Fiche{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
@@ -121,8 +124,7 @@
                     <div class="col">
                         <h3 class="display-4">A propos de moi</h3>
                         <p>
-                            {{ fichefull.descriptionCoach }}
-                            
+                             {{ fichefull.descriptionCoach }}
                         </p>
                     </div>
                 </div>
@@ -131,8 +133,7 @@
                     <div class="col">
                         <h3 class="display-4">Mon type de séance</h3>
                         <p>
-                       {{ fichefull.descriptionSeance }}
-                        
+                            {{ fichefull.descriptionSeance }}
                         </p>
                     </div>
                 </div>
