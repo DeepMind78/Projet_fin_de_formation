@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CoachRepository")
@@ -24,11 +25,23 @@ class Coach
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 58,
+     *      minMessage = "Votre nom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 58,
+     *      minMessage = "Votre prénom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre prénom doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $prenom;
 
@@ -41,31 +54,64 @@ class Coach
     /**
      * @var  File|null
      * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     * @Assert\NotBlank(message="Veuillez mettre un fichier s'il vous plait.")
+     * @Assert\File(
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "S'il vous plait, loader un fichier type jpeg ou png."
+     * )
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "Votre adresse doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre adresse doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[0-9]{5}/")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 5,
+     *     )
      */
     private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "Votre ville doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre ville doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $ville;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 14,
+     *      max = 99,
+     *      minMessage = "Votre âge doit être au minimum de {{ limit }} ans",
+     *      maxMessage = "Votre nom doit comporter jusqu'à {{ limit }} ans"
+     * )
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Regex("/^[0-9]{10}/")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 10,
+     *     )
      */
     private $telephone;
 
@@ -78,11 +124,24 @@ class Coach
     /**
      * @var  File|null
      * @Vich\UploadableField(mapping="property_diplome", fileNameProperty="diplomename")
+     * @Assert\NotBlank(message="Veuillez mettre un fichier s'il vous plait.")
+     * @Assert\File(
+     *     maxSize = "5M",
+     *     maxSizeMessage="Le fichier ne doit pas dépasser les 5 Mo.",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "S'il vous plait pouvez-vous mettre un PDF valide ?"
+     * )
      */
     private $diplomeFile;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 150,
+     *      minMessage = "Votre domaine doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre domaine doit comporter jusqu'à {{ limit }} caractères"
+     * )
      */
     private $domaine;
 
@@ -108,11 +167,13 @@ class Coach
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull
      */
     private $description_coach;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull
      */
     private $description_seance;
 
