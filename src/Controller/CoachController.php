@@ -146,7 +146,7 @@ class CoachController extends AbstractController
             // FIN PARTIE GESTION VARIABLES EMAIL
 
             $heureTest = $heureUtilisateur;
-            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur);
+            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach);
             if ($variable == true){
                 $error = true;
             } else {
@@ -176,9 +176,9 @@ class CoachController extends AbstractController
     ]);
     }
 
-    public function rdvExist($heure, $duree, $repo, $jour){
+    public function rdvExist($heure, $duree, $repo, $jour, $coach){
             
-            $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure]));
+            $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'coach'=>$coach]));
             if(!empty($jourUnBdd)){
                 return true;
             }
@@ -276,7 +276,7 @@ class CoachController extends AbstractController
                 $mailer->sendRdvCoach($coachEmail,$clientNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
                 $mailer->sendRdvClient($clientEmail,$coachNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
 
-             return $this->redirectToRoute('client.rdv');   
+             return $this->redirectToRoute('confirmation.paiement');   
         }
 
     
@@ -290,5 +290,14 @@ class CoachController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/confirmation/paiement", name="confirmation.paiement")
+    */
+    public function paymentDone(){
+
+        return $this->render('/client/confirmationPaiement.html.twig');
+    }
+
 
 }

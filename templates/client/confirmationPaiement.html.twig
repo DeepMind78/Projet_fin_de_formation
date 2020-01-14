@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation paiement{% endblock %}
+
+{% block body %}
+Le paiement à bien été effectué, vous allez recevoir un mail récapitulant votre rendez-vous avec votre coach. 
+
+Bonne séance ! 
+
+    <a href="{{path('client.rdv')}}">Voir mes rendez-vous</a>
+    <a href="{{path('home')}}">Accueil</a>
+{% endblock %}
+
+
