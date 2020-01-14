@@ -124,8 +124,13 @@
                     <div class="col">
                         <h3 class="display-4">A propos de moi</h3>
                         <p>
+<<<<<<< HEAD
                              {{ fichefull.descriptionCoach }}
 
+=======
+                            {{ fichefull.descriptionCoach }}
+                            
+>>>>>>> 36e0aa533936cb19d86021c633d8f9ae163a4f89
                         </p>
                     </div>
                 </div>
@@ -134,7 +139,12 @@
                     <div class="col">
                         <h3 class="display-4">Mon type de séance</h3>
                         <p>
+<<<<<<< HEAD
                         {{ fichefull.descriptionSeance }}
+=======
+                       {{ fichefull.descriptionSeance }}
+                        
+>>>>>>> 36e0aa533936cb19d86021c633d8f9ae163a4f89
                         </p>
                     </div>
                 </div>
@@ -181,7 +191,7 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+                    <div class="alert alert-danger">Problème: soit vous avez déjà un rendez-vous, soit le coach est déjà réservé</div>
 
                 {% endif %}
                     {% if is_granted("ROLE_CLIENT") %}

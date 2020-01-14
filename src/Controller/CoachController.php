@@ -146,7 +146,7 @@ class CoachController extends AbstractController
             // FIN PARTIE GESTION VARIABLES EMAIL
 
             $heureTest = $heureUtilisateur;
-            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach);
+            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach, $resultat[0]);
             if ($variable == true){
                 $error = true;
             } else {
@@ -176,9 +176,10 @@ class CoachController extends AbstractController
     ]);
     }
 
-    public function rdvExist($heure, $duree, $repo, $jour, $coach){
+    public function rdvExist($heure, $duree, $repo, $jour, $coach, $client){
             
             $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'coach'=>$coach]));
+            
             if(!empty($jourUnBdd)){
                 return true;
             }
@@ -190,9 +191,22 @@ class CoachController extends AbstractController
                     return true;
                     break;
                 } else {
-                    
-                    // return false;
+                
+                }
+            }
+
+            $jourClient=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'client'=>$client]));
+            if(!empty($jourClient)){
+                return true;
+            }
+            for($i=1;$i<$duree;$i++){
+                $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
+                // print_r('test');
+                if(!empty($jourBdd)){
                     // dump($heure);
+                    return true;
+                    break;
+                } else {
                 
                 }
             }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -20,52 +21,105 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 58,
+     *      minMessage = "Votre nom doit comporté au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit comporté jusqu'à {{ limit }} caractères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 58,
+     *      minMessage = "Votre nom doit comporté au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit comporté jusqu'à {{ limit }} caractères"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "Votre adresse doit comporté au moins {{ limit }} caractères",
+     *      maxMessage = "Votre adresse doit comporté jusqu'à {{ limit }} caractères"
+     * )
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "Votre ville doit comporté au moins {{ limit }} caractères",
+     *      maxMessage = "Votre ville doit comporté jusqu'à {{ limit }} caractères"
+     * )
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[0-9]{5}/")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 5,
+     *     )
      */
     private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Regex("/^[0-9]{10}/")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 10,
+     *     )
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 14,
+     *      max = 99,
+     *      minMessage = "Votre âge doit être au minimum de {{ limit }} ans",
+     *      maxMessage = "Votre nom doit comporter jusqu'à {{ limit }} ans"
+     * )
      */
-    private $age;
+    protected $age;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 25,
+     *      max = 350,
+     *      minMessage = "Votre poids doit être au minimum de {{ limit }} kg",
+     *      maxMessage = "Votre poids doit comporter jusqu'à {{ limit }} kg"
+     * )
      */
     private $poids;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 45,
+     *      max = 300,
+     *      minMessage = "Votre âge doit être au minimum de {{ limit }} cm",
+     *      maxMessage = "Votre âge doit comporter jusqu'à {{ limit }} cm"
+     * )
      */
     private $taille;
 
