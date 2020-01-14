@@ -23,9 +23,7 @@
                 background: url(../slides/bruce-mars-559226-unsplash.jpg) no-repeat center center fixed;
                 background-size: cover;
             }
-            .btn-home:hover {
-                background: #007BFF;
-            }
+
 
             .top-content {
                 height: 100vh;
@@ -65,7 +63,7 @@
                         {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
-                    <button id="buttonLaunch" class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)">Rechercher</button>
+                    <button id="buttonLaunch" class="btn-home btn btn-outline-primary bShadow" style="position: absolute; margin-top:70px;">Rechercher</button>
 
                 </div>
 
@@ -92,7 +90,7 @@
 
 <div class="container p-5">
 
-    <div class="row" id="onglet-coach">
+    <div class="row" id="ongletCoach">
         <div class="col text-center p-5">
             <h2 class="display-4">Nos Coachs</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus delectus dicta dolorem dolores facilis fugiat impedit </p>
@@ -100,31 +98,58 @@
     </div>
 
     {#CARD COACH#}
-    <div id="coachAjax" class="row"></div>
+    <div id="coachAjax" class="row">
+
+    {% for coach in coachs %}
+        <div class="col-md-4 text-center mt-5">
+            <div class="row">
+                <div class="col">
+                    <a href="{{ path('fichefullcoach', {id: coach.id}) }}"> <img class="rounded-circle img-coach" src="{{ vich_uploader_asset(coach, 'imageFile') }}" alt=""></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-white mt-4">
+                    <h5 class="display-4 text-primary" style="font-size: 1.3em;font-weight: bold;">{{coach.prenom|capitalize}}</h5>
+                    {{coach.domaine|capitalize}} /
+                    {{coach.ville|capitalize}}<br>
+                    {{coach.prix}}€/h<br>
+                    {{ coach.descriptionCoach|striptags|slice(0, 100)|capitalize }} ...
+                    <br>
+                    <a href="{{ path('fichefullcoach', {id: coach.id}) }}" class="text-primary">Voir fiche</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+
+
 
 </div>{# CONTAINER #}
-
 
     <div class="navigation d-flex justify-content-center">
         {{ knp_pagination_render(coachs) }}
     </div>
-
 
 {% endblock %}
 
 {% block javascripts %}
     <script>
 
-
         $(function () {
-        window.onload = function() {
-            let buttonLaunch = document.getElementById('buttonLaunch');
-            buttonLaunch.click();
-        };
+
+        // window.onload = function() {
+        //     let buttonLaunch = document.getElementById('buttonLaunch');
+        //     buttonLaunch.click();
+        // };
+
+
             $('#search').submit(function (event) {
                 // Annule l'action par défaut (on ne veut pas que la page se recharge)
+
                 event.preventDefault();
                 document.getElementById('coachAjax').innerHTML = '';
+
                 // Envoi de la requête XHR
                 $.post($(this).attr('action'), $(this).serializeArray(), function (data) {
 
@@ -139,11 +164,12 @@
                         var customCard = document.createElement('div');
                         customCard.className = 'contentCoach col-md-4 text-center mt-5';
                         customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\"><img class=\"rounded-circle img-coach mb-3\" style='height: 170px; ' src=\"images/properties/" + img + "\"></a> " + ' <br>';
-                        // customCard.innerHTML += capitalizeFirstLetter(coach[i].nom) + ' ';
-                        customCard.innerHTML += capitalizeFirstLetter(coach[i].prenom) + ' <br>';
+                        // customCard.innerHTML += capitalizeFirstLetter(coach[i].prenom) + ' <br>';
+                        customCard.innerHTML += "<strong class='text-primary' style='font-size: 1.3em;font-weight: bold; '>" + capitalizeFirstLetter(coach[i].prenom) + "</strong><br>";
+
                         customCard.innerHTML += coach[i].domaine + ' / ';
                         customCard.innerHTML += coach[i].ville.toUpperCase() + '<br>';
-                        customCard.innerHTML += coach[i].prix + '€/h<br>';
+                        customCard.innerHTML += "<strong style='font-weight: bold'>" + coach[i].prix + "€/h </strong><br>";
                         customCard.innerHTML += coach[i].description.substr(1,100) + '... <br>';
                         customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\">Voir Fiche</a>";
 
@@ -153,16 +179,34 @@
             });
         });
 
-
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
+
+        // Scroll lisse
+        $('.js-scrollTo').click(function() {
+            let page = $(this).attr('href')
+            let speed = 750;
+            $('html, body').animate({scrollTop: $(page).offset().top}, speed);
+            return false;
+        })
+
+
+
+
+        // $('.js-scrollTo').on('click', function() {
+        //         $('html', 'body').animate({
+        //             scrollTop: $("#ongletCoach").offset().top
+        //         }, 2000)
+        //         console.log("ok");
+        //
+        // })
+
+
+
     </script>
 {% endblock %}
-
-
-
 
 
 

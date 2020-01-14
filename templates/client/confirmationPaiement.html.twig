@@ -3,12 +3,47 @@
 {% block title %}Confirmation paiement{% endblock %}
 
 {% block body %}
-Le paiement à bien été effectué, vous allez recevoir un mail récapitulant votre rendez-vous avec votre coach. 
+    {% block stylesheets %}
+        <style>
+            .name-site {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:4em;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
+            }
+        </style>
+    {% endblock %}
 
-Bonne séance ! 
 
-    <a href="{{path('client.rdv')}}">Voir mes rendez-vous</a>
-    <a href="{{path('home')}}">Accueil</a>
+    <div class="row text-center">
+        <div class="col p-5 text-center" style="min-height: 14rem;">
+            <h2 class="name-site">FindACoach</h2>
+            <h1 class="display-4" style="font-size: 2.5em;">Confirmation Paiement</h1>
+        </div>
+    </div>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <img class="mb-5" src="{{ asset('picto-valide-png-5.png') }}" alt="" style="height: 150px;">
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-6 text-center">
+            Le paiement à bien été effectué, vous allez recevoir un mail récapitulant votre rendez-vous avec votre coach.
+
+            Bonne séance !<br><br>
+
+            <a href="{{path('client.rdv')}}" class="text-primary">Voir mes rendez-vous</a><br>
+            <a href="{{path('home')}}" class="text-primary">Accueil</a>
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}
+
 
 
