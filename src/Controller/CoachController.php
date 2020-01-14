@@ -234,6 +234,7 @@ class CoachController extends AbstractController
         $coachUserRequete = $repoUser->findBy(['id'=>$idUserCoach]);
         $coachUser = $coachUserRequete[0];
         $coachEmail = $coachUser->getEmail();
+        $coachTelephone = $coach->getTelephone();
 
 
         // RECUPERATION DONNEES RDV UTILISATEUR 
@@ -254,6 +255,7 @@ class CoachController extends AbstractController
         $requeteClient = $repoClient->findBy(['user'=>$user]);
         $clientNom = $requeteClient[0]->getNom();
         $clientPrenom = $requeteClient[0]->getPrenom();
+        $clientTelephone = $requeteClient[0]->getTelephone();
         $clientEmail = $this->getUser()->getEmail();
         
 
@@ -287,8 +289,8 @@ class CoachController extends AbstractController
                     $manager->persist($rdvPlage);
                     $manager->flush();
                 }
-                $mailer->sendRdvCoach($coachEmail,$clientNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
-                $mailer->sendRdvClient($clientEmail,$coachNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
+                $mailer->sendRdvCoach($coachEmail,$clientNom,$clientTelephone,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
+                $mailer->sendRdvClient($clientEmail,$coachNom,$coachTelephone,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
 
              return $this->redirectToRoute('confirmation.paiement');   
         }

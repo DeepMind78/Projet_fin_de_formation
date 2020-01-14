@@ -72,7 +72,7 @@ class MailerService extends AbstractController
         $this->mailer->send($message);
     }
 
-    public function sendRdvCoach($to, $infoClient, $duree, $heure, $jour,  $lieu, $total, $template)
+    public function sendRdvCoach($to, $infoClient, $telephone ,$duree, $heure, $jour,  $lieu, $total, $template)
     {
         $message = (new \Swift_Message('Nouveau rendez-vous'))
             ->setFrom('cullellsullivan78@gmail.com')
@@ -86,7 +86,8 @@ class MailerService extends AbstractController
                         'lieu' => $lieu,
                         'total' => $total,
                         'heure'=>$heure,
-                        'jour'=>$jour
+                        'jour'=>$jour, 
+                        'telephone'=> $telephone
 
                     ]
                 ),
@@ -95,7 +96,7 @@ class MailerService extends AbstractController
         $this->mailer->send($message);
     }
 
-    public function sendRdvClient($to, $infoCoach, $duree, $heure, $jour, $lieu, $total, $template)
+    public function sendRdvClient($to, $infoCoach, $telephone, $duree, $heure, $jour, $lieu, $total, $template)
     {
         $message = (new \Swift_Message('Nouveau rendez-vous'))
             ->setFrom('cullellsullivan78@gmail.com')
@@ -109,7 +110,8 @@ class MailerService extends AbstractController
                         'lieu' => $lieu,
                         'total' => $total,
                         'heure'=>$heure,
-                        'jour'=>$jour
+                        'jour'=>$jour, 
+                        'telephone'=>$telephone
                     ]
                 ),
                 'text/html'
