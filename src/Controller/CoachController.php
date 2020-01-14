@@ -146,7 +146,7 @@ class CoachController extends AbstractController
             // FIN PARTIE GESTION VARIABLES EMAIL
 
             $heureTest = $heureUtilisateur;
-            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach, $resultat[0]);
+            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach);
             if ($variable == true){
                 $error = true;
             } else {
@@ -176,7 +176,7 @@ class CoachController extends AbstractController
     ]);
     }
 
-    public function rdvExist($heure, $duree, $repo, $jour, $coach, $client){
+    public function rdvExist($heure, $duree, $repo, $jour, $coach){
             
             $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'coach'=>$coach]));
             
@@ -195,21 +195,21 @@ class CoachController extends AbstractController
                 }
             }
 
-            $jourClient=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'client'=>$client]));
-            if(!empty($jourClient)){
-                return true;
-            }
-            for($i=1;$i<$duree;$i++){
-                $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
-                // print_r('test');
-                if(!empty($jourBdd)){
-                    // dump($heure);
-                    return true;
-                    break;
-                } else {
+            // $jourClient=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'client'=>$client]));
+            // if(!empty($jourClient)){
+            //     return true;
+            // }
+            // for($i=1;$i<$duree;$i++){
+            //     $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
+            //     // print_r('test');
+            //     if(!empty($jourBdd)){
+            //         // dump($heure);
+            //         return true;
+            //         break;
+            //     } else {
                 
-                }
-            }
+            //     }
+            // }
     }
     
     /**
@@ -302,7 +302,8 @@ class CoachController extends AbstractController
             'heureRdv' => $heure,
             'duree' => $duree, 
             'total' => $amount, 
-            'lieu' => $lieu
+            'lieu' => $lieu, 
+            'jour' => $jour
         ]);
 
     }

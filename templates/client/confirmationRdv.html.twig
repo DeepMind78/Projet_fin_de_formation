@@ -36,11 +36,11 @@
         <div class="row">
         <div class="col p-5">
             <h5 style="font-size: 1.8em">Recapitulatif de la commande</h5>
-            Coach : {{coachPrenom}} {{coachNom}} <br>
-            Horaire : {{heureRdv | date('h:i')}} <br>
-            Temps : {{duree}} h <br>
+            Votre coach : {{coachPrenom}} {{coachNom}} <br>
+            Le jour de votre rendez-vous : {{jour | date('d-m-Y')}} à {{heureRdv | date('H:i')}} <br>
+            Pour une durée de : {{duree}} h <br>
             Lieu : {{lieu}} <br>
-            Prix : {{total}} €
+            Total de votre séance : {{total}} €
         </div>
         </div>
 
@@ -57,7 +57,7 @@
               <!-- Used to display Element errors. -->
               <div id="card-errors" role="alert"></div>
 
-                <button class="mt-2">Paiement</button>
+                <button class="mt-2">Confirmer</button>
                 <div class="row justify-content-end">
 
                     <img class="m-2" src="{{ asset('paiement-stripe.png') }}" alt="" style="height: 50px">
