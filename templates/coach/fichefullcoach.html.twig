@@ -121,9 +121,8 @@
                     <div class="col">
                         <h3 class="display-4">A propos de moi</h3>
                         <p>
-                            {# {{ fichefull.description_coach }}#}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at debitis facilis id inventore magni molestiae quae rem.
-                            Eaque fugit illo labore laborum magnam magni quasi ratione similique voluptate voluptatum!
+                            {{ fichefull.descriptionCoach }}
+                            
                         </p>
                     </div>
                 </div>
@@ -132,11 +131,8 @@
                     <div class="col">
                         <h3 class="display-4">Mon type de séance</h3>
                         <p>
-{#                        {{ fichefull.description_seance }}#}
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores facilis, mollitia odit officiis soluta voluptatibus voluptatum?
-                        Accusantium dicta, doloribus, ea earum eveniet exercitationem facere magni mollitia, perferendis repudiandae tempore veritatis.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda inventore maxime modi non tenetur ut. Assumenda consequatur, debitis doloribus,
-                        inventore laboriosam obcaecati pariatur quaerat quisquam reiciendis sit tempora voluptas.
+                       {{ fichefull.descriptionSeance }}
+                        
                         </p>
                     </div>
                 </div>
@@ -183,7 +179,7 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-danger"> Ce coach est déjà réservé pour cette date.</div>
+                    <div class="alert alert-danger">Problème: soit vous avez déjà un rendez-vous, soit le coach est déjà réservé</div>
 
                 {% endif %}
                     {% if is_granted("ROLE_CLIENT") %}

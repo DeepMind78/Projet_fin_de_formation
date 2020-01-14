@@ -27,7 +27,7 @@ class HomeController extends AbstractController
         $form = $this->createForm(CoachSearchType::class, $search);
         $form->handleRequest($request);
 
-//         $coachlist2 = $repo->findAll();
+        // $coachlist2 = $repo->findAll();
         $coachlist = $paginator->paginate(
             $repo->findGoodCoach($search),
             $request->query->getInt('page', 1),
