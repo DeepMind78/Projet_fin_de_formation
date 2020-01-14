@@ -65,6 +65,7 @@ class CoachController extends AbstractController
             ] );
         }
 
+
         return $this->render('coach/index.html.twig', [
             'ficheCoach' => $form->createView(),
             'error'=>$error
