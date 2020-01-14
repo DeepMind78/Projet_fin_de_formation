@@ -280,8 +280,14 @@ class CoachController extends AbstractController
         }
 
     
-
-        return $this->render('/client/confirmationRdv.html.twig');
+        return $this->render('/client/confirmationRdv.html.twig', [
+            'coachNom' => $coachNom, 
+            'coachPrenom' => $coachPrenom,
+            'heureRdv' => $heure,
+            'duree' => $duree, 
+            'total' => $amount, 
+            'lieu' => $lieu
+        ]);
 
     }
 
