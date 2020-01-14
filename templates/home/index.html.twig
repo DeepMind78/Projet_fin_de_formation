@@ -16,15 +16,17 @@
 
             }
             .top-fond {
-                min-height: 100vh;
+                min-height: 60vh;
                 width: 100%;
 
                 box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, 0.8) inset;
-                background: url(../slides/bruce-mars-559226-unsplash.jpg) no-repeat center center fixed;
+                background: url(../slides/athlete-courir-chaussures-de-course.jpg) no-repeat center center fixed;
                 background-size: cover;
+                box-shadow: 10px 10px 35px 10px rgba(0, 0, 0, 1);
             }
             .top-content {
-                height: 100vh;
+                height: 60vh;
+
             }
 
             .img-coach {
@@ -59,7 +61,7 @@
                         {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
-                    <button id="buttonLaunch" class="btn-home btn btn-outline-primary bShadow js-scrollTo" style="position: absolute; margin-top:70px;">Rechercher</button>
+                    <button id="buttonLaunch" class="btn-home btn btn-outline-primary bShadow" style="position: absolute; margin-top:70px;">Rechercher</button>
 
                 </div>
 
@@ -67,34 +69,19 @@
     </div>
 </div>
 
-    <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 200px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
-        <div class="col-4 text-center">
-            <img src="{{ asset('logos/logo_calendar.png') }}" alt="" style="height: 100px">
-            <p>Inscrivez vous et réservé dès maintenant</p>
-        </div>
-        <div class="col-4 text-center">
-            <img src="{{ asset('logos/logo_gratuit.png') }}" alt="" style="height: 100px">
-            <p>Première Seance gratuite. </p>
-        </div>
-        <div class="col-4 text-center">
-            <img src="{{ asset('logos/logo_rembourse.png') }}" alt="" style="height: 100px">
-            <p>Réservez une premiere seance et donné votre avi</p>
-        </div>
-    </div>
-
 
 
 <div class="container p-5">
 
     <div class="row" id="ongletCoach">
-        <div class="col text-center p-5">
+        <div class="col text-center">
             <h2 class="display-4">Nos Coachs</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus delectus dicta dolorem dolores facilis fugiat impedit </p>
+            <p>Ainsi, il était parfois difficile de trouver un entraîneur dans la bonne zone géographique, libre au horaires adéquats et pratiquant des tarifs non prohibitifs. </p>
         </div>
     </div>
 
     {#CARD COACH#}
-    <div id="coachAjax" class="row">
+    <div id="coachAjax" class="row" >
 
     {% for coach in coachs %}
         <div class="col-md-4 text-center mt-5">
@@ -122,6 +109,21 @@
 
 
 </div>{# CONTAINER #}
+
+    <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 200px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_calendar.png') }}" alt="" style="height: 100px">
+            <p>Inscrivez vous et réservé dès maintenant</p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_gratuit.png') }}" alt="" style="height: 100px">
+            <p>Première Seance gratuite. </p>
+        </div>
+        <div class="col-4 text-center">
+            <img src="{{ asset('logos/logo_rembourse.png') }}" alt="" style="height: 100px">
+            <p>Réservez une premiere seance et donné votre avi</p>
+        </div>
+    </div>
 
     <div class="navigation d-flex justify-content-center">
         {{ knp_pagination_render(coachs) }}
