@@ -23,8 +23,6 @@
                 background: url(../slides/bruce-mars-559226-unsplash.jpg) no-repeat center center fixed;
                 background-size: cover;
             }
-
-
             .top-content {
                 height: 100vh;
             }
@@ -39,8 +37,6 @@
                 transition-duration: .5s;
                 transform: scale(1.1, 1.1);
             }
-
-
 
         </style>
     {% endblock %}
@@ -63,7 +59,7 @@
                         {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
-                    <button id="buttonLaunch" class="btn-home btn btn-outline-primary bShadow" style="position: absolute; margin-top:70px;">Rechercher</button>
+                    <button id="buttonLaunch" class="btn-home btn btn-outline-primary bShadow js-scrollTo" href="#ongletCoach" style="position: absolute; margin-top:70px;">Rechercher</button>
 
                 </div>
 
