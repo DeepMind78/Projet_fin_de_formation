@@ -35,22 +35,11 @@ class HomeController extends AbstractController
         );
 
 
-
-
-
-
-
-
-
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'form' => $form->createView(),
             'coachs' => $coachlist
         ]);
-
-
-
-
 
 
 
@@ -76,6 +65,32 @@ class HomeController extends AbstractController
             
            
             return new Response($json);
+
+    }
+
+    /**
+     * @Route("/search", name="search", methods={"POST"})
+     */
+    public function search(SerializerInterface $serializer, Request $request, CoachRepository $repo){
+        $search = new CoachSearch;
+        // $search->setVille($_POST['ville'])->setSport($_POST['sport']);
+        $ville = $_POST['coach_search']['ville'];
+        $sport = $_POST['coach_search']['sport'];
+
+        $search->setVille($ville)->setSport($sport);
+
+        $coachlist = $repo->findGoodCoach($search);
+        $json = $coachlist;
+        $rows = array();
+        foreach($coachlist as $coach){
+            $rows[] = array("nom"=>$coach->getNom(), "prenom"=>$coach->getPrenom(), "ville" => $coach->getVille(), "prix"=>$coach->getPrix(), 'id'=> $coach->getId(),'description'=>$coach->getDescriptionCoach(),'domaine'=>$coach->getDomaine(), 'image'=>$coach->getFilename());
+        }
+
+        $json = json_encode($rows);
+
+
+        header('Content-Type: application/json');
+        return new Response($json);
 
     }
 }

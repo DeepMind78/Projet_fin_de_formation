@@ -48,17 +48,12 @@
     {% endblock %}
 
 <div class="top-fond">
-
     <div class="container">
-
-
-        {{form_start(form)}}
+        {{form_start(form, {'action': path('search'), 'method': 'POST','attr':{'id':'search'}}) }}
 
                 <div class="row align-items-center justify-content-center top-content text-center">
 
                     <h2 class="name-site bounceInLeft" style="margin-top: -100px;">FindACoach</h2><br>
-
-
 
                     <div class="col-4">
 
@@ -70,17 +65,14 @@
                         {{form_row(form.ville, {'attr': {'class': 'bShadow'}})}}
                     </div>
 
-                    <button class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)">Rechercher</button>
-
-{#                    <a href="#onglet-coach" id="btn-coach" class="js-scrollTo bounceInRight text-primary" style="position: absolute; right:0;top:50vh;">Voir les coach </a>#}
-
+                    <button id="buttonLaunch" class="btn-home btn border-primary text-light bShadow" style="position: absolute; margin-top:70px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9)">Rechercher</button>
 
                 </div>
 
         {{form_end(form)}}
     </div>
 </div>
-    
+
     <div class="row align-items-center" style="background:rgba(0,0,0,.1);height: 200px; box-shadow: -1px 2px 50px 53px rgba(0, 0, 0, .5) inset;">
         <div class="col-4 text-center">
             <img src="{{ asset('logos/logo_calendar.png') }}" alt="" style="height: 100px">
@@ -107,54 +99,64 @@
         </div>
     </div>
 
-    <div class="row">
-    {% for coach in coachs %}
+    {#CARD COACH#}
+    <div id="coachAjax" class="row"></div>
 
-            <div class="col-md-4 text-center mt-5">
-
-                <div class="row">
-                <div class="col">
-                    <a href="{{ path('fichefullcoach', {id: coach.id}) }}"> <img class="rounded-circle img-coach" src="{{ vich_uploader_asset(coach, 'imageFile') }}" alt=""></a>
-                </div>
-                </div>
-
-                <div class="row">
-                    <div class="col text-white mt-4">
-                        <h5 class="display-4" style="font-size: 1.8em">{{coach.nom}} {{coach.prenom}}</h5><br>
-                        Ville : {{coach.ville}}<br>
-                        Domaine  : {{coach.domaine}}<br>
-                        {{coach.prix}}€/h<br>
-
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto culpa exercitationem ...
-
-                        <br>
-                        <a href="{{ path('fichefullcoach', {id: coach.id}) }}" class="text-primary">Voir fiche</a>
-                    </div>
-                </div>
-
-            </div>
-
-    {% endfor %}
-
-</div>
+</div>{# CONTAINER #}
 
 
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(coachs) }}
+    </div>
 
 
-
-<div class="navigation d-flex justify-content-center">
-    {{ knp_pagination_render(coachs) }}
-</div>
-
-
-</div>  {# BODY #}
 {% endblock %}
 
 {% block javascripts %}
     <script>
 
-   
 
+        $(function () {
+        window.onload = function() {
+            let buttonLaunch = document.getElementById('buttonLaunch');
+            buttonLaunch.click();
+        };
+            $('#search').submit(function (event) {
+                // Annule l'action par défaut (on ne veut pas que la page se recharge)
+                event.preventDefault();
+                document.getElementById('coachAjax').innerHTML = '';
+                // Envoi de la requête XHR
+                $.post($(this).attr('action'), $(this).serializeArray(), function (data) {
+
+                    console.log(data);
+                    const coach = JSON.parse(data);
+                    // console.log('longueur est de ' + test.length);
+                    for(i = 0; i < coach.length; i++){
+
+                        let img = coach[i].image;
+                        let coachId = coach[i].id;
+
+                        var customCard = document.createElement('div');
+                        customCard.className = 'contentCoach col-md-4 text-center mt-5';
+                        customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\"><img class=\"rounded-circle img-coach mb-3\" style='height: 170px; ' src=\"images/properties/" + img + "\"></a> " + ' <br>';
+                        // customCard.innerHTML += capitalizeFirstLetter(coach[i].nom) + ' ';
+                        customCard.innerHTML += capitalizeFirstLetter(coach[i].prenom) + ' <br>';
+                        customCard.innerHTML += coach[i].domaine + ' / ';
+                        customCard.innerHTML += coach[i].ville.toUpperCase() + '<br>';
+                        customCard.innerHTML += coach[i].prix + '€/h<br>';
+                        customCard.innerHTML += coach[i].description.substr(1,100) + '... <br>';
+                        customCard.innerHTML += "<a href=\"coach/fichecomplet/" + coach[i].id + "\">Voir Fiche</a>";
+
+                        document.getElementById('coachAjax').appendChild(customCard)
+                    }
+                });
+            });
+        });
+
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
 
     </script>
 {% endblock %}

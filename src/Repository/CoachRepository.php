@@ -34,7 +34,7 @@ class CoachRepository extends ServiceEntityRepository
             $query ->setParameter('sport',$search->getSport()); 
         }
 
-        return $query->getQuery();
+        return $query->getQuery()->getResult();
     }
 
 
