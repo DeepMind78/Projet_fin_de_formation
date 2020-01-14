@@ -61,7 +61,15 @@
                 box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
                 border: 1px solid black;
             }
-
+            .form-error-message {
+                color: white !important;
+            }
+            .name-site-logo {
+                color: white;
+                font-family: 'Baloo Bhai', cursive;
+                font-size:1.5em;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
+            }
 
         </style>
     </head>
@@ -73,24 +81,14 @@
         </div>
 
         <nav class="navbar navbar-expand-md navbar-light fixed-top nav-bar-back">
-            <a class="navbar-brand text-white text- center" href="{{path('home')}}">Find a Coach</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand text-white name-site-logo" href="{{path('home')}}">FindACoach</a>
+            <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav ml-auto">
                       {% if is_granted("ROLE_CLIENT") %}
-
-{#                          <div class="custom-box">#}
-{#                              <div class="custom-box-connect rounded p-1 fadeInDown fadeOutUp" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 120px;cursor: pointer">#}
-{#                                  <div class="col text-center">#}
-{#                                      <img src="{{ asset('picto-valide-png-5.png') }}" alt="" style="height: 50px;">#}
-{#                                      <p>Vous êtes Connecté ! </p>#}
-{#                                  </div>#}
-{#                              </div>#}
-{#                          </div>#}
-
                           <li class="nav-item">
                               <a class="nav-link text-white color-blue" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
                           </li>
@@ -111,14 +109,6 @@
 {#                      <a class="nav-link text-white color-blue" onclick="if (confirm('Deconnexion :'));" href="{{path('logout')}}">Se deconnecter</a>#}
                       <a class="nav-link text-white color-blue" onclick="return(confirm('Etes-vous sûr de vouloir vous déconnecter ?'));" href="{{path('logout')}}">Se deconnecter</a>
                     </li>
-{#                        <div class="custom-box">#}
-{#                            <div class="custom-box-connect rounded p-1 fadeInDown fadeOutUp" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 120px;cursor: pointer">#}
-{#                                <div class="col text-center">#}
-{#                                    <img src="{{ asset('deconnection.png') }}" alt="" style="height: 50px;">#}
-{#                                    <p>Vous êtes bien Déconnecté ! </p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
                     {% else %}
                     <li class="nav-item">
                       <a class="nav-link text-white color-blue" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
@@ -144,7 +134,7 @@
             <img class="img-contact" src="{{ asset('contact.png') }}" alt="">
         </div>
 
-        <div id="block-contact" class="bg-primary rounded p-2" style="display:none; position: fixed;z-index: 500; bottom: 0;right: 85px; height: 400px;width: 350px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
+        <div id="block-contact" class="bg-primary rounded p-2" style="display:none; position: fixed;z-index: 500; bottom: 0;right: 85px; height: 400px;width: 280px; border: solid 1px black;box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);">
             <div class="row text-center justify-content-center">
                 <form action="{{path('contact')}}" method="post" id="contact-form">
                     <aside class="alert d-none">
