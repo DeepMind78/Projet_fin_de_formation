@@ -19,15 +19,19 @@
     <div class="row text-center mb-5 text-center img-top">
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site" style="">FindACoach</h2>
-            <h1 class="display-4" style="font-size: 2.5em;color: rgba(0,0,0,.8);font-weight: bold">Devenir Client</h1>
         </div>
     </div>
 
 <div class="container">
 
+    <div class="row">
+    <div class="col text-center">
+        <h1  class="display-4 m-3" style="font-size: 2.5em">Devenir Client</h1>
+    </div>
+    </div>
+
     <div class="row justify-content-center">
     <div class="col-6">
-
         {{ form_start(formInscription) }}
         {{ form_row(formInscription.pseudo) }}
         {{form_row(formInscription.email, {'label':'Adresse email ', attr : { 'placeholder': 'adresse email'}})}}
@@ -36,7 +40,6 @@
 
         <button type="submit" class='btn btn-sm btn-outline-primary m-3'> Confirmer </button>
         {{ form_end(formInscription) }}
-
     </div>
     </div>
 

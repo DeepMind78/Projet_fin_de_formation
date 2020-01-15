@@ -104,7 +104,7 @@
                     {# COACH #}
                     {% if is_granted("ROLE_COACH") %}
                         <li class="nav-item">
-                          <a class="nav-link text-white href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                          <a class="nav-link text-white" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
