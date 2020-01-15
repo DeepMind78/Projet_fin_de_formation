@@ -261,7 +261,7 @@ class CoachController extends AbstractController
 
 
         
-        \Stripe\Stripe::setApiKey('sk_test_D75XiUOxctvVVfaK93BHQro6007yoi24NH');
+        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
 
         if(isset($_POST['stripeToken'])){
             $token = $_POST['stripeToken'];
