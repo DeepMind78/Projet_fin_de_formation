@@ -1,11 +1,10 @@
 {# templates/emails/registration.html.twig #}
 <h3>Confirmation de l'inscription</h3>
 
- {{ pseudo }}!, vous avez réussi l'inscription c'est bien, veuillez confirmer votre compte s'il vous plait,
+ {{ pseudo }}, pour finaliser votre inscription et pouvoir réserver un coach, veuillez confirmer votre compte s'il vous plait,
 
 <a href="http://127.0.0.1:8000/compte/confirmation/{{ token }}/{{ pseudo }}">confirmer email</a>
 
 Cordialement.
 
 {# Makes an absolute URL to the /images/logo.png file #}
-<img src="{{ absolute_url(asset('images/logo.png')) }}" alt="">
