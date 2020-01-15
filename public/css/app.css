@@ -70,7 +70,9 @@ h3 {
 .bShadow-top {
     box-shadow: -10px -10px 25px 20px rgba(0, 0, 0, .8);
 }
-
+.bShadow-btn {
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, .5) !important;
+}
 
 
 
