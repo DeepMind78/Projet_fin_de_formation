@@ -4,32 +4,17 @@
 
 {% block body %}
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
             .img-top {
                 background: url(../../ail_work_working.jpg) no-repeat center center fixed;
                 background-size: cover;
                 box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);
             }
-
-            .form-control {
-                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
-                border: 1px solid black;
-            }
-            textarea {
-                box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 1);
-            }
-            button {
-                box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
-            }
         </style>
     {% endblock %}
 
+    {##### TOP #####}
     <div class="row text-center mb-5 text-center img-top">
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site" style="">FindACoach</h2>
@@ -42,11 +27,11 @@
 
     {% if is_granted("ROLE_COACH") and error == false %}
 
-    <p>
+
     <div class="row justify-content-center">
         <div class="col-8">
-
             {{form_start(ficheCoach)}}
+
             <div class="row">
                 <div class="col-6">
                     {{ form_row(ficheCoach.nom) }}
@@ -63,16 +48,16 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     {{ form_row(ficheCoach.codePostal) }}
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     {{ form_row(ficheCoach.ville) }}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     {{ form_row(ficheCoach.telephone) }}
                 </div>
             </div>
@@ -102,15 +87,14 @@
             </div>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4">
                     {{ form_row(ficheCoach.prix) }}
                 </div>
             </div>
-                    {{form_rest(ficheCoach)}}
 
+            {{form_rest(ficheCoach)}}
 
-
-            <button class='btn btn-sm btn-primary m-3' type="submit">Enregistrer</button>
+            <button class='btn btn-sm btn-outline-primary m-3' type="submit">Enregistrer</button>
             {{form_end(ficheCoach)}}
 
         </div>
@@ -123,6 +107,6 @@
             <a href="{{path('home')}}">Lien vers menu principal</a>
     {% endif %}
 
-</div>
+</div>{#CONTAINER#}
 
 {% endblock %}

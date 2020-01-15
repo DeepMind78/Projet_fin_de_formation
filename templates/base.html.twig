@@ -18,22 +18,20 @@
         <meta name="Geography" content="Paris">
         <meta name="Category" content="sports">
 
-
         <title>{% block title %}FindACoach{% endblock %}</title>
-{#        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">#}
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
         <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/app.css">
+
         <link rel="stylesheet" href="{{ asset('css/effetCss.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
 
         {% block stylesheets %}
 
         {% endblock %}
         <style>
-            a {
-                color: #464646;
-            }
+            {# CONTACT IMG #}
             .img-contact {
                 height: 50px;
                 transition-duration: .5s;
@@ -43,10 +41,17 @@
                 transition-duration: .5s;
                 height: 60px;
             }
-            .color-blue:hover {
-                color: #007BFF;
+            #block-contact {
+                display:none;
+                position: fixed;z-index: 500;
+                bottom: 0;
+                right: 85px;
+                height: 400px;width: 280px;
+                border: solid 1px black;
+                box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);
             }
 
+            {# PROGRESS BAR #}
             .progress-container {
                 width: 100%;
                 height: 4px;
@@ -57,10 +62,7 @@
                 background: #5bc65b;
                 width: 0%;
             }
-            .form-control {
-                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
-                border: 1px solid black;
-            }
+
             .form-error-message {
                 color: white !important;
             }
@@ -88,46 +90,49 @@
           
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav ml-auto">
+
+                    {# CLIENT #}
                       {% if is_granted("ROLE_CLIENT") %}
                           <li class="nav-item">
-                              <a class="nav-link text-white color-blue" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                              <a class="nav-link text-white" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link text-white color-blue" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                              <a class="nav-link text-white" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
                           </li>
                       {% endif %}
+
+                    {# COACH #}
                     {% if is_granted("ROLE_COACH") %}
-                    <li class="nav-item">
-                      <a class="nav-link text-white color-blue" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
-                    </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white color-blue" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                          <a class="nav-link text-white href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
                         </li>
                     {% endif %}
+
                     {% if app.user %}
-                    <li class="nav-item">
-{#                      <a class="nav-link text-white color-blue" onclick="if (confirm('Deconnexion :'));" href="{{path('logout')}}">Se deconnecter</a>#}
-                      <a class="nav-link text-white color-blue" onclick="return(confirm('Etes-vous sûr de vouloir vous déconnecter ?'));" href="{{path('logout')}}">Se deconnecter</a>
-                    </li>
+                    {# DECONNEXION #}
+                        <li class="nav-item">
+                          <a class="nav-link text-white" onclick="return(confirm('Etes-vous sûr de vouloir vous déconnecter ?'));" href="{{path('logout')}}">Se deconnecter</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link text-white color-blue" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-white color-blue" href="{{path('inscriptionClient')}}">Inscription Client </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-white color-blue" href="{{path('app_login')}}">Login </a>
-                    </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="{{path('inscriptionCoach')}}">Inscription Coach </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="{{path('inscriptionClient')}}">Inscription Client </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="{{path('app_login')}}">Login </a>
+                        </li>
                     {% endif %}
                 </ul>
 
             </div>
           </nav>
 
-
-        {% block body %}{% endblock %}
-
+    {% block body %}{% endblock %}
 
         {# CONTACT #}
         <div id="contact" style="color: red; position: fixed;z-index: 500; bottom: 20px;right: 30px;">
@@ -160,6 +165,7 @@
         {# FOOTER #}
         <div class="mt-5" style="min-height: 200px; background: #232323">
 
+            {# SEPARATION #}
             <div class="row" style="height: 1px;background: rgba(0,0,0, .5); box-shadow: -3px -3px 5px 1px rgba(0, 0, 0, .6);"></div>
 
             <div class="container">
@@ -197,15 +203,22 @@
         </div>
 
 
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
 
-        <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <script>
+        {# CONTACT EFFET#}
+        $("#contact").click(function(){
+            $("#block-contact").slideToggle().addClass("zoomInRight");
+        });
 
+        $('select').select2();
+        $('span').css('color','black');
 
+            {# CONATCT #}
             $(function () {
                 $('#contact-form').submit(function (event) {
                     // Annule l'action par défaut (on ne veut pas que la page se recharge)
@@ -218,35 +231,23 @@
                         // Notifications
                         if (data) {
                             $aside.addClass('alert-success').text('Le message a bien été envoyé !').removeClass('d-none');
-                                $blockContact.addClass("bounceOutDown");
+                                $blockContact.addClass("zoomOutRight");
                         } else {
                             $aside.addClass('alert-danger').text('Erreur lors de l\'envoi du message !').removeClass('d-none');
                         }
                     });
                 });
             });
-            
-
-              $('select').select2();
-              $('span').css('color','black');
 
 
-              // $("#block-contact").hide();
-              $("#contact").click(function(){
-                  $("#block-contact").slideToggle();
-              });
-
-
-              // When the user scrolls the page, execute myFunction
-              window.onscroll = function() {myFunction()};
-              function myFunction() {
-                  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                  var scrolled = (winScroll / height) * 100;
-                  document.getElementById("myBar").style.width = scrolled + "%";
-              }
-
-
+          // When the user scrolls the page, execute myFunction
+          window.onscroll = function() {myFunction()};
+          function myFunction() {
+              var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+              var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              var scrolled = (winScroll / height) * 100;
+              document.getElementById("myBar").style.width = scrolled + "%";
+          }
 
 
         </script>

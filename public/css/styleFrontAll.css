@@ -51,6 +51,34 @@ h3 {
 }
 
 
+.select2-results__option {
+    color: rgba(0, 0, 0, .9);;
+}
+
+
+
+/* FORM RESERVATION */
+.btn-alert {
+    background-color: #0090c5;
+    border: none;
+    padding: 1em;
+    color: white;
+    margin: 1em;
+    border-radius: 5px;
+}
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 850;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0, .9);
+}
+
+
+
+
 
 .color-blue:hover {
     color: #007BFF;
@@ -58,7 +86,9 @@ h3 {
 
 
 
-
+.bg-color-S {
+    background-color: rgba(0, 0, 0, .1);
+}
 
 
 .bShadow-full {

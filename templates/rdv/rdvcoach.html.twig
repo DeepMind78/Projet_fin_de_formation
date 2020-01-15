@@ -4,30 +4,17 @@
 
 {% block body %}
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
-            .img-top {
-                background: url(../bureau-girly.jpg) no-repeat center center fixed;
-                background-size: cover;
-                box-shadow: 0px 0px 25px 30px rgba(0, 0, 0, .5);
-            }
-            .select2-results__option {
-                color: rgba(0, 0, 0, .9);;
-            }
         </style>
     {% endblock %}
 
 
     <div class="row text-center">
         <div class="col p-5 text-center" style="min-height: 14rem;">
-            <h2 class="name-site" style="">FindACoach</h2>
+            <h2 class="name-site">FindACoach</h2>
             <h1 class="display-4" style="font-size: 2.5em;">Mes Rendez-vous</h1>
-            <img src="{{ asset('picto_15_partenaires2.png') }}" alt="">
+            <img src="{{ asset('picto_15_partenaires2.png') }}" alt="" style="height: 200px;">
         </div>
     </div>
 
@@ -37,17 +24,16 @@
             <div class="col-8 rounded border border-primary p-5">
                 {% for rdv in rdvcoachs %}
                     {% if rdv.total %}
-
-                            <div class="row text-center">
-                                <div class="col">
-                                    Client <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
-                                    Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
-                                    Le : <span class="text-danger">{{ rdv.jour | date("d/m/Y") }}</span><br>
-                                    Horaire : <span class="text-danger">{{ rdv.heure | date("H:i") }}</span><br>
-                                    Temps :  <span class="text-danger">{{ rdv.duree }} heure(s)</span><br>
-                                    Montant <span class="text-primary">{{ rdv.total }}</span> €.
-                                </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                Client <span class="text-primary">{{ rdv.client.nom }} {{ rdv.client.prenom }}</span><br>
+                                Lieu : <span class="text-primary">{{ rdv.lieu}}</span><br>
+                                Le : <span class="text-danger">{{ rdv.jour | date("d/m/Y") }}</span><br>
+                                Horaire : <span class="text-danger">{{ rdv.heure | date("H:i") }}</span><br>
+                                Temps :  <span class="text-danger">{{ rdv.duree }} heure(s)</span><br>
+                                Montant <span class="text-primary">{{ rdv.total }}</span> €.
                             </div>
+                        </div>
                         <div class="bg-primary m-3" style="height: 1px"></div>
                     {% endif %}
                 {% endfor %}
@@ -55,9 +41,9 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-12 mt-5">
-                <h2>Ajouter les heures où vous ne pourrez pas être disponible </h2>
+        <div class="row justify-content-center">
+            <div class="col-8 mt-5 text-center">
+                <h2 class="display-4" style="font-size: 1.8em;">Ajouter les heures où vous ne pourrez pas être disponible </h2>
             </div>
 
             <div class="col-5 mt-1 mb-5">
@@ -67,7 +53,7 @@
                 {{form_row(form.duree)}}
                 {{ form_row(form._token) }}
 
-                <button class="btn btn-sm border-primary text-primary m-3">Envoyer</button>
+                <button class="btn btn-sm btn-outline-primary m-3">Envoyer</button>
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>

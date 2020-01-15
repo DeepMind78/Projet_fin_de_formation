@@ -4,22 +4,14 @@
 
 {% block body %}
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
             .img-top {
                 background: url(../slides/grp-coach.jpg) no-repeat center center fixed;
                 background-size: cover;
                 box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);
             }
-            .form-control {
-                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
-                border: 1px solid black;
-            }
+
         </style>
     {% endblock %}
 
@@ -27,7 +19,7 @@
     <div class="row text-center mb-5 text-center img-top">
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site" style="">FindACoach</h2>
-            <h1 class="display-4" style="font-size: 2.5em;color: rgba(0,0,0,.8);font-weight: bold"">Devenir Client</h1>
+            <h1 class="display-4" style="font-size: 2.5em;color: rgba(0,0,0,.8);font-weight: bold">Devenir Client</h1>
         </div>
     </div>
 
@@ -42,7 +34,7 @@
         {{form_row(formInscription.password, {attr : { 'placeholder': 'mot de passe'}})}}
         {{form_row(formInscription.confirm_password, {attr : { 'placeholder': 'confirmer mot de passe'}})}}
 
-        <button type="submit" class='btn btn-sm border-primary text-light m-3'> Confirmer </button>
+        <button type="submit" class='btn btn-sm btn-outline-primary m-3'> Confirmer </button>
         {{ form_end(formInscription) }}
 
     </div>

@@ -5,19 +5,8 @@
 {% block body %}
     {% block stylesheets %}
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
-            .form-control {
-                box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
-                border: 1px solid black;
-            }
         </style>
     {% endblock %}
-
 
     <div class="row text-center">
         <div class="col p-5 text-center" style="min-height: 14rem;">
@@ -31,37 +20,24 @@
         <div class="row justify-content-center">
             <img class="mb-5" src="{{ asset('login-logo.png') }}" alt="" style="height: 150px;">
         </div>
+
     <form method="post">
 
         <div class="row justify-content-center">
-
         <div class="col-6">
+
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-            <label for="inputPassword">Password</label>
+            <label for="inputPassword" class="mt-2">Mot de passe</label>
             <input type="password" name="password" id="inputPassword" class="form-control" required>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-            #}
-
-            <button class="btn btn-sm border-primary text-light m-3" type="submit">
-                Se connecter
-            </button>
+            <button class="btn btn-sm btn-outline-primary m-3" type="submit">Se connecter</button>
 
             <a href="{{ path('forgottenPassword') }}" style="font-size: .8em;">Mot de passe oublié</a>
 
@@ -70,5 +46,6 @@
 
     </form>
 
-    </div>
+    </div>{#CONTAINER#}
+
 {% endblock %}

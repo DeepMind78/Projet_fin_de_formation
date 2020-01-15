@@ -5,12 +5,6 @@
 {% block body %}
     {% block stylesheets %}
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
             .img-top {
                 background: url(../validation-large.jpg) no-repeat center center fixed;
                 background-size: cover;
@@ -32,7 +26,7 @@
             <div class="col-10 border border-primary rounded p-5 text-center">
                 Nous vous avons envoyé un email de confirmation pour nous rejoindre dans cette grande aventure.
                 <br>
-                <a class="btn-sm border-primary text-primary m-3" href="{{ path('app_login')}}">Se connecter</a>
+                <a class="btn btn-sm btn-outline-primary m-3" href="{{ path('app_login')}}">Se connecter</a>
 
             </div>
         </div>

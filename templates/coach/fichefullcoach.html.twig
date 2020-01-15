@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
     <link rel="stylesheet" href="{{ asset('css/effetCss.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
     <style>
         .img-coach {
             height: 200px;
@@ -14,15 +15,7 @@
             box-shadow: 10px 10px 35px 10px rgba(0, 0, 0, 1);
         }
 
-        .card {
 
-        }
-        .card-header {
-            color: rgba(0, 0, 0, .9);
-        }
-        .card-body {
-            background-color: rgba(0, 0, 0, .9);
-        }
         .carousel-item {
             max-height:250px;
         }
@@ -35,36 +28,14 @@
         .carousel {
             box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);
         }
+
+        {##### FORM RESERVATION #####}
         .select2-results__option {
-            color: rgba(0, 0, 0, .9);;
+            color: rgba(0, 0, 0, .9);
         }
         #fc-widget-content {
             height: 100px;
         }
-        .form-control {
-            box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .6);
-            border: 1px solid black;
-        }
-
-        .btn-alert {
-            background-color: #0090c5;
-            border: none;
-            padding: 1em;
-            color: white;
-            margin: 1em;
-            border-radius: 5px;
-        }
-        #modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 850;
-            height: 100%;
-            width: 100%;
-            background: rgba(0,0,0, .9);
-        }
-
-
 
 
     </style>
@@ -72,54 +43,55 @@
 {% block body %}
 
 
-
-            <div id="carouselExampleFade" class="carousel slide carousel-fade slide-top" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('slides/slideCoach.jpg') }}" class="d-block w-100 img-fluid" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('slides/slide2-bis.jpg') }}" class="d-block w-100 img-fluid" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('slides/slide3-bis.jpg') }}" class="d-block w-100 img-fluid" alt="...">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+    {##### CAROUSEL TOP #####}
+    <div id="carouselExampleFade" class="carousel slide carousel-fade slide-top" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('slides/slideCoach.jpg') }}" class="d-block w-100 img-fluid" alt="Coach1">
             </div>
-
+            <div class="carousel-item">
+                <img src="{{ asset('slides/slide2-bis.jpg') }}" class="d-block w-100 img-fluid" alt="Choac2">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('slides/slide3-bis.jpg') }}" class="d-block w-100 img-fluid" alt="Choach3">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
 
 
     <div class="container">
     <div class="row mt-5">
 
-
         <div class="col-lg-8">
+
+                {##### INFO COACH #####}
                 <div class="row">
                     <div class="col-4">
                         <img class="rounded-circle img-coach text-center" src="{{ vich_uploader_asset(fichefull, 'imageFile') }}" alt="">
                     </div>
                     <div class="col mt-4 ml-5">
 
-                            <h4 class="display-4" style="color: white; font-size: 2.5em;">{{ fichefull.nom }} {{ fichefull.prenom }}</h4><br>
-                        <p>
-                            Domaine : {{ fichefull.domaine }}<br>
-                            Age : {{ fichefull.age }}<br>
-                            Ville : {{ fichefull.ville }}<br>
-                            Prix : {{ fichefull.prix }}€/h <br>
-                            <a href="{{ vich_uploader_asset(fichefull, 'diplomeFile') }}" alt="">Qualifications/Diplômes</a>
-                        </p>
+                        <h4 class="display-4" style="color: white; font-size: 2.5em;">{{ fichefull.nom|capitalize }} {{ fichefull.prenom|capitalize }}</h4><br>
+
+                        Domaine : {{ fichefull.domaine|capitalize }}<br>
+                        Age : {{ fichefull.age }} ans<br>
+                        Ville : {{ fichefull.ville|capitalize }}<br>
+                        Prix : {{ fichefull.prix }}€/h <br>
+                        <a href="{{ vich_uploader_asset(fichefull, 'diplomeFile') }}" alt="">Qualifications/Diplômes</a>
+
                     </div>
                 </div>
 
+                {##### COACH CONTENT #####}
                 <div class="row mt-5">
                     <div class="col">
                         <h3 class="display-4">A propos de moi</h3>
@@ -138,25 +110,24 @@
                     </div>
                 </div>
 
-            <div class="row mt-5">
-                <div class="col">
-                    {# <h3 class="display-4">Mon calendrier</h3>#}
+            {##### CALENDAR #####}
+            <div class="row mt-5 justify-content-center">
+                <div class="col-10 text-center">
                     {% include '@Calendar/calendar.html' %}
-                    {#<script>afficherCalendar()</script>#}
-                    <button class="btn btn-outline-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
+                    <button class="btn btn-sm btn-outline-primary m-3" id="btn-calendar" onclick="afficherCalendar(); this.onclick=null;">Voir disponibilités</button>
                 </div>
             </div>
-
 
         </div>{#COL#}
 
 
 
 
-        {#SIDEBAR#}
+        {##### SIDE BAR #####}
         <div class="col-lg-4 mb-5">
 
-{#            <h3 class="display-4">Ma Localisation</h3>#}
+            {##### GOOLE MAP #####}
+            <h3 class="display-4" style="font-size: 1.5em;">Ma Localisation</h3>
             <iframe class=" mt-3 rounded"
                     width="100%"
                     height="300px"
@@ -164,44 +135,46 @@
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBb5PjquVcMufKEVLRmvC_g_iyt-78FdTQ&q={{fichefull.ville}}+France" allowfullscreen>
             </iframe>
 
-            <div class="card border-secondary text-center mt-4" style="box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, .5);">
-                <div class="card-header bg-primary">
+            {##### RESERVATION #####}
+            <div class="card text-center mt-4 bShadow bg-color-S">
+                <div class="card-header bg-primary text-color-S">
                     Réservation
                 </div>
-                <div class="col card-body p-5">
-                {% if error %}
-{#                    <script>console.log('test de merde'); boxAlertPop()</script>#}
-                    <div class="custom-box shake">
-                        <div class="custom-box rounded p-1 bounceInRight" onclick="$('.custom-box').addClass('bounceOutRight');" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 200px;cursor: pointer">
-                            <div class="col text-center">
-                            <img src="{{ asset('croix.png') }}" alt="" style="height: 50px;">
-                           <p>Problème lors de la résèrvation ! </p>
+
+                {##### CARD #####}
+                <div class="col card-body p-5 bg-color-S">
+
+                    {% if error %}
+                        {##### POPUP ALERT #####}
+                        <div class="custom-box shake">
+                            <div class="custom-box rounded p-1 bounceInRight" onclick="$('.custom-box').addClass('bounceOutRight');" style="box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, .7); font-size: .8em; color: #CF3D2A; width: 200px;cursor: pointer">
+                                <div class="col text-center">
+                                <img src="{{ asset('croix.png') }}" alt="" style="height: 50px;">
+                               <p>Problème lors de la résèrvation ! </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="alert alert-danger">Problème: soit vous avez déjà un rendez-vous, soit le coach est déjà réservé</div>
+                        <div class="alert alert-danger">Problème: soit vous avez déjà un rendez-vous, soit le coach est déjà réservé</div>
 
-                {% endif %}
+                    {% endif %}
                     {% if is_granted("ROLE_CLIENT") %}
-                    <p style="color: white;">
 
                         {{ form_start(formRdv, {attr: { 'id': 'payment-form'}}) }}
 
                         {{ form_rest(formRdv) }}
 
-                        <button class="btn btn-outline-primary m-3">Réserver</button>
+                        <button class="btn btn-sm btn-outline-primary m-3">Réserver</button>
                         {{ form_end(formRdv) }}
-
-                    </p>
 
 
                     {% else %}
                         <p>Vous devez être client pour réserver! </p>
-                        <button class="btn btn-sm border border-primary text-primary m-3"><a href="{{path('app_login')}}">Connection</a>/<a href="{{path('inscriptionClient')}}">Inscription</a> </button>
+                        <button class="btn btn-sm btn-sm border border-primary text-primary m-3"><a href="{{path('app_login')}}">Connection</a>/<a href="{{path('inscriptionClient')}}">Inscription</a> </button>
                     {% endif %}
                 </div>
-            </div>
+
+            </div>{#CARD#}
 
         </div>{#COL#}
 
@@ -211,77 +184,72 @@
 
 
 
-        {% block javascripts %}
+{% block javascripts %}
 
-        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
-            <script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
 
-                function boxAlertPop() {
-                    var boxAlert = document.createElement('div')
-                    boxAlert.setAttribute('id', 'modal')
-                    var customBoxAlert = document.createElement('div')
-                    customBoxAlert.className = 'custom-box rounded-pill p-3 text-center lightSpeedIn';
-                    customBoxAlert.innerHTML = '<p>Test Boite alert</p>'
-                    customBoxAlert.innerHTML += '<button id="boxClose" class="btn btn-outline-primary mt-3" style="width: 60px"> OK</button>'
+    <script>
 
-                    boxAlert.appendChild(customBoxAlert);
+        function boxAlertPop() {
+            var boxAlert = document.createElement('div')
+            boxAlert.setAttribute('id', 'modal')
+            var customBoxAlert = document.createElement('div')
+            customBoxAlert.className = 'custom-box rounded-pill p-3 text-center lightSpeedIn';
+            customBoxAlert.innerHTML = '<p>Test Boite alert</p>'
+            customBoxAlert.innerHTML += '<button id="boxClose" class="btn btn-sm btn-outline-primary mt-3" style="width: 60px"> OK</button>'
 
-                    document.getElementById('boxAlertCustom').addEventListener('', function () {
-                        // console.log('test')
+            boxAlert.appendChild(customBoxAlert);
 
-                        document.body.appendChild(boxAlert)
+            document.getElementById('boxAlertCustom').addEventListener('', function () {
 
-                        document.getElementById('boxClose').addEventListener('', function () {
-                            while (boxAlert.hasChildNodes()) {
-                                boxAlert.removeChild(boxAlert.firstChild)
-                            }
-                            document.body.removeChild(boxAlert)
-                        })
-                    })
-                }
+                document.body.appendChild(boxAlert)
 
-            </script>
-        {% endblock %}
-        <script>
+                document.getElementById('boxClose').addEventListener('', function () {
+                    while (boxAlert.hasChildNodes()) {
+                        boxAlert.removeChild(boxAlert.firstChild)
+                    }
+                    document.body.removeChild(boxAlert)
+                })
+            })
+        }
 
 
-
-            function afficherCalendar() {
-                var calendarEl = document.getElementById('calendar-holder');
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    height: 450,
-                    defaultView: 'dayGridMonth',
-                    editable: false,
-                    eventSources: [{
-                        height: 20,
-                        url: "/fc-load-events",
-                        method: "POST",
-                        extraParams: {
-                            filters: JSON.stringify({})
-                        },
-                        failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
-                        },
+        function afficherCalendar() {
+            var calendarEl = document.getElementById('calendar-holder');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                height: 450,
+                defaultView: 'dayGridMonth',
+                editable: false,
+                eventSources: [{
+                    height: 20,
+                    url: "/fc-load-events",
+                    method: "POST",
+                    extraParams: {
+                        filters: JSON.stringify({})
                     },
-                    ],
-                    header: {
-                        height: 20,
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'dayGridMonth',
+                    failure: () => {
+                        // alert("There was an error while fetching FullCalendar!");
                     },
-                    plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
-                    timeZone: 'UTC',
-                });
-                calendar.render();
-            }
+                },
+                ],
+                header: {
+                    height: 20,
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'dayGridMonth',
+                },
+                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        }
 
-        </script>
+    </script>
 
-
+{% endblock %}
 
 
 {% endblock %}

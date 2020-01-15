@@ -4,13 +4,8 @@
 
 {% block body %}
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/styleFrontAll.css') }}">
         <style>
-            .name-site {
-                color: white;
-                font-family: 'Baloo Bhai', cursive;
-                font-size:4em;
-                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px rgba(0,0,0,.9);
-            }
         </style>
     {% endblock %}
 
@@ -20,7 +15,7 @@
         <div class="col p-5 text-center" style="min-height: 14rem;">
             <h2 class="name-site" style="">FindACoach</h2>
             <h1 class="display-4" style="font-size: 2.5em;">Mes Rendez-vous</h1>
-            <img src="{{ asset('picto_15_partenaires2.png') }}" alt="">
+            <img src="{{ asset('picto_15_partenaires2.png') }}" alt="" style="height: 200px;">
         </div>
     </div>
 
