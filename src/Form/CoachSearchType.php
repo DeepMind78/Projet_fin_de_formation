@@ -4,17 +4,18 @@ namespace App\Form;
 
 
 use App\Entity\CoachSearch;
-
-use Symfony\Component\Form\Extension\Core\Type\StringType;
+use App\Repository\CoachRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\StringType;
 
 
 class CoachSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+       
         $builder
             ->add('sport', null ,[
                 'required'=> false,
@@ -31,6 +32,7 @@ class CoachSearchType extends AbstractType
                 ]
             ])
             
+            
         ;
     }
 
@@ -40,4 +42,6 @@ class CoachSearchType extends AbstractType
             'data_class' => CoachSearch::class,
         ]);
     }
+
+    
 }

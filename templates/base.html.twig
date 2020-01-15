@@ -31,7 +31,7 @@
 
         {% endblock %}
         <style>
-            {# CONTACT IMG #}
+            /* CONTACT IMG */
             .img-contact {
                 height: 50px;
                 transition-duration: .5s;
@@ -51,7 +51,7 @@
                 box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);
             }
 
-            {# PROGRESS BAR #}
+            /* PROGRESS BAR */ 
             .progress-container {
                 width: 100%;
                 height: 4px;
@@ -179,18 +179,23 @@
                     <br>
                     <a href="{{path('app_login')}}">Inscription Coach</a><br>
                     <a href="{{path('inscriptionClient')}}">Inscription Client</a><br>
-                    <a href="{{path('app_login')}}">Login</a><br>
+                    
 
                     {# CLIENT #}
                     {% if is_granted("ROLE_CLIENT") %}
-                        <a class="nav-link text-white" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
-                        <a class="nav-link text-white" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                        <a  href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                        <br>
+                        <a  href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
                     {% endif %}
                     {# COACH #}
+                    
                     {% if is_granted("ROLE_COACH") %}
-                        <a class="nav-link text-white" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
-                        <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                        <a  href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                        <br>
+                        <a  href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
                     {% endif %}
+                    <br>
+                    <a href="{{path('app_login')}}">Login</a><br>
 
                 </div>
                 <div class="col-4 mt-4">
@@ -205,7 +210,7 @@
                 </div>
 
                 <div class="col m-3 text-center text-secondary" style="font-size: .8em;">
-                    findacoach.com - 2019 - All rights reserved - Made in Damien, Sullivan, Benjamin
+                    findacoach.fr - 2020 - All rights reserved - Made in Damien, Sullivan, Benjamin
                 </div>
 
             </div>
@@ -221,7 +226,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
 
-        {# CONTACT EFFET#}
+        // CONTACT EFFET
         $("#contact").click(function(){
             $("#block-contact").slideToggle().addClass("zoomInRight");
         });
@@ -229,7 +234,7 @@
         $('select').select2();
         $('span').css('color','black');
 
-            {# CONATCT #}
+            // CONATCT 
             $(function () {
                 $('#contact-form').submit(function (event) {
                     // Annule l'action par défaut (on ne veut pas que la page se recharge)

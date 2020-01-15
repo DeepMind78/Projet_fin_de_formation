@@ -46,7 +46,7 @@
                         {{form_row(form.ville)}}
                     </div>
 
-                    <button id="buttonLaunch" class="btn btn-primary" style="position: absolute; margin-top:70px;">Rechercher</button>
+                    <button id="buttonLaunch" class="btn btn-primary" style="position: absolute; margin-top:70px;  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);">Rechercher</button>
 
                 </div>
 
@@ -131,7 +131,7 @@
             //     buttonLaunch.click();
             // };
 
-            {# REQUEST AJAX COACH #}
+            // REQUEST AJAX COACH 
             $('#search').submit(function (event) {
                 event.preventDefault();
                 document.getElementById('coachAjax').innerHTML = '';
