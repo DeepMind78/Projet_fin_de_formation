@@ -146,7 +146,7 @@ class CoachController extends AbstractController
             // FIN PARTIE GESTION VARIABLES EMAIL
 
             $heureTest = $heureUtilisateur;
-            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach, $resultat[0]);
+            $variable = $this->rdvExist($heureTest,$dureeUtilisateur,$repoRdv,$jourUtilisateur, $coach);
             if ($variable == true){
                 $error = true;
             } else {
@@ -176,7 +176,7 @@ class CoachController extends AbstractController
     ]);
     }
 
-    public function rdvExist($heure, $duree, $repo, $jour, $coach, $client){
+    public function rdvExist($heure, $duree, $repo, $jour, $coach){
             
             $jourUnBdd=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'coach'=>$coach]));
             
@@ -195,21 +195,21 @@ class CoachController extends AbstractController
                 }
             }
 
-            $jourClient=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'client'=>$client]));
-            if(!empty($jourClient)){
-                return true;
-            }
-            for($i=1;$i<$duree;$i++){
-                $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
-                // print_r('test');
-                if(!empty($jourBdd)){
-                    // dump($heure);
-                    return true;
-                    break;
-                } else {
+            // $jourClient=($repo->findBy(['jour'=>$jour, 'heure'=>$heure, 'client'=>$client]));
+            // if(!empty($jourClient)){
+            //     return true;
+            // }
+            // for($i=1;$i<$duree;$i++){
+            //     $jourBdd=($repo->findBy(['jour'=>$jour, 'heure'=>date_modify($heure, "+1 hours")]));
+            //     // print_r('test');
+            //     if(!empty($jourBdd)){
+            //         // dump($heure);
+            //         return true;
+            //         break;
+            //     } else {
                 
-                }
-            }
+            //     }
+            // }
     }
     
     /**
@@ -234,6 +234,7 @@ class CoachController extends AbstractController
         $coachUserRequete = $repoUser->findBy(['id'=>$idUserCoach]);
         $coachUser = $coachUserRequete[0];
         $coachEmail = $coachUser->getEmail();
+        $coachTelephone = $coach->getTelephone();
 
 
         // RECUPERATION DONNEES RDV UTILISATEUR 
@@ -254,12 +255,13 @@ class CoachController extends AbstractController
         $requeteClient = $repoClient->findBy(['user'=>$user]);
         $clientNom = $requeteClient[0]->getNom();
         $clientPrenom = $requeteClient[0]->getPrenom();
+        $clientTelephone = $requeteClient[0]->getTelephone();
         $clientEmail = $this->getUser()->getEmail();
         
 
 
         
-        \Stripe\Stripe::setApiKey('sk_test_D75XiUOxctvVVfaK93BHQro6007yoi24NH');
+        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
 
         if(isset($_POST['stripeToken'])){
             $token = $_POST['stripeToken'];
@@ -287,8 +289,8 @@ class CoachController extends AbstractController
                     $manager->persist($rdvPlage);
                     $manager->flush();
                 }
-                $mailer->sendRdvCoach($coachEmail,$clientNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
-                $mailer->sendRdvClient($clientEmail,$coachNom,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
+                $mailer->sendRdvCoach($coachEmail,$clientNom,$clientTelephone,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvCoach.html.twig');
+                $mailer->sendRdvClient($clientEmail,$coachNom,$coachTelephone,$duree,$heureMailer, $jourMailer, $lieu,$amount,'confirmationRdvClient.html.twig');
 
              return $this->redirectToRoute('confirmation.paiement');   
         }
@@ -300,7 +302,8 @@ class CoachController extends AbstractController
             'heureRdv' => $heure,
             'duree' => $duree, 
             'total' => $amount, 
-            'lieu' => $lieu
+            'lieu' => $lieu, 
+            'jour' => $jour
         ]);
 
     }

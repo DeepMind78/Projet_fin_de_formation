@@ -172,14 +172,22 @@
             <div class="row justify-content-center">
 
                 <div class="col-4 mt-4 text-center">
-                    <h2 class="name-site text-left " style="font-size: 1.8em;">FindACoach</h2>
-                    <br><br><br>
-                    <a href="#">Lien vers page du site</a><br>
-                    <a href="#">Lien vers page du site</a><br>
-                    <a href="#">Lien vers page du site</a><br>
-                    <a href="#">Lien vers page du site</a><br>
-                    <a href="#">Lien vers page du site</a><br>
-                    <a href="#">Lien vers page du site</a><br>
+                    <h2 class="name-site text-left" style="font-size: 1.8em;">FindACoach</h2>
+                    <br>
+                    <a href="{{path('app_login')}}">Inscription Coach</a><br>
+                    <a href="{{path('inscriptionClient')}}">Inscription Client</a><br>
+                    <a href="{{path('app_login')}}">Login</a><br>
+
+                    {# CLIENT #}
+                    {% if is_granted("ROLE_CLIENT") %}
+                        <a class="nav-link text-white" href="{{path('fiche.client', {user : app.user.id})}}">Remplir ma fiche </a>
+                        <a class="nav-link text-white" href="{{path('client.rdv')}}">Voir mes rendez-vous </a>
+                    {% endif %}
+                    {# COACH #}
+                    {% if is_granted("ROLE_COACH") %}
+                        <a class="nav-link text-white" href="{{path('fiche.coach', {user : app.user.id})}}">Remplir ma fiche </a>
+                        <a class="nav-link text-white" href="{{path('coach.rdv')}}">Voir mes rendez-vous </a>
+                    {% endif %}
 
                 </div>
                 <div class="col-4 mt-4">

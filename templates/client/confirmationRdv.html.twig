@@ -16,7 +16,6 @@
         </div>
     </div>
 
-
     <div class="container justify-content-center text-center p-3 rounded border border-primary">
 
         <div class="row">
@@ -28,19 +27,19 @@
         <div class="row">
         <div class="col p-6">
             <h5 style="font-size: 1.8em">Recapitulatif de la commande</h5>
-            Coach : {{coachPrenom}} {{coachNom}} <br>
-            Horaire : {{heureRdv | date('h:i')}} <br>
-            Temps : {{duree}} h <br>
+            Votre coach : {{coachPrenom}} {{coachNom}} <br>
+            Le jour de votre rendez-vous : {{jour | date('d-m-Y')}} à {{heureRdv | date('H:i')}} <br>
+            Pour une durée de : {{duree}} h <br>
             Lieu : {{lieu}} <br>
-            Prix : {{total}} €
+            Total de votre séance : {{total}} €
         </div>
         </div>
 
         <div class="row justify-content-center">
         <div class="col-6">
 
-            <form action="" method="post" id="payment-form">
-              <label for="card-element">
+            <form action="" method="post" id="payment-form" class="m-3">
+              <label for="card-element" class="text-left">
                 Carte de crédit
               </label>
               <div id="card-element" class="form-control">
@@ -49,7 +48,10 @@
               <!-- Used to display Element errors. -->
               <div id="card-errors" role="alert"></div>
 
-                <button class="mt-2">Paiement</button>
+                <div id="switchGif" class="m-4" style="min-height: 70px;">
+                <button id="btn-paiement" class="mt-2">Confirmer</button>
+                </div>
+
                 <div class="row justify-content-end">
                     <img class="m-2" src="{{ asset('paiement-stripe.png') }}" alt="" style="height: 50px">
                 </div>
@@ -66,7 +68,10 @@
 {% block javascripts %}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-          var stripe = Stripe('pk_test_Hg8HD1krhTqAe2LSUgD5dkuV00KUUCViqn');
+
+
+    var stripe = Stripe('pk_test_KPKb152QizLWddvxZbnJml6500MouClgKA');
+          
             var elements = stripe.elements();
 
             // Custom styling can be passed to options when creating an Element.
@@ -86,6 +91,10 @@
 
             var form = document.getElementById('payment-form');
             form.addEventListener('submit', function(event) {
+
+
+
+
             event.preventDefault();
 
             stripe.createToken(card).then(function(result) {
@@ -101,6 +110,13 @@
             });
 
             function stripeTokenHandler(token) {
+
+                {# GIF #}
+                var btnContent = document.getElementById("switchGif")
+                document.getElementById("btn-paiement").style.display = "none";
+                btnContent.innerHTML = '<img src="{{ asset('VAyR.gif') }}" alt="" style="height: 60px;">'
+
+
                 // Insert the token ID into the form so it gets submitted to the server
                 var form = document.getElementById('payment-form');
                 var hiddenInput = document.createElement('input');
