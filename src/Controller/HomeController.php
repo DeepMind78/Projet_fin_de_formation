@@ -80,7 +80,7 @@ class HomeController extends AbstractController
         $search->setVille($ville)->setSport($sport);
 
         $coachlist = $repo->findGoodCoach($search);
-        $json = $coachlist;
+        
         $rows = array();
         foreach($coachlist as $coach){
             $rows[] = array("nom"=>$coach->getNom(), "prenom"=>$coach->getPrenom(), "ville" => $coach->getVille(), "prix"=>$coach->getPrix(), 'id'=> $coach->getId(),'description'=>$coach->getDescriptionCoach(),'domaine'=>$coach->getDomaine(), 'image'=>$coach->getFilename());
