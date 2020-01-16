@@ -243,8 +243,8 @@ class CoachController extends AbstractController
         
 
 
-        
-        \Stripe\Stripe::setApiKey('sk_test_5U8RJ7GIFIWcstBQDaX6u0Ot00gWCe0UJJ');
+        // Mettre sa clé sk
+        \Stripe\Stripe::setApiKey('clé secrete');
 
         if(isset($_POST['stripeToken'])){
             $token = $_POST['stripeToken'];
